@@ -1,4 +1,4 @@
-- Name of the project
+- Name of the project: for4Wagon
 
 - Pages on the project
   - Main page
