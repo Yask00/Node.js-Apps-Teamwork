@@ -4,13 +4,13 @@
 1. First Name
 2. Last Name
 3. Phone Number
-4. Address
+4. Address ??? => email ???
 5. RoomOrders []
 6. ServiceOrders []
 
 # Hotel
 1. Name
-2. Email
+2. Email => Phone NUmber ???
 3. ImageUrls []
 4. Description
 5. Location -> nearest village, Region, Mountain
@@ -23,7 +23,7 @@
 
 # Room
 1. Type -> one, two, three, appartment
-2. ImageUrl
+2. ImageUrl => optional ???
 3. HotelId
 4. Description
 5. Price - per night, per 5 nights(- 10%)
@@ -42,7 +42,7 @@
 # BookingService
 1. ServiceId, HotelId
 2. EventDate
-3. PersonCount
+3. PersonCount => room capacity validation ???
 4. UserId
 
 # Order
