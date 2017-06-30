@@ -2,4 +2,10 @@
 
 - Pages on the project
   - Main page
+  -...
+  
+-Use Yeoman to set project Skelethon
+  -remove unnecessary files/folders
+  
+-Configure ESLint before starting  
   
