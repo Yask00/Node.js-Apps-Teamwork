@@ -10,7 +10,7 @@
 
 # Hotel
 1. Name
-2. Email => Phone Number ???
+2. Phone Number
 3. ImageUrls []
 4. Description
 5. Location -> nearest village, Region, Mountain
@@ -23,7 +23,7 @@
 
 # Room
 1. Type -> one, two, three, appartment
-2. ImageUrl => optional ???
+2. ImageUrl => optional
 3. HotelId
 4. Description
 5. Price - per night, per 5 nights(- 10%)
@@ -31,7 +31,7 @@
 # Service
 1. Type -> horse walk, all day walk, bulgarian food dinner, folk koncert, ...
 2. HotelId
-3. ImageUrl
+3. ImageUrl => optional
 4. Price - per one person, per group of 5(- 5%)
 
 # BookingRoom
