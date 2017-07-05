@@ -1,5 +1,5 @@
 # Node.js-Apps-Teamwork
-# Team PerfectCodeStorm - Name of the project
+# Team PerfectCodeStorm - for4Wagon
 
 ## Application Description
 
