@@ -5,8 +5,9 @@
 2. Last Name
 3. Phone Number
 4. Email
-5. RoomOrders []
-6. ServiceOrders []
+5. Roles [], 'Admin', 'User', 'Moderator'
+6. RoomOrders []
+7. ServiceOrders []
 
 # Hotel
 1. Name
