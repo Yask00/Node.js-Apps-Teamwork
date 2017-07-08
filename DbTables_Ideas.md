@@ -4,13 +4,14 @@
 1. First Name
 2. Last Name
 3. Phone Number
-4. Address ??? => email ???
-5. RoomOrders []
-6. ServiceOrders []
+4. Email
+5. Roles [], 'Admin', 'User', 'Moderator'
+6. RoomOrders []
+7. ServiceOrders []
 
 # Hotel
 1. Name
-2. Email => Phone NUmber ???
+2. Phone Number
 3. ImageUrls []
 4. Description
 5. Location -> nearest village, Region, Mountain
@@ -23,7 +24,7 @@
 
 # Room
 1. Type -> one, two, three, appartment
-2. ImageUrl => optional ???
+2. ImageUrl => optional
 3. HotelId
 4. Description
 5. Price - per night, per 5 nights(- 10%)
@@ -31,7 +32,8 @@
 # Service
 1. Type -> horse walk, all day walk, bulgarian food dinner, folk koncert, ...
 2. HotelId
-3. Price - per one person, per group of 5
+3. ImageUrl => optional
+4. Price - per one person, per group of 5(- 5%)
 
 # BookingRoom
 1. RoomId, HotelId
@@ -42,14 +44,15 @@
 # BookingService
 1. ServiceId, HotelId
 2. EventDate
-3. PersonCount => room capacity validation ???
+3. PersonCount => this is an event, not a room
 4. UserId
 
 # Order
 1. UserId
 2. BookingRoom []
 3. BookingService []
-4. TotalPrice
+4. PaymentType - Bank, EasyPay
+5. TotalPrice
 
 # Region
 1. Name
