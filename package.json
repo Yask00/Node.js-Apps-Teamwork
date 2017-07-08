@@ -1,0 +1,17 @@
+{
+  "name": "PrefectCodeStorm",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/Team-PerfectCodeStorm/Node.js-Apps-Teamwork.git",
+  "author": "Stefan Fotev <sfo321@mail.bg>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.29",
+    "morgan": "^1.8.2",
+    "passport": "^0.3.2",
+    "path": "^0.12.7"
+  }
+}
