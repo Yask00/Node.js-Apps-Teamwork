@@ -2,29 +2,29 @@ module.exports = function(db) {
     return {
         setValidation() {
             return db.command({
-                collMod: "contacts",
+                collMod: 'contacts',
                 validator: {
                     $and: [
-                        { phone: { $type: "string" } },
+                        { phone: { $type: 'string' } },
                         { email: { $regex: /@mongodb\.com$/ } },
-                        { status: { $in: ["Unknown", "Incomplete"] } }
-                    ]
+                        { status: { $in: ['Unknown', 'Incomplete'] } },
+                    ],
                 },
-                validationLevel: "strict",
-                validationAction: 'error'
+                validationLevel: 'strict',
+                validationAction: 'error',
             });
         },
         createCollection(name) {
             return db.createCollection(name, {
                 validator: {
                     $and: [
-                        { phone: { $type: "string" } },
+                        { phone: { $type: 'string' } },
                         { email: { $regex: /@mongodb\.com$/ } },
-                        { status: { $in: ["Unknown", "Incomplete"] } }
-                    ]
+                        { status: { $in: ['Unknown', 'Incomplete'] } },
+                    ],
                 },
-                validationAction: "error"
-            })
-        }
-    }
+                validationAction: 'error',
+            });
+        },
+    };
 };
