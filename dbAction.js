@@ -35,7 +35,7 @@ const getValidationOptions = (Model, validator) => {
                 validationOptions.validator.$and.push({
                     [prop]: validator[prop],
                 });
-                console.log(`Databse validation ${prop} for collection ${collection} set!`);
+                //console.log(`Databse validation ${prop} for collection ${collection} set!`);
             }
         });
     return {
