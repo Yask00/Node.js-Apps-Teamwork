@@ -1,0 +1,41 @@
+extend ../_shared/_master
+
+block body
+    .container
+        #main_area
+            // Slider
+            .row
+                #slider
+                    .row                        
+                        #myCarousel.carousel.slide
+                            // Carousel items
+                            .carousel-inner
+                                .active.item(data-slide-number='0')
+                                    img(src='http://www.bgvakancia.com/common_images/offers/5921/eb524e22e7de65a9c0bbf11cf4a2894e.jpg')
+                                    .carousel-caption 
+                                        h2.white Къщите край реката
+                                .item(data-slide-number='1')
+                                    img(src='http://www.bgvakancia.com/common_images/offers/5921/38601ff757fc622a9b0fca31420a6d67.jpg')
+                                    .carousel-caption 
+                                        h2.white На моста
+                                .item(data-slide-number='2')
+                                    img(src='http://www.bgvakancia.com/common_images/offers/5921/41c2ea0f15d192e81625c8e333f0db81.jpg')
+                                    .carousel-caption 
+                                        h2.white На терасата
+                                .item(data-slide-number='3')
+                                    img(src='http://www.bgvakancia.com/common_images/offers/5921/7e164f23e769222ebde462994e68bccb.jpg')
+                                    .carousel-caption 
+                                        h2.white В градината
+                                .item(data-slide-number='4')
+                                    img(src='http://www.bgvakancia.com/common_images/offers/5921/dce46d83d98a71f2a8f27acf768c36eb.jpg')
+                                    .carousel-caption 
+                                        h2.white Къщите на хълма
+                                .item(data-slide-number='5')
+                                    img(src='http://www.bgvakancia.com/common_images/offers/5921/a1c9c99f0f333912b4af8482098c4a31.jpg')
+                                    .carousel-caption 
+                                        h2.white Изглед от балкона
+                            // Carousel nav
+                            a.carousel-control.left(data-slide='prev', href='#myCarousel') ‹
+                            a.carousel-control.right(data-slide='next', href='#myCarousel') ›
+block scripts
+    script("/js/gallery.js")
