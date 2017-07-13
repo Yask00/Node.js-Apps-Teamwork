@@ -1,5 +1,6 @@
 class Hotel {
     constructor(options) {
+        this._id = options._id;
         this.name = options.name;
         this.phone = options.phone;
         this.imageURL = options.imageURL;

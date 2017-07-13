@@ -1,5 +1,6 @@
 class Region {
     constructor(options) {
+        this._id = options._id;
         this.name = options.name;
         this.imageURLs = [];
         this.mapURL = options.mapURL;

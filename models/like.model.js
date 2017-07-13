@@ -1,5 +1,6 @@
 class Like {
     constructor(options) {
+        this._id = options._id;
         this.userId = options.userId;
         this.hotelId = options.hotelId;
     }

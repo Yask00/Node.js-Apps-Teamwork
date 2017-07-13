@@ -1,22 +1,39 @@
+const validator = require('../validator');
+
 class Static {
     static isValid(model) {
-        return typeof model !== 'undefined' &&
-            typeof model.text === 'string' &&
-            model.text.length > 3;
-    }
+        let valid = true;
 
-    get id() {
-        return this._id;
+        if (typeof model === 'undefined') {
+            return !valid;
+        }
+
+        Object.keys(model)
+            .forEach((prop) => {
+                const test = validator[prop];
+                const match = model[prop];
+                if (test) {
+                    if (Object.prototype.toString.call(test) === '[object Array]') {
+                        if (!test.find((x) => x === match)) {
+                            valid = false;
+                        }
+                    } else {
+                        const reg = new RegExp(test);
+                        if (!reg.test(match)) {
+                            valid = false;
+                        }
+                    }
+                }
+            });
+        return valid;
     }
 
     static toViewModel(model) {
         const viewModel = {};
-
         Object.keys(model)
             .forEach((prop) => {
                 viewModel[prop] = model[prop];
             });
-
         return viewModel;
     }
 }

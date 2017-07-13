@@ -1,5 +1,6 @@
 class BookingRoom {
     constructor(options) {
+        this._id = options._id;
         this.userId = options.userId;
         this.startDate = options.startDate;
         this.roomId = options.roomId;

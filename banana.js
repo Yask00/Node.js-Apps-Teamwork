@@ -1,5 +1,6 @@
 /* globals __dirname */
 
+const Static = require('./models/static');
 const async = require('./utils/async');
 const validator = require('./validator');
 const fs = require('fs');
@@ -11,13 +12,15 @@ const initData = (db) => {
         .then(() => readFolder())
             .then((collections) => updateDatabase(db, collections))
             .then((result) => {
-                db.collection('hotels')
-                    .insert({
-                        name: 'not valid',
-                        phone: 888888888,
-                        location: 'na majka МУ.....',
-                        startDate: 'Вчера бе, вчера!',
-                    }).catch((err) => console.log('Имате грешка, ние нямаме телефон!'));
+                const model = {
+                    serviceType: 'horse walk',
+                    imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmx1CKUrR95QWchNegsHuOAnSOfkotdxw2iheS2DhZ58dbaJzx',
+                    hotelId: '596659c5e2e43f1e308e6156',
+                    price: '115,99',
+                };
+                console.log(Static.isValid(model));
+                db.collection('services')
+                    .insert(model).catch((err) => console.log('К`ъв Петров търсиш бе идиот, ние нямаме телефон!'));
                 res(result);
                 db.close();
             });

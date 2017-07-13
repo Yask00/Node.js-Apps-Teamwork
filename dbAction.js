@@ -22,7 +22,7 @@ const getValidationOptions = (Model, validator) => {
     const collection = Model.name.toLowerCase() + 's';
     const validationOptions = {
         validator: {
-            $and: [{ phone: { $type: 'string' } }],
+            $and: [],
         },
         validationLevel: 'strict',
         validationAction: 'error',
@@ -32,10 +32,15 @@ const getValidationOptions = (Model, validator) => {
     Object.keys(model)
         .forEach((prop) => {
             if (validator[prop]) {
-                validationOptions.validator.$and.push({
-                    [prop]: validator[prop],
-                });
-                //console.log(`Databse validation ${prop} for collection ${collection} set!`);
+                if (Object.prototype.toString.call(validator[prop]) === '[object Array]') {
+                    validationOptions.validator.$and.push({
+                        [prop]: { $in: validator[prop] },
+                    });
+                } else {
+                    validationOptions.validator.$and.push({
+                        [prop]: { $regex: validator[prop] },
+                    });
+                }
             }
         });
     return {
