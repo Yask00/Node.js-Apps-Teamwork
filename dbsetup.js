@@ -1,29 +1,20 @@
 /* globals __dirname */
 
-const Static = require('./models/static');
 const async = require('./utils/async');
-const validator = require('./validator');
 const fs = require('fs');
 const path = require('path');
 
-const initData = (db) => {
+const dbSetup = (db, validator) => {
     return new Promise((res, rej) => {
         async()
         .then(() => readFolder())
-            .then((collections) => updateDatabase(db, collections))
+            .then((collections) => updateDatabase(db, collections, validator))
             .then((result) => {
-                const model = {
-                    serviceType: 'horse walk',
-                    imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmx1CKUrR95QWchNegsHuOAnSOfkotdxw2iheS2DhZ58dbaJzx',
-                    hotelId: '596659c5e2e43f1e308e6156',
-                    price: '115,99',
-                };
-                console.log(Static.isValid(model));
-                db.collection('services')
-                    .insert(model).catch((err) => console.log('К`ъв Петров търсиш бе идиот, ние нямаме телефон!'));
-                res(result);
-                db.close();
-            });
+                db.collection('users').createIndex({ 'username': 2 }, { unique: true }); // <- no duplicate values magic!
+                db.collection('users').createIndex({ 'email': 2 }, { unique: true }); // <- no duplicate values magic!
+                console.log(result);
+                res(db);
+            }).catch((err) => console.log(err));
     });
 };
 
@@ -33,7 +24,7 @@ const readFolder = () => {
     return Promise.resolve(collections);
 };
 
-const updateDatabase = (db, collections) => {
+const updateDatabase = (db, collections, validator) => {
     const act = require('./dbAction')(db);
     let count = 0;
     const counter = collections.length;
@@ -41,7 +32,7 @@ const updateDatabase = (db, collections) => {
         collections
             .forEach((file) => {
                 const collection = file.substr(0, file.indexOf('.js'));
-                updateCollection(db, collection, act)
+                updateCollection(db, collection, act, validator)
                     .then((result) => {
                         console.log(result);
                         count++;
@@ -67,7 +58,7 @@ const checkCollection = (db, collection) => {
     });
 };
 
-const updateCollection = (db, collection, act) => {
+const updateCollection = (db, collection, act, validator) => {
     return new Promise((res, rej) => {
         async()
         .then(() => checkCollection(db, collection))
@@ -87,4 +78,4 @@ const updateCollection = (db, collection, act) => {
     });
 };
 
-module.exports = initData;
+module.exports = dbSetup;
