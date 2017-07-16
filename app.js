@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 
 require('./config/express-config')(app);
+require('./config/auth-config')(app);
 require('./routers')(app);
 
 // eslint-disable-next-line no-process-env
