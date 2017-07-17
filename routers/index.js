@@ -30,6 +30,18 @@ module.exports = (app) => {
         if (!req.isAuthenticated()) {
             return res.status(401).redirect('/login');
         }
+
+        if (req.user.roles.includes('admin')) {
+            return res.status(200).send( `
+                Welcome, ${req.user.username}
+                <br>
+                YOu are admin and the godfather here
+                <hr />
+                <button>CREATE NEW HOTEL FROM FORM.....</button>
+                <br>
+                <a href="/logout">LOGOUT</a>
+            `);
+        }
         return res.status(200).send(
             `
                 Welcome, ${req.user.username}
