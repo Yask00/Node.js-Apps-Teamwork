@@ -1,4 +1,4 @@
-const BaseData = require('./base/base');
+const BaseData = require('../data/base/base');
 const UserModel = require('../models/user.model');
 
 class UsersData extends BaseData {

@@ -7,7 +7,7 @@ const attachTo = (app, data) => {
 
     router
         .get('/all', (req, res) => {
-            return controller.getAllHotels(req, res);
+            return controller.getAll(req, res);
         })
         .get('/hotel-details', (req, res) => {
             return controller.getHotelDetails(req, res);

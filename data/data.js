@@ -1,8 +1,10 @@
 const UsersData = require('./users.data');
+const HotelsData = require('./hotels.data');
 
 const init = (db) => {
     return Promise.resolve({
         users: new UsersData(db),
+        hotels: new HotelsData(db),
     });
 };
 
