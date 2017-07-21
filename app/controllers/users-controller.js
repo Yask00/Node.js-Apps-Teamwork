@@ -24,7 +24,7 @@ class UsersController {
 
     signOut(req, res) {
         req.logout();
-        return res.redirect('/');
+        return res.redirect('/login');
     }
 
     signUp(req, res) {

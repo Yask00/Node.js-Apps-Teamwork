@@ -7,7 +7,7 @@ mixin navigation
                     span(class="icon-bar")
                     span(class="icon-bar")
                     span(class="icon-bar")
-                a(class="navbar-brand" href="#")
+                a(class="navbar-brand" href="/")
                     | Почивка мечта
             div(class="collapse navbar-collapse" id="myNavbar")
                 ul(class="nav navbar-nav")
@@ -44,9 +44,17 @@ mixin navigation
                                 a(href="/region-details")
                                     | Средна гора
                 ul(class="nav navbar-nav navbar-right")
-                    li
-                        a(href="/login")
-                            | Влез
-                    li
-                        a(href="/register") 
-                            | Регистрирай се
+                    if !user
+                        li
+                            a(href="/login")
+                                | Влез
+                        li
+                            a(href="/register") 
+                                | Регистрирай се
+                    else
+                        li
+                            a(href="profile")
+                                | Здравей, #{user.username}
+                        li
+                            a(href="/logout")
+                                | Излез

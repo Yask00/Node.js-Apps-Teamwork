@@ -1,11 +1,11 @@
 /* globals __dirname */ // unused
 
-const async = require('./utils/async');
-const validator = require('./validator');
-const config = require('./config');
-const dbSetup = require('./dbsetup');
+const async = require('./app/utils/async');
+const validator = require('./app/utils/validator');
+const config = require('./app/config');
+const dbSetup = require('./app/dbsetup');
 
-async().then(() => require('./db').setup(config.connectionString))
+async().then(() => require('./app/db').setup(config.connectionString))
     .then((db) => dbSetup(db, validator))
     .then((db) => {
         // const serviceModel = {
@@ -21,7 +21,7 @@ async().then(() => require('./db').setup(config.connectionString))
             lastName: 'Nasran',
             phone: '02155455555',
             email: 'hasan.reje@pishki.tr',
-            roles: ['default'],
+            role: ['default'],
             roomOrders: [],
             serviceOrders: [],
         };
@@ -32,7 +32,7 @@ async().then(() => require('./db').setup(config.connectionString))
             lastName: 'Bog',
             phone: '02155455554',
             email: 'gospod@bog.rai',
-            roles: ['admin'],
+            role: ['admin'],
             roomOrders: [],
             serviceOrders: [],
         };
@@ -79,4 +79,3 @@ async().then(() => require('./db').setup(config.connectionString))
         db.close();
     })
     .catch((err) => console.log(err));
-

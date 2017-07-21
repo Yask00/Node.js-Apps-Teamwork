@@ -22,7 +22,7 @@ const attachTo = (app, data) => {
         .get('/error', (req, res) => {
             return controller.showError(req, res);
         })
-        .post('/logout', (req, res) => {
+        .get('/logout', (req, res) => {
             return controller.signOut(req, res);
         })
         .post('/register', (req, res) => {
