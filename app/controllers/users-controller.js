@@ -32,13 +32,17 @@ class UsersController {
         this.data.users.getByUsername(bodyUser.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    res.render('user/register', { error: 'Username already exists!' });
+                    res.render('user/register', {
+                        error: 'Username already exists!',
+                    });
                     return;
                 } else {
                     this.data.users.getByEmail(bodyUser.email)
                         .then((dUser) => {
                             if (dUser) {
-                                res.render('user/register', { error: 'This email already exists!' });
+                                res.render('user/register', {
+                                    error: 'This email already exists!',
+                                });
                                 return;
                             }
                         });

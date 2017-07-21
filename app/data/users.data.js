@@ -40,14 +40,13 @@ class UserData extends BaseData {
         model.role = 'default';
         model.roomOrders = [];
         model.serviceOrders = [];
-        console.log(model);
+        // console.log(model);
         if (Static.isValid(model, this.validator)) {
             return this.collection.insert(model);
-        } else {
-            return Promise.reject('User data validation failed!');
         }
-    }
 
+        return Promise.reject('User data validation failed!');
+    }
 }
 
 const init = (db, Model, validator) => {

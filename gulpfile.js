@@ -1,8 +1,8 @@
-const gulp = require('gulp'),
-    babel = require('gulp-babel'),
-    eslint = require('gulp-eslint'),
-    nodemon = require('gulp-nodemon'),
-    destination = 'build';
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const eslint = require('gulp-eslint');
+const nodemon = require('gulp-nodemon');
+const destination = 'build';
 
 gulp.task('copy:templates', () => {
     return gulp.src('src/**/*.pug')

@@ -12,9 +12,9 @@ const attachTo = (app, data) => {
         .get('/profile', (req, res) => {
             if (req.isAuthenticated()) {
                 return controller.getUserProfile(req, res);
-            } else {
-                return controller.getSignInForm(req, res);
             }
+
+            return controller.getSignInForm(req, res);
         })
         .get('/login', (req, res) => {
             return controller.getSignInForm(req, res);

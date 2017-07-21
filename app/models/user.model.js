@@ -7,10 +7,9 @@ class User {
         this.lastName = options.lastName;
         this.phone = options.phone;
         this.email = options.email;
-        this.role = options.role; //[]
-        this.roomOrders = options.roomOrders; //[]
-        this.serviceOrders = options.serviceOrders; //[]
-
+        this.role = options.role; // []
+        this.roomOrders = options.roomOrders; // []
+        this.serviceOrders = options.serviceOrders; // []
     }
 
     get id() {
