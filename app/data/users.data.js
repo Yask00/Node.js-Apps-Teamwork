@@ -1,6 +1,7 @@
 const hashing = require('../utils/hashing');
 const BaseData = require('./base/base');
 const Static = require('../models/static');
+const { ObjectID } = require('mongodb');
 
 class UserData extends BaseData {
     constructor(db, Model, validator) {
@@ -11,21 +12,10 @@ class UserData extends BaseData {
         return this.collection.findOne({ username: username });
     }
 
-    checkPassword(username, password) {
-        return new Promise((res, rej) => {
-            this.getByUsername(username)
-                .then((resultUser) => {
-                    if (!resultUser) {
-                        rej('Invalid user');
-                    }
-                    const salt = resultUser.salt;
-                    const passHash = hashing.hashPassword(salt, password);
-                    if (resultUser.password !== passHash) {
-                        rej('Invalid password');
-                    }
-                    res(true);
-                });
-        });
+    updateCollection(user, params) {
+        const collection = params.collection;
+        const item = params.item;
+        return this.collection.update({ _id: user._id }, { $push: { collection: item } });
     }
 
     getByEmail(email) {
@@ -46,6 +36,24 @@ class UserData extends BaseData {
         } else {
             return Promise.reject('User data validation failed!');
         }
+    }
+
+    update(id, body) {
+        return this.getById(id).then((resultUser) => {
+            if (resultUser) {
+                const salt = resultUser.salt;
+                const passHash = hashing.hashPassword(salt, body.password);
+                body.password = passHash;
+                return this.collection.update({ _id: resultUser._id }, {
+                    $set: {
+                        firstName: body.firstName,
+                        lastName: body.lastName,
+                        password: body.password,
+                        phone: body.phone,
+                    },
+                });
+            }
+        });
     }
 
 }

@@ -1,0 +1,48 @@
+extend ../_shared/_master
+
+block body
+        h2 #{error}
+        form(id="register-form" class="form-vertical" action='/updateuser' method="POST")
+            fieldset
+                div(id="legend")
+                    legend
+                        | Update User data
+
+                div(class="control-group")
+                    label(class="control-label" for="firstName")
+                        | First Name
+                    div(class="controls")
+                        input(type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge")
+                        p(class="help-block")
+                            | Please enter your first Name
+
+                div(class="control-group")
+                    label(class="control-label" for="lastName")
+                        | Last Name
+                    div(class="controls")
+                        input(type="text" id="lastName" name="lastName" placeholder="" class="input-xlarge")
+                        p(class="help-block")
+                            | Please enter your last Name
+
+                div(class="control-group")
+                    label(class="control-label" for="phone")
+                        | Phone Number
+                    div(class="controls")
+                        input(type="text" id="phone" name="phone" placeholder="" class="input-xlarge")
+                        p(class="help-block")
+                            | Please enter your phone Number
+
+                div(class="control-group")
+                    label(class="control-label" for="password")
+                        | Password
+                    div(class="controls")
+                        input(type="password" id="password" name="password" placeholder="" class="input-xlarge")
+                        p(class="help-block")
+                            | Password should be at least 4 characters
+
+                div(class="control-group")
+                    div(class="controls")
+                        button(class="btn btn-success")
+                            | Update
+
+

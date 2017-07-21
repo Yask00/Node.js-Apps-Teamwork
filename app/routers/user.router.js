@@ -22,6 +22,9 @@ const attachTo = (app, data) => {
         .get('/error', (req, res) => {
             return controller.showError(req, res);
         })
+        .get('/update', (req, res) => {
+            return controller.getUpdateForm(req, res);
+        })
         .post('/logout', (req, res) => {
             return controller.signOut(req, res);
         })
@@ -32,7 +35,13 @@ const attachTo = (app, data) => {
             successRedirect: '/profile',
             failureRedirect: '/login',
             failureFlash: true,
-        }));
+        }))
+        .post('/updateuser', (req, res) => {
+            return controller.update(req, res);
+        })
+        .put('/add', (req, res) => {
+            return controller.add(req, res);
+        });
 
     app.use(router);
 };

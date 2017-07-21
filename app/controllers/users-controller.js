@@ -11,6 +11,10 @@ class UsersController {
         return res.render('user/login');
     }
 
+    getUpdateForm(req, res) {
+        return res.render('user/update');
+    }
+
     showError(req, res) {
         return res.render('user/error');
     }
@@ -20,6 +24,34 @@ class UsersController {
             .then((dbUser) => {
                 res.render('user/profile', { user: dbUser });
             });
+    }
+
+    update(req, res) {
+        if (req.user) {
+            this.data.users.update(req.user._id, req.body)
+                .then(() => {
+                    this.data.users.getById(req.user._id)
+                        .then((dbUser) => {
+                            res.render('user/profile', { user: dbUser });
+                        });
+                });
+        } else {
+            res.render('user/login', { message: 'Please login first!' });
+        }
+    }
+
+    add(req, res) {
+        if (req.user) {
+            this.data.users.updateCollection(req.user, req.body)
+                .then(() => {
+                    this.data.users.getById(req.user._id)
+                        .then((dbUser) => {
+                            res.render('user/profile', { user: dbUser });
+                        });
+                });
+        } else {
+            res.render('user/login', { message: 'Please login first!' });
+        }
     }
 
     signOut(req, res) {
