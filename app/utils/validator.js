@@ -1,11 +1,11 @@
 module.exports = {
     username: /^[A-Za-z0-9_-]{3,16}$/,
-    password: /^[A-Za-z0-9_-]{6,18}$/,
+    password: /^[A-Za-z0-9_-]{6,40}$/,
     firstName: /^[A-Za-z]{3,30}$/,
     lastName: /^[A-Za-z]{3,30}$/,
     phone: /[0-9+()]{3,20}$/,
     email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-    roles: ['default', 'moderator', 'admin'],
+    role: ['default', 'moderator', 'admin'],
     serviceType: ['horse walk', 'bulgarian food dinner',
         'folk concert', 'bungee jump', 'Fire-Dancer show',
         'parachute jump', 'Azis concert', 'Veselin Marinov concert',

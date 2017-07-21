@@ -1,7 +1,8 @@
 extend ../_shared/_master
 
 block body
-        form(id="register-form" class="form-horizontal" action='/register' method="POST")
+        h2 #{error}
+        form(id="register-form" class="form-vertical" action='/register' method="POST")
             fieldset
                 div(id="legend")
                     legend
@@ -19,7 +20,7 @@ block body
                     label(class="control-label" for="firstName")
                         | First Name
                     div(class="controls")
-                        input(type="text" id="firstName" name="firstname" placeholder="" class="input-xlarge")
+                        input(type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge")
                         p(class="help-block")
                             | Please enter your first Name
 
@@ -32,10 +33,10 @@ block body
                             | Please enter your last Name
 
                 div(class="control-group")
-                    label(class="control-label" for="phoneNumber")
+                    label(class="control-label" for="phone")
                         | Phone Number
                     div(class="controls")
-                        input(type="text" id="phoneNumber" name="phoneNumber" placeholder="" class="input-xlarge")
+                        input(type="text" id="phone" name="phone" placeholder="" class="input-xlarge")
                         p(class="help-block")
                             | Please enter your phone Number
 

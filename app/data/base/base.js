@@ -25,29 +25,15 @@ class BaseData {
 
     getById(id) {
         const _id = (new ObjectID(id));
-        return new Promise((res, rej) => {
-            return this.collection.findOne({ _id: _id })
-                .then((result) => {
-                    if (result) {
-                        res(result);
-                    } else {
-                        rej('Invalid id passed!');
-                    }
-                });
-        });
+        return this.collection.findOne({ _id: _id });
     }
 
     create(model) {
-        return new Promise((res, rej) => {
-            if (Static.isValid(model, this.validator)) {
-                return this.collection.insert(model)
-                    .then((dbModel) => {
-                        res(dbModel);
-                    });
-            } else {
-                rej('Model data validation failed!');
-            }
-        });
+        if (Static.isValid(model, this.validator)) {
+            return this.collection.insert(model);
+        } else {
+            return Promise.reject('Model validation failed!');
+        }
     }
 };
 

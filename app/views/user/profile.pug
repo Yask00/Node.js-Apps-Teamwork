@@ -1,3 +1,16 @@
+extend ../_shared/_master
+
 block body
-    h1
-        | Hello user
+        div 
+            h1 Потребителски профил
+            div
+                div
+                    h2 Потребителско име: #{user.username}
+                div
+                    h3 Име: #{user.firstName}
+                div
+                    h3 Фамилия: #{user.LastName}
+                div
+                    h3 E-mail: #{user.email}
+                div
+                    h3 Телефон: #{user.phone}

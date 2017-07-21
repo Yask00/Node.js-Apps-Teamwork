@@ -1,5 +1,6 @@
 const hashing = require('../utils/hashing');
 const BaseData = require('./base/base');
+const Static = require('../models/static');
 
 class UserData extends BaseData {
     constructor(db, Model, validator) {
@@ -7,16 +8,7 @@ class UserData extends BaseData {
     }
 
     getByUsername(username) {
-        return new Promise((res, rej) => {
-            return this.collection.findOne({ username: username })
-                .then((result) => {
-                    if (result) {
-                        res(result);
-                    } else {
-                        rej('Invalid username passed!');
-                    }
-                });
-        });
+        return this.collection.findOne({ username: username });
     }
 
     checkPassword(username, password) {
@@ -37,17 +29,25 @@ class UserData extends BaseData {
     }
 
     getByEmail(email) {
-        return new Promise((res, rej) => {
-            return this.collection.findOne({ email: email })
-                .then((result) => {
-                    if (result) {
-                        res(result);
-                    } else {
-                        rej('Invalid email passed!');
-                    }
-                });
-        });
+        return this.collection.findOne({ email: email });
     }
+
+    create(model) {
+        const salt = hashing.generateSalt();
+        const passHash = hashing.hashPassword(salt, model.password);
+        model.password = passHash;
+        model.salt = salt;
+        model.role = 'default';
+        model.roomOrders = [];
+        model.serviceOrders = [];
+        console.log(model);
+        if (Static.isValid(model, this.validator)) {
+            return this.collection.insert(model);
+        } else {
+            return Promise.reject('User data validation failed!');
+        }
+    }
+
 }
 
 const init = (db, Model, validator) => {

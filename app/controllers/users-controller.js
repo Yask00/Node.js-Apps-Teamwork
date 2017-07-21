@@ -11,6 +11,17 @@ class UsersController {
         return res.render('user/login');
     }
 
+    showError(req, res) {
+        return res.render('user/error');
+    }
+
+    getUserProfile(req, res) {
+        this.data.users.getById(req.user._id)
+            .then((dbUser) => {
+                res.render('user/profile', { user: dbUser });
+            });
+    }
+
     signOut(req, res) {
         req.logout();
         return res.redirect('/');
@@ -18,20 +29,26 @@ class UsersController {
 
     signUp(req, res) {
         const bodyUser = req.body;
-
-        this.data.users.findByUsername(bodyUser.username)
+        this.data.users.getByUsername(bodyUser.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    throw new Error('User already exists');
+                    res.render('user/register', { error: 'Username already exists!' });
+                    return;
+                } else {
+                    this.data.users.getByEmail(bodyUser.email)
+                        .then((dUser) => {
+                            if (dUser) {
+                                res.render('user/register', { error: 'This email already exists!' });
+                                return;
+                            }
+                        });
                 }
-
-                return this.data.users.create(bodyUser);
-            })
-            .then((dbUser) => {
-                return res.redirect('/user/login');
-            })
-            .catch((err) => {
-                req.flash('error', err);
+                this.data.users.create(bodyUser)
+                    .then((User) => {
+                        res.redirect('/login');
+                    }).catch((err) => {
+                        res.render('user/register', { error: err });
+                    });
             });
     }
 }
