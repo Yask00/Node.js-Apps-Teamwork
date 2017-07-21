@@ -49,6 +49,6 @@ class BaseData {
             }
         });
     }
-};
+}
 
 module.exports = BaseData;

@@ -1,5 +1,3 @@
-'use strict';
-
 const async = require('./app/utils/async');
 const config = require('./app/config');
 const validator = require('./app/utils/validator');
@@ -10,3 +8,4 @@ async().then(() => require('./app/db').setup(config.connectionString))
         .then((data) => require('./app/app').init(data, config, db)))
     .then((app) => app.listen(config.PORT, () =>
         console.log(`CORS-enabled app running on http://localhost:${config.PORT}`)));
+

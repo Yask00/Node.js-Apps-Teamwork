@@ -32,7 +32,8 @@ const getValidationOptions = (Model, validator) => {
     Object.keys(model)
         .forEach((prop) => {
             if (validator[prop]) {
-                if (Object.prototype.toString.call(validator[prop]) === '[object Array]') {
+                if (Object.prototype.toString.call(validator[prop]) ===
+                    '[object Array]') {
                     validationOptions.validator.$and.push({
                         [prop]: { $in: validator[prop] },
                     });

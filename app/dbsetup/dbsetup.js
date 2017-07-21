@@ -10,8 +10,10 @@ const dbSetup = (db, validator) => {
         .then(() => readFolder())
             .then((collections) => updateDatabase(db, collections, validator))
             .then((result) => {
-                db.collection('users').createIndex({ 'username': 2 }, { unique: true });
-                db.collection('users').createIndex({ 'email': 2 }, { unique: true });
+                db.collection('users')
+                    .createIndex({ 'username': 2 }, { unique: true });
+                db.collection('users')
+                    .createIndex({ 'email': 2 }, { unique: true });
                 res(db);
             }).catch((err) => console.log(err));
     });
@@ -63,14 +65,17 @@ const updateCollection = (db, collection, act, validator) => {
         .then(() => checkCollection(db, collection))
             .then((result) => {
                 if (result) {
-                    const model = require(__dirname + '/../models/' + collection);
+                    const model =
+                        require(__dirname + '/../models/' + collection);
                     act.setValidation(model, validator)
                         .then(() => res(`Db validations of ${collection} set!`))
                         .catch((err) => rej(err));
                 } else {
-                    const model = require(__dirname + '/../models/' + collection);
+                    const model =
+                        require(__dirname + '/../models/' + collection);
                     act.createCollection(model, validator)
-                        .then(() => res(`Collection ${collection} created and validated!`))
+                        .then(() => res(
+                            `Collection ${collection} created and validated!`))
                         .catch((err) => rej(err));
                 }
             });

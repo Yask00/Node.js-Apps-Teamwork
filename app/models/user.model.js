@@ -7,9 +7,9 @@ class User {
         this.lastName = options.lastName;
         this.phone = options.phone;
         this.email = options.email;
-        this.roles = options.roles; //[]
-        this.roomOrders = options.roomOrders; //[]
-        this.serviceOrders = options.serviceOrders; //[]
+        this.roles = options.roles; // []
+        this.roomOrders = options.roomOrders; // []
+        this.serviceOrders = options.serviceOrders; // []
     }
     static isValid(model) {
         return true;

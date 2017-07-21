@@ -9,7 +9,8 @@ const setupData = (db, validator) => {
         .filter((file) => file.includes('.data'))
         .forEach((file) => {
             const dataName = file.substr(0, file.indexOf('.data'));
-            const modelName = (dataName.substr(0, (dataName.length - 1)) + '.model');
+            const modelName =
+                (dataName.substr(0, (dataName.length - 1)) + '.model');
             const Model = require((__dirname + '/../models/' + modelName));
             const modulePath = path.join(__dirname, file);
             data[dataName] = require(modulePath).init(db, Model, validator);

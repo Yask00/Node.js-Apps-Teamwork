@@ -11,7 +11,8 @@ class Static {
                 const test = validator[prop];
                 const match = model[prop];
                 if (test) {
-                    if (Object.prototype.toString.call(test) === '[object Array]') {
+                    if (Object.prototype.toString.call(test) ===
+                        '[object Array]') {
                         if (!test.find((x) => x === match)) {
                             valid = false;
                         }
