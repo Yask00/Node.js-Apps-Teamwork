@@ -6,7 +6,7 @@ class UsersController {
     getSignUpForm(req, res) {
         return res.render('user/register');
     }
-    
+
     getSignInForm(req, res) {
         return res.render('user/login');
     }

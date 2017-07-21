@@ -1,6 +1,6 @@
 /* globals __dirname */
 
-const async = require('./utils/async');
+const async = require('../utils/async');
 const fs = require('fs');
 const path = require('path');
 
@@ -10,22 +10,21 @@ const dbSetup = (db, validator) => {
         .then(() => readFolder())
             .then((collections) => updateDatabase(db, collections, validator))
             .then((result) => {
-                db.collection('users').createIndex({ 'username': 2 }, { unique: true }); // <- no duplicate values magic!
-                db.collection('users').createIndex({ 'email': 2 }, { unique: true }); // <- no duplicate values magic!
-                console.log(result);
+                db.collection('users').createIndex({ 'username': 2 }, { unique: true });
+                db.collection('users').createIndex({ 'email': 2 }, { unique: true });
                 res(db);
             }).catch((err) => console.log(err));
     });
 };
 
 const readFolder = () => {
-    const collections = fs.readdirSync(__dirname + '/models')
+    const collections = fs.readdirSync(__dirname + '/../models/')
         .filter((file) => file.includes('.model'));
     return Promise.resolve(collections);
 };
 
 const updateDatabase = (db, collections, validator) => {
-    const act = require('./dbAction')(db);
+    const act = require('./dbaction')(db);
     let count = 0;
     const counter = collections.length;
     return new Promise((res, rej) => {
@@ -64,12 +63,12 @@ const updateCollection = (db, collection, act, validator) => {
         .then(() => checkCollection(db, collection))
             .then((result) => {
                 if (result) {
-                    const model = require(__dirname + '/models/' + collection);
+                    const model = require(__dirname + '/../models/' + collection);
                     act.setValidation(model, validator)
                         .then(() => res(`Db validations of ${collection} set!`))
                         .catch((err) => rej(err));
                 } else {
-                    const model = require(__dirname + '/models/' + collection);
+                    const model = require(__dirname + '/../models/' + collection);
                     act.createCollection(model, validator)
                         .then(() => res(`Collection ${collection} created and validated!`))
                         .catch((err) => rej(err));

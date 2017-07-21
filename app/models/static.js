@@ -1,7 +1,5 @@
-const validator = require('../validator');
-
 class Static {
-    static isValid(model) {
+    static isValid(model, validator) {
         let valid = true;
 
         if (typeof model === 'undefined') {
