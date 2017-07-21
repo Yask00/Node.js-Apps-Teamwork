@@ -1,0 +1,37 @@
+[{
+    "name": "",
+    "phone": "",
+    "imageURL": "",
+    "description": "",
+    "lattitude": "",
+    "longitude": "",
+    "region": {}, // need new name -> region, not location
+    "rooms": [],
+    "services": [],
+    "comments": [],
+    "likes": []
+}]
+
+/*
+pri update -> 
+
+    "region": {
+        "_id": "",
+        "name": ""
+    }
+
+    "rooms": [{
+        "_id": "",
+        "roomType": "",
+        "price": "",
+        "weekPrice": ""
+    }]
+    
+    "comments": [{
+        "_id": "",
+        "username": "",
+        "text": "",
+        "createdOn": ""
+    }]
+}]
+*/

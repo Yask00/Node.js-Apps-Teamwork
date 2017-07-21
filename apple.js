@@ -1,4 +1,4 @@
-/* globals __dirname */
+/* globals __dirname */ // unused
 
 const async = require('./utils/async');
 const validator = require('./validator');
@@ -72,10 +72,11 @@ async().then(() => require('./db').setup(config.connectionString))
         db.collection('hotels')
             .insert(hotelModel1)
             .catch((err) => console.log('Hotel insertion failed! ' + err));
-        
+
         db.collection('hotels')
             .insert(hotelModel2)
             .catch((err) => console.log('Hotel insertion failed! ' + err));
         db.close();
     })
     .catch((err) => console.log(err));
+

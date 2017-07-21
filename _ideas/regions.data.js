@@ -1,9 +1,9 @@
 const BaseData = require('../data/base/base');
-const Hotels = require('../models/hotel.model');
+const Regions = require('../models/region.model');
 
-class HotelsData extends BaseData {
+class RegionsData extends BaseData {
     constructor(db) {
-        super(db, Hotels, Hotels);
+        super(db, Regions, Regions);
     }
 
     _isModelValid(model) {
@@ -12,4 +12,4 @@ class HotelsData extends BaseData {
     }
 }
 
-module.exports = HotelsData;
+module.exports = RegionsData;

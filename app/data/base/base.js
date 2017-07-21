@@ -35,6 +35,6 @@ class BaseData {
             return Promise.reject('Model validation failed!');
         }
     }
-};
+}
 
 module.exports = BaseData;

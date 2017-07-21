@@ -1,0 +1,19 @@
+extend ../_shared/_master
+
+block body
+    h1.htitle.text-center Изберете мечтан район!
+    .hcards
+        each region in context
+            .hcard
+                header
+                    h2
+                        a(href="/regions/" + region.id)
+                            =region.name
+                    h4
+                        a(href="/regions")
+                            =region.regionType
+                img(src=region.imageURL, alt=region.name)
+                .body
+                    p
+                        =region.description
+                    img(src=region.mapURL, alt=region.name)

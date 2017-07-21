@@ -9,5 +9,5 @@ module.exports = {
     hashPassword(salt, password) {
         const hmac = crypto.createHmac('sha1', salt);
         return hmac.update(password).digest('hex');
-    }
+    },
 };
