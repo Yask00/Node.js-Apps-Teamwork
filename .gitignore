@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -56,3 +57,43 @@ typings/
 
 # dotenv environment variables file
 .env
+=======
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Visual Studio
+bin/
+obj/
+*.suo
+
+# Node.js package folders
+node_modules/
+bower_components/
+npm-debug*.log
+>>>>>>> e8d078f72e35182dc35cc68ea7c49e73697cc66e

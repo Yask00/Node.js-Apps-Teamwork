@@ -12,9 +12,9 @@ const attachTo = (app, data) => {
         .get('/profile', (req, res) => {
             if (req.isAuthenticated()) {
                 return controller.getUserProfile(req, res);
-            } else {
-                return controller.getSignInForm(req, res);
             }
+
+            return controller.getSignInForm(req, res);
         })
         .get('/login', (req, res) => {
             return controller.getSignInForm(req, res);
@@ -22,10 +22,7 @@ const attachTo = (app, data) => {
         .get('/error', (req, res) => {
             return controller.showError(req, res);
         })
-        .get('/update', (req, res) => {
-            return controller.getUpdateForm(req, res);
-        })
-        .post('/logout', (req, res) => {
+        .get('/logout', (req, res) => {
             return controller.signOut(req, res);
         })
         .post('/register', (req, res) => {

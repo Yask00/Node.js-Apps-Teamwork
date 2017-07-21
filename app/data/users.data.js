@@ -1,7 +1,6 @@
 const hashing = require('../utils/hashing');
 const BaseData = require('./base/base');
 const Static = require('../models/static');
-const { ObjectID } = require('mongodb');
 
 class UserData extends BaseData {
     constructor(db, Model, validator) {
@@ -30,14 +29,13 @@ class UserData extends BaseData {
         model.role = 'default';
         model.roomOrders = [];
         model.serviceOrders = [];
-        console.log(model);
+        // console.log(model);
         if (Static.isValid(model, this.validator)) {
             return this.collection.insert(model);
-        } else {
-            return Promise.reject('User data validation failed!');
         }
-    }
 
+        return Promise.reject('User data validation failed!');
+    }
     update(id, body) {
         return this.getById(id).then((resultUser) => {
             if (resultUser) {

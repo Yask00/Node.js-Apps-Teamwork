@@ -10,13 +10,13 @@ const session = require('express-session');
 const morgan = require('morgan');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
-//const cors = require('cors');
+// const cors = require('cors');
 
 const init = (data, config, db) => {
     const app = express();
     app.set('views', path.join(__dirname, '../views'));
     app.set('view engine', 'pug');
-    //app.use(cors());
+    // app.use(cors());
     app.use('/public', express.static(path.join(__dirname, '../../public')));
     app.use(morgan('combined'));
     app.use(bodyParser.json());
