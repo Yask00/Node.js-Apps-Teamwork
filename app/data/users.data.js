@@ -29,7 +29,6 @@ class UserData extends BaseData {
         model.role = 'default';
         model.roomOrders = [];
         model.serviceOrders = [];
-        // console.log(model);
         if (Static.isValid(model, this.validator)) {
             return this.collection.insert(model);
         }

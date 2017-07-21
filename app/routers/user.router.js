@@ -13,7 +13,6 @@ const attachTo = (app, data) => {
             if (req.isAuthenticated()) {
                 return controller.getUserProfile(req, res);
             }
-
             return controller.getSignInForm(req, res);
         })
         .get('/login', (req, res) => {
@@ -21,6 +20,9 @@ const attachTo = (app, data) => {
         })
         .get('/error', (req, res) => {
             return controller.showError(req, res);
+        })
+        .get('/update', (req, res) => {
+            return controller.getUpdateForm(req, res);
         })
         .get('/logout', (req, res) => {
             return controller.signOut(req, res);
