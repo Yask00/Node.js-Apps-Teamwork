@@ -7,6 +7,10 @@ class UsersController {
         return res.render('user/register');
     }
 
+    getAddForm(req, res) {
+        return res.render('user/addorder');
+    }
+
     getSignInForm(req, res) {
         return res.render('user/login');
     }
@@ -32,7 +36,7 @@ class UsersController {
                 .then(() => {
                     this.data.users.getById(req.user._id)
                         .then((dbUser) => {
-                            res.render('user/profile', { user: dbUser });
+                            res.redirect('/profile');
                         });
                 });
         } else {
@@ -42,12 +46,14 @@ class UsersController {
 
     add(req, res) {
         if (req.user) {
-            this.data.users.updateCollection(req.user, req.body)
+            this.data.users.updateCollection(req)
                 .then(() => {
                     this.data.users.getById(req.user._id)
                         .then((dbUser) => {
-                            res.render('user/profile', { user: dbUser });
+                            res.redirect('/profile');
                         });
+                }).catch((err) => {
+                    res.render('user/addorder', { error: err });
                 });
         } else {
             res.render('user/login', { message: 'Please login first!' });

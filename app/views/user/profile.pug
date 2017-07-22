@@ -14,3 +14,15 @@ block body
                     h3 E-mail: #{user.email}
                 div
                     h3 Телефон: #{user.phone}
+                div 
+                    h3 Резeрвирани стаи:
+                    each val in user.roomOrders
+                        div
+                            span Начало на купона: #{val.startDate}г. &nbsp
+                            span Продължителност на купона: #{val.nightsCount} дни.
+                div 
+                    h3 Резeрвирани услуги:
+                    each val in user.serviceOrders
+                        div
+                            span Начало на купона: #{val.startDate}г.
+                            span Продължителност на купона: #{val.nightsCount} часа.

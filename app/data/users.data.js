@@ -11,10 +11,16 @@ class UserData extends BaseData {
         return this.collection.findOne({ username: username });
     }
 
-    updateCollection(user, params) {
-        const collection = params.collection;
-        const item = params.item;
-        return this.collection.update({ _id: user._id }, { $push: { collection: item } });
+    updateCollection(req) {
+        const user = req.user;
+        const item = req.body;
+        item.userId = user._id;
+        item.hotelId = user._id;
+        item.roomId = user._id;
+        if (req.body.nightsCount) {
+            return this.collection.update({ _id: user._id }, { $push: { roomOrders: item } });
+        }
+        return this.collection.update({ _id: user._id }, { $push: { serviceOrders: item } });
     }
 
     getByEmail(email) {

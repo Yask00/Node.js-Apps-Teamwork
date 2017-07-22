@@ -18,6 +18,9 @@ const attachTo = (app, data) => {
         .get('/login', (req, res) => {
             return controller.getSignInForm(req, res);
         })
+        .get('/add', (req, res) => {
+            return controller.getAddForm(req, res);
+        })
         .get('/error', (req, res) => {
             return controller.showError(req, res);
         })
@@ -38,7 +41,7 @@ const attachTo = (app, data) => {
         .post('/updateuser', (req, res) => {
             return controller.update(req, res);
         })
-        .put('/add', (req, res) => {
+        .post('/add', (req, res) => {
             return controller.add(req, res);
         });
 
