@@ -71,7 +71,7 @@ class UsersController {
             .then((dbUser) => {
                 if (dbUser) {
                     req.flash('Failed username', 'From Connect flash in REGISTER Този потребител вече съществува');
-                    res.redirect('/register', { message: req.flash('Failed username') });
+                    res.render('user/error', { message: req.flash('Failed username') });
                     return;
                 } else {
                     this.data.users.getByEmail(bodyUser.email)
