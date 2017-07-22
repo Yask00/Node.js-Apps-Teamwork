@@ -1,8 +1,10 @@
 extend ../_shared/_master
 
 block body
+    if (message && message.length > 0)
+        div.flash-message-green
+            | #{message}
     div(class="container")
-        h2 #{message}
         div(class="card card-container")
             img(id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png")
             p(id="profile-name" class="profile-name-card")

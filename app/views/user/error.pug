@@ -2,5 +2,9 @@ extend ../_shared/_master
 
 block body
     h1
-        | Hello To Error!
+        | Hello To Error page!
+
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
 

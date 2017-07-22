@@ -251,3 +251,29 @@ html {
 .btn-success{
     width: 100%;
 }
+
+.flash-message-red {
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-weight:bold;
+    font-size: 20px;
+}
+
+.flash-message-green {
+    background-color: green;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-weight:bold;
+    font-size: 20px;
+}

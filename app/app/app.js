@@ -9,6 +9,7 @@ const session = require('express-session');
 const morgan = require('morgan');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
+const flash = require('connect-flash');
 // const cors = require('cors');
 
 const init = (data, config, db) => {
@@ -29,6 +30,7 @@ const init = (data, config, db) => {
         saveUninitialized: true,
         cookie: { httpOnly: true, maxAge: 600000 },
     }));
+    app.use(flash());
 
     require('../passport')(app, data);
 

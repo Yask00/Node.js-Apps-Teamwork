@@ -70,24 +70,24 @@ class UsersController {
         this.data.users.getByUsername(bodyUser.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    res.render('user/register', {
-                        error: 'Username already exists!',
-                    });
+                    req.flash('Failed username', 'From Connect flash in REGISTER Този потребител вече съществува');
+                    res.redirect('/register', { message: req.flash('Failed username') });
                     return;
                 } else {
                     this.data.users.getByEmail(bodyUser.email)
                         .then((dUser) => {
                             if (dUser) {
-                                res.render('user/register', {
-                                    error: 'This email already exists!',
-                                });
+                                req.flash('Failed email', 'From Connect flash in REGISTER Този email е използван за регистрация');
+                                res.render('user/error', { message: req.flash('Failed email') });
                                 return;
                             }
                         });
                 }
                 this.data.users.create(bodyUser)
                     .then((User) => {
-                        res.redirect('/login');
+                        req.flash('Successful Registration', 'From Connect flash in REGISTER Вие се регистрирахте успешно, моля влезте с вашите потребителско име и парола');
+                        // res.redirect('/login');
+                        res.render('user/login', { message: req.flash('Successful Registration') });
                     }).catch((err) => {
                         res.render('user/register', { error: err });
                     });

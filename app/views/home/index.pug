@@ -1,5 +1,9 @@
 extend ../_shared/_master
 
 block body
-    h1
-        | On main page
+    h1 On main page
+
+    if (message.length > 0)
+        div.flash-message
+            | #{message}
+
