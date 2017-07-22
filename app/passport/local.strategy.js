@@ -1,5 +1,3 @@
-'use strict';
-
 const LocalStrategy = require('passport-local');
 const hashing = require('../utils/hashing');
 

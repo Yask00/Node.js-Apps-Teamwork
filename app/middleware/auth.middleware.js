@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
     isInRole(role) {
         return (req, res, next) => {
