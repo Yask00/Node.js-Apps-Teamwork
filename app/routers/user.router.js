@@ -5,7 +5,7 @@ const auth = require('../middleware/auth.middleware');
 const attachTo = (app, data) => {
     const router = new Router();
     const controller = require('../controllers/users-controller').init(data);
-    const loginFirsErr = 'Страницата е достъпна след login';
+    const loginFirstErr = 'Страницата е достъпна след login';
     const invalidCredentialsErr = 'Невалидни username/password';
 
     router
@@ -29,7 +29,7 @@ const attachTo = (app, data) => {
         })
         .get('/add', (req, res) => {
             if (!req.isAuthenticated()) {
-                return controller.getSignInForm(req, res, loginFirsErr);
+                return controller.getSignInForm(req, res, loginFirstErr);
             }
             return controller.getAddForm(req, res);
         })
@@ -38,7 +38,7 @@ const attachTo = (app, data) => {
         })
         .get('/update', (req, res) => {
             if (!req.isAuthenticated()) {
-                return controller.getSignInForm(req, res, loginFirsErr);
+                return controller.getSignInForm(req, res, loginFirstErr);
             }
             return controller.getUpdateForm(req, res);
         })

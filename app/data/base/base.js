@@ -14,11 +14,7 @@ class BaseData {
     getAll(filter, options) {
         filter = filter || {};
         options = options || {};
-        return new Promise((res, rej) => {
-            this.collection
-                .find(filter, options)
-                .then((result) => res(result.toArray()));
-        });
+        return this.collection.find(filter, options).toArray();
     }
 
     getById(id) {

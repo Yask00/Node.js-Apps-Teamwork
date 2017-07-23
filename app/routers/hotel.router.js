@@ -4,28 +4,40 @@ const { Router } = require('express');
 const attachTo = (app, data) => {
     const router = new Router();
     const controller = require('../controllers/hotels-controller').init(data);
+    const errmsg = 'Записът неуспешен поради невалидни данни!';
 
     router
-        .get('/all', (req, res) => {
+        .get('/allhotels', (req, res) => {
             return controller.getAll(req, res);
+        })
+        .get('/hotel/gallery/:id', (req, res) => {
+            return controller.getHotelGallery(req, res);
+        })
+        .get('/hotel/create', (req, res) => {
+            return controller.getCreateForm(req, res);
+        })
+        .get('/hotel/addform/:id', (req, res) => {
+            return controller.getAddForm(req, res);
+        })
+        .get('/hotel/updateformerr/:id', (req, res) => {
+            return controller.getUpdateForm(req, res, errmsg);
+        })
+        .get('/hotel/updateform/:id', (req, res) => {
+            return controller.getUpdateForm(req, res);
         })
         .get('/hotel/:id', (req, res) => {
             return controller.getHotelDetails(req, res);
         })
-        .get('/hotel/:id/gallery', (req, res) => {
-            return controller.getHotelGallery(req, res);
+        .post('/hotel/update', (req, res) => {
+            return controller.update(req, res);
+        })
+        .post('/hotel/create', (req, res) => {
+            return controller.createHotel(req, res);
+        })
+        .post('/hotel/add', (req, res) => {
+            return controller.add(req, res);
         });
-    // .post('/logout', (req, res) => {
-    //     return controller.signOut(req, res);
-    // })
-    // .post('/register', (req, res) => {
-    //     return controller.signUp(req, res);
-    // })
-    // .post('/login', passport.authenticate('local', {
-    //     successRedirect: '/profile',
-    //     failureRedirect: '/login',
-    //     failureFlash: true,
-    // }));
+
 
     app.use(router);
 };

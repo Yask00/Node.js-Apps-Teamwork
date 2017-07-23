@@ -1,34 +1,41 @@
 const BaseData = require('./base/base');
 const Static = require('../models/static');
+const { ObjectID } = require('mongodb');
 
 class HotelData extends BaseData {
     constructor(db, Model, validator) {
         super(db, Model, validator);
     }
 
-    getAll() {
-        return this.collection.find().toArray();
-    }
-
     getByName(name) {
         return this.collection.findOne({ name: name });
     }
 
-    updateCollection(hotel, params) {
-        const collection = params.collection;
-        const item = params.item;
-        return this.collection.update(
-            { _id: hotel._id }, { $push: { collection: item } });
+    updateCollection(id, body) {
+        const params = {
+            collection: body.collection,
+            item: body,
+        };
+        return this.collection.update({ _id: id }, { $push: params });
     }
 
-    create(model) {
-        model.hotels = [];
-
-        if (Static.isValid(model, this.validator)) {
-            return this.collection.insert(model);
-        }
-
-        return Promise.reject('Hotel data validation failed!');
+    update(id, body) {
+        return this.getById(id)
+            .then((resultHotel) => {
+                if (resultHotel) {
+                    return this.collection.update({ _id: resultHotel._id }, {
+                        $set: {
+                            name: body.name,
+                            phone: body.phone,
+                            imageURL: body.imageURL,
+                            description: body.description,
+                            region: body.region,
+                            lattitude: body.lattitude,
+                            longitude: body.longitude,
+                        },
+                    });
+                }
+            });
     }
 }
 

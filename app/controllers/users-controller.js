@@ -95,7 +95,6 @@ class UsersController {
                     .then((User) => {
                         req.flash('Successful Registration',
                             'Вие се регистрирахте успешно, моля влезте');
-                        // res.redirect('/login');
                         res.render('user/login', {
                             message: req.flash('Successful Registration'),
                         });
