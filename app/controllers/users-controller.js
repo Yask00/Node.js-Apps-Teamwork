@@ -83,11 +83,25 @@ class UsersController {
                             }
                         });
                 }
+
+                this.data.users.getByEmail(bodyUser.email)
+                    .then((dUser) => {
+                        if (dUser) {
+                            req.flash('Failed email',
+                                'Този email вече е използван за регистрация');
+                            res.render('user/error', {
+                                message: req.flash('Failed email') });
+                            return;
+                        }
+                    });
+
                 this.data.users.create(bodyUser)
                     .then((User) => {
                         req.flash('Successful Registration', 'Вие се регистрирахте успешно, моля влезте с вашите потребителско име и парола');
                         // res.redirect('/login');
-                        res.render('user/login', { message: req.flash('Successful Registration') });
+                        res.render('user/login', {
+                            message: req.flash('Successful Registration'),
+                        });
                     }).catch((err) => {
                         res.render('user/register', { error: err });
                     });

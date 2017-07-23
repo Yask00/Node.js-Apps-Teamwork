@@ -3,7 +3,7 @@ const init = (data) => {
         getAll(req, res) {
             return data.hotels.getAll()
                 .then((hotels) => {
-                    return res.render('hotels/all-hotels', {
+                    return res.render('hotel/all', {
                         context: hotels,
                     });
                 });
