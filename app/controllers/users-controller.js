@@ -8,7 +8,7 @@ class UsersController {
     }
 
     getAddForm(req, res) {
-        return res.render('user/addorder');
+        return res.render('user/addorder', { user: req.user });
     }
 
     getSignInForm(req, res, error) {
@@ -17,7 +17,7 @@ class UsersController {
     }
 
     getUpdateForm(req, res) {
-        return res.render('user/update');
+        return res.render('user/update', { user: req.user });
     }
 
     showError(req, res) {
