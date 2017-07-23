@@ -19,6 +19,11 @@ class RegionsController {
         return res.render('region/form');
     }
 
+    // =============== TO: DELETE this
+    getAdminPanel(req, res) {
+        return res.render('admin/panel');
+    } // ============ TO: DELETE this
+
     createNewRegion(req, res) {
         const region = req.body;
         region.hotels = [];

@@ -1,0 +1,116 @@
+extend ../_shared/_master
+
+block body
+    .hold-transition.sidebar-mini
+        .wrapper
+            header.main-header
+                a.logo(href='#')
+                    span.logo-mini Adm
+                    span.logo-lg
+                        b Aдмин Панел
+                nav.navbar.navbar-static-top(role='navigation')
+                    // Sidebar toggle button
+                    a.sidebar-toggle(href='#', data-toggle='push-menu', role='button')
+                        span.sr-only Toggle navigation
+                    .navbar-custom-menu
+                        ul.nav.navbar-nav                      
+                            // Control Sidebar Toggle Button
+                            li
+                                a(href='#', data-toggle='control-sidebar')
+                                    i.fa.fa-gears
+            aside.main-sidebar
+                section.sidebar
+                    ul.sidebar-menu.custom-my(data-widget='tree')
+                        li.header Добре дошъл!
+                        li.active
+                            a(href='/regions/create')
+                                i.fa.fa-map-marker
+                                span Добави регион
+                        li
+                            a(href='/hotels/create')
+                                i.fa.fa-h-square
+                                span Добави хотел
+                        li
+                            a(href='#')
+                                i.fa.fa-bed
+                                span Добави стая
+                        li
+                            a(href='#')
+                                i.fa.fa-picture-o
+                                span Добави услуга
+                        li.treeview
+                            a(href='#')
+                                i.fa.fa-pencil-square-o 
+                                span Редактирай
+                                span.pull-right-container
+                                    i.fa.fa-angle-left.pull-right
+                            ul.treeview-menu
+                                li
+                                    a(href='#') 
+                                        i.fa.fa-picture-o 
+                                        span Потребител
+                                li
+                                    a(href='#') 
+                                        i.fa.fa-map-marker
+                                        span Регион
+                                li
+                                    a(href='#') 
+                                        i.fa.fa-h-square
+                                        span Хотел
+                                li
+                                    a(href='#') 
+                                        i.fa.fa-bed
+                                        span Стая
+                                li
+                                    a(href='#') 
+                                        i.fa.fa-picture-o
+                                        span Услуга
+                                li
+                                    a(href='#') 
+                                        i.fa.fa-shopping-basket
+                                        span Поръчка
+            .content-wrapper
+                section.content-header
+                    h1
+                        | Page Header
+                        small Optional description
+                section.content.container-fluid
+                    //
+                        ------------------------
+                        | Your Page Content Here |
+                        ------------------------
+            // Control Sidebar
+            aside.control-sidebar.control-sidebar-light
+                ul.nav.nav-tabs.nav-justified.control-sidebar-tabs
+                    li.active
+                        a(href='#control-sidebar-home-tab', data-toggle='tab')
+                            i.fa.fa-home
+                    li
+                        a(href='#control-sidebar-settings-tab', data-toggle='tab')
+                            i.fa.fa-gears
+                // Tab panes
+                .tab-content
+                    // Home tab content
+                    #control-sidebar-home-tab.tab-pane.active
+                        h3.control-sidebar-heading Recent Activity
+                        ul.control-sidebar-menu
+                            li
+                                a(href='javascript:;')
+                                    i.menu-icon.fa.fa-birthday-cake.bg-red
+                                    .menu-info
+                                        h4.control-sidebar-subheading Здрасти
+                                        p Това е добре!
+                        // /.control-sidebar-menu
+                        h3.control-sidebar-heading Нещо ново
+                        ul.control-sidebar-menu
+                            li
+                                a(href='javascript:;')
+                                    h4.control-sidebar-subheading
+                                        | Ръст на поръчките
+                                        span.pull-right-container
+                                            span.label.label-danger.pull-right 70%
+                                    .progress.progress-xxs
+                                        .progress-bar.progress-bar-danger(style='width: 70%')
+            .control-sidebar-bg
+block scripts
+    script(src='/public/js/admin.js')

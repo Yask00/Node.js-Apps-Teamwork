@@ -14,6 +14,10 @@ const attachTo = (app, data) => {
         // .get('/:id/gallery', (req, res) => {
         //     return controller.getOneRegionGallery(req, res);
         // })
+        // ================= TO: DELETE this
+        .get('/admin/panel', (req, res) => {
+            return controller.getAdminPanel(req, res);
+        }) // =============== TO: DELETE
         .get('/regions/create', (req, res) => {
             return controller.getCreateForm(req, res);
         })
