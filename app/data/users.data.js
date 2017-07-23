@@ -38,7 +38,6 @@ class UserData extends BaseData {
         if (Static.isValid(model, this.validator)) {
             return this.collection.insert(model);
         }
-
         return Promise.reject('User data validation failed!');
     }
 
