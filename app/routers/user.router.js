@@ -22,6 +22,10 @@ const attachTo = (app, data) => {
         .get('/login', (req, res) => {
             return controller.getSignInForm(req, res);
         })
+        .get('/loginerror', (req, res) => {
+            const error = 'Невалидни username/password';
+            return controller.getSignInForm(req, res, error);
+        })
         .get('/add', (req, res) => {
             if (!req.isAuthenticated()) {
                 return controller.getSignInForm(req, res);
@@ -45,7 +49,7 @@ const attachTo = (app, data) => {
         })
         .post('/login', passport.authenticate('local', {
             successRedirect: '/profile',
-            failureRedirect: '/login',
+            failureRedirect: '/loginerror',
             failureFlash: true,
         }))
         .post('/updateuser', (req, res) => {

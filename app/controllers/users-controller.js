@@ -11,8 +11,9 @@ class UsersController {
         return res.render('user/addorder');
     }
 
-    getSignInForm(req, res) {
-        return res.render('user/login');
+    getSignInForm(req, res, error) {
+        req.flash('Invalid credentials', error);
+        return res.render('user/login', { message: req.flash('Invalid credentials') });
     }
 
     getUpdateForm(req, res) {
