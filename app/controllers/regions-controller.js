@@ -22,7 +22,15 @@ class RegionsController {
     // =============== TO: DELETE this
     getAdminPanel(req, res) {
         return res.render('admin/panel');
-    } // ============ TO: DELETE this
+    }
+
+    getOrderRoomForm(req, res) {
+        return res.render('order/booking-room');
+    }
+
+     getOrderServiceForm(req, res) {
+        return res.render('order/booking-service');
+    }// ============ TO: DELETE this
 
     createNewRegion(req, res) {
         const region = req.body;

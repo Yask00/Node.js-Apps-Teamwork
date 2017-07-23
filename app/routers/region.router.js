@@ -17,6 +17,12 @@ const attachTo = (app, data) => {
         // ================= TO: DELETE this
         .get('/admin/panel', (req, res) => {
             return controller.getAdminPanel(req, res);
+        })
+        .get('/regions/orderroom', (req, res) => {
+            return controller.getOrderRoomForm(req, res);
+        })
+        .get('/regions/orderservice', (req, res) => {
+            return controller.getOrderServiceForm(req, res);
         }) // =============== TO: DELETE
         .get('/regions/create', (req, res) => {
             return controller.getCreateForm(req, res);
