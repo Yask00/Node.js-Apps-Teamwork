@@ -72,8 +72,9 @@ class UsersController {
                 if (dbUser) {
                     req.flash('Failed username',
                         'Този потребител вече съществува');
-                    res.render('user/error', {
-                        message: req.flash('Failed username') });
+                    res.render('user/register', {
+                        message: req.flash('Failed username'),
+                    });
                     return;
                 }
 
@@ -82,8 +83,9 @@ class UsersController {
                         if (dUser) {
                             req.flash('Failed email',
                                 'Този email вече е използван за регистрация');
-                            res.render('user/error', {
-                                message: req.flash('Failed email') });
+                            res.render('user/register', {
+                                message: req.flash('Failed email'),
+                            });
                             return;
                         }
                     });
@@ -97,7 +99,9 @@ class UsersController {
                             message: req.flash('Successful Registration'),
                         });
                     }).catch((err) => {
-                        res.render('user/register', { error: err });
+                        req.flash('Failed registration',
+                            'Регистрацията неуспешна поради невалидни данни!');
+                        res.render('user/register', { message: req.flash('Failed registration') });
                     });
             });
     }

@@ -1,6 +1,9 @@
 extend ../_shared/_master
 
 block body
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
     form(id="register-form" class="form-vertical" action='/register' method="POST")
         fieldset
             div(id="legend")
