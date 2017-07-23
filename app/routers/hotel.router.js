@@ -9,10 +9,10 @@ const attachTo = (app, data) => {
         .get('/all', (req, res) => {
             return controller.getAll(req, res);
         })
-        .get('/hotel-details', (req, res) => {
+        .get('/hotel/:id', (req, res) => {
             return controller.getHotelDetails(req, res);
         })
-        .get('/hotel-gallery', (req, res) => {
+        .get('/hotel/:id/gallery', (req, res) => {
             return controller.getHotelGallery(req, res);
         });
     // .post('/logout', (req, res) => {

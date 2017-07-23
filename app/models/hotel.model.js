@@ -5,7 +5,7 @@ class Hotel {
         this.phone = options.phone;
         this.imageURL = options.imageURL;
         this.description = options.description;
-        this.location = options.location;
+        this.region = options.region;
         this.lattitude = options.lattitude;
         this.longitude = options.longitude;
         this.rooms = [];
@@ -16,6 +16,17 @@ class Hotel {
 
     get id() {
         return this._id;
+    }
+
+    static toViewModel(model) {
+        const viewModel = new Hotel();
+
+        Object.keys(model)
+            .forEach((prop) => {
+                viewModel[prop] = model[prop];
+            });
+
+        return viewModel;
     }
 }
 
