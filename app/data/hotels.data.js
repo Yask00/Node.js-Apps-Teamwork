@@ -1,7 +1,7 @@
 const BaseData = require('./base/base');
 const Static = require('../models/static');
 
-class RegionData extends BaseData {
+class HotelData extends BaseData {
     constructor(db, Model, validator) {
         super(db, Model, validator);
     }
@@ -14,11 +14,11 @@ class RegionData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
-    updateCollection(region, params) {
+    updateCollection(hotel, params) {
         const collection = params.collection;
         const item = params.item;
         return this.collection.update(
-            { _id: region._id }, { $push: { collection: item } });
+            { _id: hotel._id }, { $push: { collection: item } });
     }
 
     create(model) {
@@ -28,12 +28,12 @@ class RegionData extends BaseData {
             return this.collection.insert(model);
         }
 
-        return Promise.reject('Region data validation failed!');
+        return Promise.reject('Hotel data validation failed!');
     }
 }
 
 const init = (db, Model, validator) => {
-    return new RegionData(db, Model, validator);
+    return new HotelData(db, Model, validator);
 };
 
 module.exports = { init };

@@ -70,23 +70,28 @@ class UsersController {
         this.data.users.getByUsername(bodyUser.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    req.flash('Failed username', 'Този потребител вече съществува');
-                    res.render('user/error', { message: req.flash('Failed username') });
+                    req.flash('Failed username',
+                        'Този потребител вече съществува');
+                    res.render('user/error', {
+                        message: req.flash('Failed username') });
                     return;
-                } else {
-                    this.data.users.getByEmail(bodyUser.email)
-                        .then((dUser) => {
-                            if (dUser) {
-                                req.flash('Failed email', 'Този email вече е използван за регистрация');
-                                res.render('user/error', { message: req.flash('Failed email') });
-                                return;
-                            }
-                        });
                 }
+
+                this.data.users.getByEmail(bodyUser.email)
+                    .then((dUser) => {
+                        if (dUser) {
+                            req.flash('Failed email',
+                                'Този email вече е използван за регистрация');
+                            res.render('user/error', {
+                                message: req.flash('Failed email') });
+                            return;
+                        }
+                    });
 
                 this.data.users.create(bodyUser)
                     .then((User) => {
-                        req.flash('Successful Registration', 'Вие се регистрирахте успешно, моля влезте с вашите потребителско име и парола');
+                        req.flash('Successful Registration',
+                            'Вие се регистрирахте успешно, моля влезте');
                         // res.redirect('/login');
                         res.render('user/login', {
                             message: req.flash('Successful Registration'),

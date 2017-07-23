@@ -18,9 +18,12 @@ class UserData extends BaseData {
         item.hotelId = user._id;
         item.roomId = user._id;
         if (req.body.nightsCount) {
-            return this.collection.update({ _id: user._id }, { $push: { roomOrders: item } });
+            return this.collection.update(
+                { _id: user._id }, { $push: { roomOrders: item } });
         }
-        return this.collection.update({ _id: user._id }, { $push: { serviceOrders: item } });
+
+        return this.collection.update(
+            { _id: user._id }, { $push: { serviceOrders: item } });
     }
 
     getByEmail(email) {
@@ -38,6 +41,7 @@ class UserData extends BaseData {
         if (Static.isValid(model, this.validator)) {
             return this.collection.insert(model);
         }
+
         return Promise.reject('User data validation failed!');
     }
 
