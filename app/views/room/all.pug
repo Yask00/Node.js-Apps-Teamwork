@@ -1,0 +1,26 @@
+extend ../_shared/_master
+
+block body
+    h1 All rooms
+    .hcards
+        each room in context
+            //- Will render only free rooms
+            //- if (room.roomStatus === 'free') 
+            .hcard
+                header
+                    h2
+                        a(href="/hotel-details")
+                            | Beds in the room: #{room.roomType}
+                    h4
+                        a(href="#")
+                            | Rooms's price: #{room.price} BGN
+                img(src=room.imageURL, alt='')
+                .body
+                    p
+                        | DESCRIPTION: #{room.description}
+                    p
+                        | STATUS: #{room.roomStatus}
+                    p
+                        | Number of free Rooms: #{room.roomCount}
+                    a.btn.btn-success.pull-left(href=("#"))
+                        | Резервирай

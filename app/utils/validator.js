@@ -30,4 +30,6 @@ module.exports = {
     startDate: /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)dd$/,
     nightsCount: /^[0-9]{1,2}$/,
     roomId: /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i,
+    roomStatus: ['free', 'booked'],
+    roomCount: /^[1-9]$|^[1-2][0-9]$|^3[0-6]$/g,
 };

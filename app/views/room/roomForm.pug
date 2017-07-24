@@ -1,0 +1,66 @@
+extend ../_shared/_master
+
+block body
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
+    form(id="register-form" class="form-vertical" action='/room/create' method="POST")
+        fieldset
+            div(id="legend")
+                legend
+                    | Add room
+
+            div(class="control-group")
+                label(class="control-label" for="roomType")
+                    | Room Type
+                div(class="controls")
+                    input(type="text" id="roomType" name="roomType" placeholder="" class="input-xlarge")
+                    //- input(type="text" id="hotelId" name="hotelId" value=hotelId class="hidden")
+                    //- input(type="text" id="collection" name="collection" value="rooms" class="hidden")
+                    p(class="help-block")
+                        | Enter one, two, three or four
+
+            div(class="control-group")
+                            label(class="control-label" for="imageURL")
+                                | Image
+                            div(class="controls")
+                                input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
+                                p(class="help-block")
+                                    | Please enter valid image URL
+
+            div(class="control-group")
+                label(class="control-label" for="description")
+                    | Description
+                div(class="controls")
+                    input(type="text" id="description" name="description" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Enter room description
+
+            div(class="control-group")
+                label(class="control-label" for="price")
+                    | Price
+                div(class="controls")
+                    input(type="text" id="price" name="price" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter room price
+
+            div(class="control-group")
+                label(class="control-label" for="roomStatus")
+                    | Room Status
+                div(class="controls")
+                    input(type="text" id="roomStatus" name="roomStatus" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter free or booked
+
+            div(class="control-group")
+                label(class="control-label" for="roomCount")
+                    | Number of rooms
+                div(class="controls")
+                    input(type="text" id="roomCount" name="roomCount" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter count of this type of room (1 - 36)
+
+            div(class="control-group")
+                div(class="controls")
+                    button(class="btn btn-success")
+                        | Add room
