@@ -20,16 +20,20 @@ class HotelData extends BaseData {
         };
         const params = collections[body.collection];
         if (Static.isValid(body, this.validator)) {
-            return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
+            return this.collection.update(
+                { _id: new ObjectID(id) }, { $push: params });
         }
-        return Promise.reject('Aaa, така не става, братчед!');
+        return Promise.reject('Редактирането е неуспешно!');
     }
 
     update(id, body) {
         return this.getById(id)
             .then((resultHotel) => {
-                if (resultHotel) {
-                    return this.collection.update({ _id: resultHotel._id }, {
+                if (!resultHotel) {
+                    return Promise.reject('Редактирането е неуспешно!');
+                }
+
+                return this.collection.update({ _id: resultHotel._id }, {
                         $set: {
                             name: body.name,
                             phone: body.phone,
@@ -40,7 +44,6 @@ class HotelData extends BaseData {
                             longitude: body.longitude,
                         },
                     });
-                }
             });
     }
 }

@@ -11,7 +11,9 @@ class HotelsController {
                     user: req.user,
                 });
             })
-            .catch((err) => res.render('user/error', { error: err }));
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
     }
 
     getHotelDetails(req, res) {
@@ -21,17 +23,25 @@ class HotelsController {
                     hotel: dbHotel,
                     user: req.user,
                 }))
-            .catch((err) => res.render('user/error', { error: err }));
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
     }
 
     getHotelGallery(req, res) {
         this.data.hotels.getById(req.params.id)
-            .then((dbHotel) => res.render('hotel/gallery', { hotel: dbHotel }))
-            .catch((err) => res.render('user/error', { error: err }));
+            .then((dbHotel) => {
+                res.render('hotel/gallery', { hotel: dbHotel });
+            })
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
     }
 
     getCreateForm(req, res) {
-        return res.render('hotel/form', { user: req.user });
+        return res.render('hotel/form', {
+            user: req.user,
+        });
     }
 
     getAddForm(req, res) {
@@ -56,7 +66,8 @@ class HotelsController {
                         res.render('hotel/details', { hotel: dbHotel });
                     });
             }).catch((err) => {
-                req.flash('Invalid data', 'Записът неуспешен поради невалидни данни!');
+                req.flash(
+                    'Invalid data', 'Неуспешен запис: невалидни данни!');
                 res.render('hotel/updateform', {
                     user: req.user,
                     hotelId: req.body.id,
@@ -73,7 +84,8 @@ class HotelsController {
                         res.render('hotel/gallery', { hotel: dbHotel });
                     });
             }).catch((err) => {
-                req.flash('Add failed', 'Записът неуспешен поради невалидни данни!');
+                req.flash(
+                    'Add failed', 'Неуспешен запис: невалидни данни!');
                 res.render('hotel/addform', {
                     user: req.user,
                     hotelId: req.body.hotelId,
@@ -86,14 +98,14 @@ class HotelsController {
         this.data.hotels.create(req.body)
             .then((dbHotel) => {
                 req.flash('Hotel created succesfuly',
-                    `Хотел ${dbHotel.name} успешно създаден`);
+                    `Хотел ${dbHotel.name} е успешно създаден`);
                 res.render('hotel/details', {
                     message: req.flash('Hotel created succesfuly'),
                     hotel: dbHotel,
                 });
             }).catch((err) => {
                 req.flash('Failed creation',
-                    'Записът неуспешен поради невалидни данни!');
+                    'Записът e неуспешен поради невалидни данни!');
                 res.render('hotel/form', {
                     message: req.flash('Failed creation'),
                     user: req.user,

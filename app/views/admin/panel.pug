@@ -22,16 +22,16 @@ block body
                 section.sidebar
                     ul.sidebar-menu.custom-my(data-widget='tree')
                         li.header Добре дошъл!
-                        li.active
-                            a(href='/regions/create')
+                        li
+                            a(href='/region/create')
                                 i.fa.fa-map-marker
                                 span Добави регион
                         li
-                            a(href='/hotels/create')
+                            a(href='/hotel/create')
                                 i.fa.fa-h-square
                                 span Добави хотел
                         li
-                            a(href='#')
+                            a(href='/room/create')
                                 i.fa.fa-bed
                                 span Добави стая
                         li
@@ -70,16 +70,13 @@ block body
                                         i.fa.fa-shopping-basket
                                         span Поръчка
             .content-wrapper
-                section.content-header
-                    h1
-                        | Page Header
-                        small Optional description
+                //- section.content-header
+                //-     h1
+                //-         | Page Header
+                //-         small Optional description
                 section.content.container-fluid
-                    //
-                        ------------------------
-                        | Your Page Content Here |
-                        ------------------------
-            // Control Sidebar
+                    block addoredit
+
             aside.control-sidebar.control-sidebar-light
                 ul.nav.nav-tabs.nav-justified.control-sidebar-tabs
                     li.active

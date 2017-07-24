@@ -1,15 +1,59 @@
 [{
+    "name": "Вила Голямата мечка, Вършило",
+    "phone": "056 123342",
+    "imageURL": "http://www.bgvakancia.com/common_images/offers/5271/03d8e6318faa872e5535598af35f0eab.jpg",
+    "description": "Вила Голямата мечка е масивна сграда с голям двор в китното и уединено странджанско селце Вършило.Намира се на 40км от гр.Бургас и на 30 км от най-близкият плаж Крайморие.",
+    "region": "Странджа",
+    "lattitude": "42.2608",
+    "longitude": "27.3786"    
+}, {
+    "name": "Михайловата къща, Буйновци",
+    "phone": "033221174",
+    "imageURL": "http://www.bgvakancia.com/common_images/offers/2445/thumb_96ae22225500b89680d0d490f65b7eae.jpg",
+    "description": "Михайловата къща е разположена в красивото балканско село Буйновци, в Балкана, на 11 км от гр. Елена.",
+    "region": "Еленски Балкан",
+    "lattitude": "42.8700",
+    "longitude": "25.8943"
+}, {
     "name": "",
     "phone": "",
     "imageURL": "",
     "description": "",
+    "region": "",
     "lattitude": "",
-    "longitude": "",
-    "region": {}, // need new name -> region, not location
-    "rooms": [],
-    "services": [],
-    "comments": [],
-    "likes": []
+    "longitude": ""
+}, {
+    "name": "",
+    "phone": "",
+    "imageURL": "",
+    "description": "",
+    "region": "",
+    "lattitude": "",
+    "longitude": ""
+}, {
+    "name": "",
+    "phone": "",
+    "imageURL": "",
+    "description": "",
+    "region": "",
+    "lattitude": "",
+    "longitude": ""
+}, {
+    "name": "",
+    "phone": "",
+    "imageURL": "",
+    "description": "",
+    "region": "",
+    "lattitude": "",
+    "longitude": ""
+}, {
+    "name": "",
+    "phone": "",
+    "imageURL": "",
+    "description": "",
+    "region": "",
+    "lattitude": "",
+    "longitude": ""
 }]
 
 /*

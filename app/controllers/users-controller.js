@@ -13,7 +13,8 @@ class UsersController {
 
     getSignInForm(req, res, error) {
         req.flash('Invalid credentials', error);
-        return res.render('user/login', { message: req.flash('Invalid credentials') });
+        return res.render('user/login', {
+            message: req.flash('Invalid credentials') });
     }
 
     getUpdateForm(req, res) {
@@ -107,8 +108,9 @@ class UsersController {
                         });
                     }).catch((err) => {
                         req.flash('Failed registration',
-                            'Регистрацията неуспешна поради невалидни данни!');
-                        res.render('user/register', { message: req.flash('Failed registration') });
+                            'Регистрацията неуспешна: невалидни данни!');
+                        res.render('user/register', {
+                            message: req.flash('Failed registration') });
                     });
             });
     }

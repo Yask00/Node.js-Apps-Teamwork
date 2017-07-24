@@ -18,10 +18,12 @@ class UserData extends BaseData {
         item.hotelId = user._id;
         item.roomId = user._id;
         if (req.body.nightsCount) {
-            return this.collection.update({ _id: user._id }, { $push: { roomOrders: item } });
+            return this.collection.update(
+                { _id: user._id }, { $push: { roomOrders: item } });
         }
 
-        return this.collection.update({ _id: user._id }, { $push: { serviceOrders: item } });
+        return this.collection.update(
+            { _id: user._id }, { $push: { serviceOrders: item } });
     }
 
     getByEmail(email) {
@@ -35,34 +37,40 @@ class UserData extends BaseData {
         model.salt = salt;
         model.roomOrders = [];
         model.serviceOrders = [];
-        if (model.username === 'sfo321' || model.username === 'yasko1' || model.username === 'tarlit') {
-            model.role = 'admin';
+        if (model.username === 'sfo321' ||
+            model.username === 'yasko1' ||
+            model.username === 'tarlit') {
+                model.role = 'admin';
         } else {
             model.role = 'default';
         }
+
         if (Static.isValid(model, this.validator)) {
             return this.collection.insert(model);
         }
+
         return Promise.reject('User data validation failed!');
     }
 
     update(id, body) {
         return this.getById(id)
             .then((resultUser) => {
-                if (resultUser) {
-                    const salt = resultUser.salt;
-                    const passHash = hashing.hashPassword(salt, body.password);
-                    body.password = passHash;
-                    return this.collection.update({ _id: resultUser._id }, {
-                        $set: {
-                            firstName: body.firstName,
-                            lastName: body.lastName,
-                            password: body.password,
-                            phone: body.phone,
-                        },
-                    });
+                if (!resultUser) {
+                    return Promise.reject('User data validation failed!');
                 }
-            });
+
+                const salt = resultUser.salt;
+                const passHash = hashing.hashPassword(salt, body.password);
+                body.password = passHash;
+                return this.collection.update({ _id: resultUser._id }, {
+                    $set: {
+                        firstName: body.firstName,
+                        lastName: body.lastName,
+                        password: body.password,
+                        phone: body.phone,
+                    },
+                });
+        });
     }
 }
 
