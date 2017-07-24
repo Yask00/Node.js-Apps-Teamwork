@@ -4,7 +4,6 @@ const { Router } = require('express');
 const attachTo = (app, data) => {
     const router = new Router();
     const controller = require('../controllers/hotels-controller').init(data);
-    const errmsg = 'Записът неуспешен поради невалидни данни!';
 
     router
         .get('/allhotels', (req, res) => {
@@ -16,13 +15,10 @@ const attachTo = (app, data) => {
         .get('/hotel/create', (req, res) => {
             return controller.getCreateForm(req, res);
         })
-        .get('/hotel/addform/:id', (req, res) => {
+        .get('/hotel/add/:id', (req, res) => {
             return controller.getAddForm(req, res);
         })
-        .get('/hotel/updateformerr/:id', (req, res) => {
-            return controller.getUpdateForm(req, res, errmsg);
-        })
-        .get('/hotel/updateform/:id', (req, res) => {
+        .get('/hotel/update/:id', (req, res) => {
             return controller.getUpdateForm(req, res);
         })
         .get('/hotel/:id', (req, res) => {
