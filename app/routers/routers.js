@@ -6,12 +6,7 @@ const path = require('path');
 const attachTo = (app, data) => {
     app
         .get('/', (req, res) => {
-            return res.render('home/index', { message: req.flash('test') });
-        })
-        // Only for testing pupose
-        .get('/flash', (req, res) => {
-            req.flash('test', 'Testing the connect-flash');
-            res.redirect('/');
+            return res.render('home/index', { user: req.user });
         });
 
     fs.readdirSync(__dirname)

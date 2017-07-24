@@ -8,6 +8,7 @@ class HotelsController {
             .then((hotels) => {
                 res.render('hotel/all', {
                     context: hotels,
+                    user: req.user,
                 });
             })
             .catch((err) => res.render('user/error', { error: err }));
@@ -15,7 +16,11 @@ class HotelsController {
 
     getHotelDetails(req, res) {
         this.data.hotels.getById(req.params.id)
-            .then((dbHotel) => res.render('hotel/details', { hotel: dbHotel }))
+            .then((dbHotel) =>
+                res.render('hotel/details', {
+                    hotel: dbHotel,
+                    user: req.user,
+                }))
             .catch((err) => res.render('user/error', { error: err }));
     }
 

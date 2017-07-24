@@ -8,6 +8,7 @@ class RegionsController {
             .then((regions) => {
                 res.render('region/all', {
                     context: regions,
+                    user: req.user,
                 });
             })
             .catch((err) => {
@@ -16,20 +17,28 @@ class RegionsController {
     }
 
     getCreateForm(req, res) {
-        return res.render('region/form');
+        return res.render('region/form', {
+                    user: req.user,
+                });
     }
 
     // =============== TO: DELETE this
     getAdminPanel(req, res) {
-        return res.render('admin/panel');
+        return res.render('admin/panel', {
+                    user: req.user,
+                });
     }
 
     getOrderRoomForm(req, res) {
-        return res.render('order/booking-room');
+        return res.render('order/booking-room', {
+                    user: req.user,
+                });
     }
 
      getOrderServiceForm(req, res) {
-        return res.render('order/booking-service');
+        return res.render('order/booking-service', {
+                    user: req.user,
+                });
     }// ============ TO: DELETE this
 
     createNewRegion(req, res) {
