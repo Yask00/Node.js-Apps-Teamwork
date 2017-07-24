@@ -15,9 +15,19 @@ block body
                 div(class="controls")
                     input(type="text" id="roomType" name="roomType" placeholder="" class="input-xlarge")
                     input(type="text" id="hotelId" name="hotelId" value=hotelId class="hidden")
-                    input(type="text" id="collection" name="collection" value="rooms" class="hidden")
                     p(class="help-block")
-                        | Enter number between 1 and 4
+                        | Hint: one, two, three or four
+            div(class="control-group")
+                label(class="control-label" for="collection")
+                    | Type
+                div(class="controls")
+                    select(id="collection" name="collection" class="input-xlarge")
+                        option(value=rooms) rooms
+                        option(value=services) services
+                        option(value=comments) comments
+                        option(value=likes) likes
+                    p(class="help-block")
+                        | Enter type
             div(class="control-group")
                 label(class="control-label" for="description")
                     | Description

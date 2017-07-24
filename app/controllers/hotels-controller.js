@@ -61,7 +61,6 @@ class HotelsController {
     }
 
     add(req, res) {
-        console.log(req.body);
         this.data.hotels.updateCollection(req.body.hotelId, req.body)
             .then(() => {
                 this.data.hotels.getById(req.body.hotelId)
@@ -70,7 +69,7 @@ class HotelsController {
                     });
             }).catch((err) => {
                 req.flash('Add failed', 'Записът неуспешен поради невалидни данни!');
-                res.render('hotel/add', {
+                res.render('hotel/addform', {
                     user: req.user,
                     hotelId: req.body.hotelId,
                     message: req.flash('Add failed'),

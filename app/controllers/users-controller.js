@@ -31,6 +31,13 @@ class UsersController {
             });
     }
 
+    getAdminPanel(req, res) {
+        this.data.users.getById(req.user._id)
+            .then((dbUser) => {
+                res.render('admin/panel', { user: dbUser });
+            });
+    }
+
     update(req, res) {
         if (req.user) {
             this.data.users.update(req.user._id, req.body)

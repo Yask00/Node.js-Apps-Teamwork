@@ -17,7 +17,7 @@ const attachTo = (app, data) => {
                 return controller.getSignInForm(req, res);
             }
             if (auth.isInRole(req, 'admin')) {
-                return controller.getUpdateForm(req, res);
+                return controller.getAdminPanel(req, res);
             }
             return controller.getUserProfile(req, res);
         })

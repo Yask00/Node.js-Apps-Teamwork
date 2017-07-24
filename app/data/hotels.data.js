@@ -14,12 +14,15 @@ class HotelData extends BaseData {
     updateCollection(id, body) {
         const collections = {
             rooms: { rooms: body },
-            services: { rooms: body },
-            comments: { rooms: body },
-            likes: { rooms: body },
+            services: { services: body },
+            comments: { comments: body },
+            likes: { likes: body },
         };
         const params = collections[body.collection];
-        return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
+        if (Static.isValid(body, this.validator)) {
+            return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
+        }
+        return Promise.reject('Aaa, така не става, братчед!');
     }
 
     update(id, body) {

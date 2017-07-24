@@ -1,7 +1,6 @@
 class Static {
     static isValid(model, validator) {
         let valid = true;
-
         if (typeof model === 'undefined') {
             return !valid;
         }
@@ -14,11 +13,13 @@ class Static {
                     if (Object.prototype.toString.call(test) ===
                         '[object Array]') {
                         if (!test.find((x) => x === match)) {
+                            console.log(prop);
                             valid = false;
                         }
                     } else {
                         const reg = new RegExp(test);
                         if (!reg.test(match)) {
+                            console.log(prop);
                             valid = false;
                         }
                     }
