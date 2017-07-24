@@ -12,11 +12,13 @@ class HotelData extends BaseData {
     }
 
     updateCollection(id, body) {
-        const collection = body.collection;
-        const item = body;
-        const params = {
-            collection: item,
+        const collections = {
+            rooms: { rooms: body },
+            services: { rooms: body },
+            comments: { rooms: body },
+            likes: { rooms: body },
         };
+        const params = collections[body.collection];
         return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
     }
 
