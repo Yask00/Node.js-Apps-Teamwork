@@ -4,11 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 const attachTo = (app, data) => {
-    app
-        .get('/', (req, res) => {
-            return res.render('home/index', { user: req.user });
-        });
-
     fs.readdirSync(__dirname)
         .filter((file) => file.includes('.router'))
         .forEach((file) => {
