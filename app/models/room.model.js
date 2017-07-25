@@ -1,4 +1,3 @@
-
 class Room {
     constructor(options) {
         this._id = options._id;
