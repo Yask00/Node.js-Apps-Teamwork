@@ -13,14 +13,19 @@ class HotelData extends BaseData {
 
     updateCollection(id, body) {
         if (Static.isValid(body, this.validator)) {
-            return this.collection.update(
-                { _id: new ObjectID(id) }, { $push: params });
+            const collections = {
+                rooms: { rooms: body },
+                services: { services: body },
+                comments: { comments: body },
+                likes: { likes: body },
+            };
+            const params = collections[body.collection];
+            return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
         }
         return Promise.reject('Редактирането е неуспешно!');
     }
 
     update(id, body) {
-<<<<<<< .mine
         if (Static.isValid(body, this.validator)) {
             return this.getById(id)
                 .then((resultHotel) => {
@@ -39,28 +44,7 @@ class HotelData extends BaseData {
                     }
                 });
         }
-        return Promise.reject('Aaa, така не става, братчед!');
-=======
-        return this.getById(id)
-            .then((resultHotel) => {
-                if (!resultHotel) {
-                    return Promise.reject('Редактирането е неуспешно!');
-                }
-
-                return this.collection.update({ _id: resultHotel._id }, {
-                        $set: {
-                            name: body.name,
-                            phone: body.phone,
-                            imageURL: body.imageURL,
-                            description: body.description,
-                            region: body.region,
-                            lattitude: body.lattitude,
-                            longitude: body.longitude,
-                        },
-                    });
-            });
-
->>>>>>> .theirs
+        return Promise.reject('Редактирането е неуспешно!');
     }
 }
 

@@ -27,7 +27,7 @@ class ServiceData extends BaseData {
                     }
                 });
         }
-        return Promise.reject('Aaa, така не става, братчед!');
+        return Promise.reject('Редактирането е неуспешно!');
     }
 }
 
