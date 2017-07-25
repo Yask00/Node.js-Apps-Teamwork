@@ -42,6 +42,50 @@ class RoomsController {
                 });
             });
     }
+
+    getRoomDetails(req, res) {
+        this.data.rooms.getById(req.params.id)
+            .then((dbRoom) =>
+                res.render('room/details', {
+                    room: dbRoom,
+                    user: req.user,
+                }))
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
+    }
+
+    getAddForm(req, res) {
+        return res.render('room/roomForm', {
+            user: req.user,
+            hotelId: req.params.id,
+        });
+    }
+
+    getUpdateForm(req, res) {
+        return res.render('room/updateForm', {
+            user: req.user,
+            hotelId: req.params.id,
+        });
+    }
+
+    update(req, res) {
+        this.data.rooms.update(req.body.id, req.body)
+            .then(() => {
+                this.data.rooms.getById(req.body.id)
+                    .then((dbRoom) => {
+                        res.render('room/details', { room: dbRoom });
+                    });
+            }).catch((err) => {
+                req.flash(
+                    'Invalid data', 'Неуспешен запис: невалидни данни!');
+                res.render('room/updateform', {
+                    user: req.user,
+                    roomId: req.body.id,
+                    message: req.flash('Invalid data'),
+                });
+            });
+    }
 }
 
 const init = (data) => {
