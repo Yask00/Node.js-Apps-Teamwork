@@ -11,7 +11,9 @@ class ServicesController {
                     user: req.user,
                 });
             })
-            .catch((err) => res.render('user/error', { error: err }));
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
     }
 
     getDetails(req, res) {
@@ -20,11 +22,15 @@ class ServicesController {
                 res.render('service/details', {
                     service: dbService,
                     user: req.user,
-                })).catch((err) => res.render('user/error', { error: err }));
+                })).catch((err) => {
+                    res.render('user/error', { error: err });
+                });
     }
 
     getCreateForm(req, res) {
-        return res.render('service/form', { user: req.user });
+        return res.render('service/form', {
+            user: req.user,
+        });
     }
 
     getUpdateForm(req, res) {
@@ -48,7 +54,8 @@ class ServicesController {
                         });
                     });
             }).catch((err) => {
-                req.flash('Invalid data', 'Записът неуспешен поради невалидни данни!');
+                req.flash(
+                    'Invalid data', 'Неуспешен запис: невалидни данни!');
                 res.render('service/updateform', {
                     user: req.user,
                     serviceId: req.body.id,
@@ -62,14 +69,14 @@ class ServicesController {
         this.data.services.create(req.body)
             .then((dbService) => {
                 req.flash('Service created succesfuly',
-                    `Услугата успешно създаденa`);
+                    `Услугата e успешно създаденa`);
                 res.render('service/details', {
                     message: req.flash('Service created succesfuly'),
                     service: req.body,
                 });
             }).catch((err) => {
                 req.flash('Failed creation',
-                    'Записът неуспешен поради невалидни данни!');
+                    'Записът e неуспешен поради невалидни данни!');
                 res.render('service/form', {
                     message: req.flash('Failed creation'),
                     user: req.user,

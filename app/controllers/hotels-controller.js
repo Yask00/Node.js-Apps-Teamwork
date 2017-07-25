@@ -63,7 +63,12 @@ class HotelsController {
             .then(() => {
                 this.data.hotels.getById(req.body.id)
                     .then((dbHotel) => {
-                        res.render('hotel/details', { hotel: dbHotel });
+                        req.flash('Service updated succesfuly',
+                            `Хотелът e успешно променен`);
+                        res.render('hotel/details', {
+                            message: req.flash('Service updated succesfuly'),
+                            hotel: dbHotel,
+                        });
                     });
             }).catch((err) => {
                 req.flash(

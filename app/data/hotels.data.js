@@ -20,7 +20,8 @@ class HotelData extends BaseData {
                 likes: { likes: body },
             };
             const params = collections[body.collection];
-            return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
+            return this.collection.update(
+                { _id: new ObjectID(id) }, { $push: params });
         }
         return Promise.reject('Редактирането е неуспешно!');
     }
@@ -30,16 +31,17 @@ class HotelData extends BaseData {
             return this.getById(id)
                 .then((resultHotel) => {
                     if (resultHotel) {
-                        return this.collection.update({ _id: resultHotel._id }, {
-                            $set: {
-                                name: body.name,
-                                phone: body.phone,
-                                imageURL: body.imageURL,
-                                description: body.description,
-                                region: body.region,
-                                lattitude: body.lattitude,
-                                longitude: body.longitude,
-                            },
+                        return this.collection.update(
+                            { _id: resultHotel._id }, {
+                                $set: {
+                                    name: body.name,
+                                    phone: body.phone,
+                                    imageURL: body.imageURL,
+                                    description: body.description,
+                                    region: body.region,
+                                    lattitude: body.lattitude,
+                                    longitude: body.longitude,
+                                },
                         });
                     }
                 });
