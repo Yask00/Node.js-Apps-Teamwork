@@ -1,4 +1,4 @@
-const hashing = require('../../utils/hashing');
+// const hashing = require('../../utils/hashing');
 const Static = require('../../models/static');
 const { ObjectID } = require('mongodb');
 

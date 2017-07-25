@@ -2,13 +2,13 @@
 
 const path = require('path');
 const express = require('express');
-const async = require('../utils/async');
+// const async = require('../utils/async');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const morgan = require('morgan');
 const MongoStore = require('connect-mongo')(session);
-const passport = require('passport');
+// const passport = require('passport');
 const flash = require('connect-flash');
 // const cors = require('cors');
 

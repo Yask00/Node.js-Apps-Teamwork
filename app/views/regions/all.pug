@@ -7,10 +7,10 @@ block body
             .hcard
                 header
                     h2
-                        a(href="/region/" + region._id)
+                        a(href="/regions/" + region._id)
                             =region.name
                     h4
-                        a(href="/region/" + region.regionType)
+                        a(href="/regions?search=" + region.regionType)
                             =region.regionType
                 img.img-responsive(src=region.imageURL, alt=region.name)
                 .body

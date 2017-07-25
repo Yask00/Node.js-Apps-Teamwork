@@ -5,7 +5,7 @@ const attachTo = (app, data) => {
     const controller = require('../controllers/regions-controller').init(data);
 
     router
-        .get('/region/all', (req, res) => {
+        .get('/regions/all', (req, res) => {
             return controller.getAll(req, res);
         })
         // .get('/gallery', (req, res) => {
@@ -18,23 +18,26 @@ const attachTo = (app, data) => {
         .get('/admin/panel', (req, res) => {
             return controller.getAdminPanel(req, res);
         })
-        .get('/region/orderroom', (req, res) => {
+        .get('/regions/orderroom', (req, res) => {
             return controller.getOrderRoomForm(req, res);
         })
-        .get('/region/orderservice', (req, res) => {
+        .get('/regions/orderservice', (req, res) => {
             return controller.getOrderServiceForm(req, res);
         }) // =============== TO: DELETE
-        .get('/region/create', (req, res) => {
+        .get('/regions', (req, res) => {
             return controller.getCreateForm(req, res);
         })
-        .post('/region/create', (req, res) => {
+        .post('/regions', (req, res) => {
             return controller.createRegion(req, res);
         });
         // .get('/regions/:id', (req, res) => {
         //     return controller.getRegionDetails(req, res);
         // });
-        // .put('/update/:id', (req, res)=> {
+        // .put('/regions/:id', (req, res)=> {
         //     return controller.updateRegion(req, res);
+        // });
+        // .delete('/regions/:id', (req, res)=> {
+        //     return controller.deleteRegion(req, res);
         // });
 
     app.use(router);
