@@ -1,0 +1,24 @@
+extend ../_shared/_master
+
+block body
+        h1 
+            | Тук Има невидим хотел, а това са неговите коментари
+        each comment in context
+            div(class="container")
+                div(class="row")
+                    div(class="col-sm-12")
+                        div(class="panel panel-white post")
+                            div(class="post-heading")
+                                div(class="pull-left image")
+                                    img(src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image")
+                                div(class="pull-left meta")
+                                    div(class="title h5")
+                                        a(href="#")
+                                            b Потребител: Анонимен
+                                        |  направи следния коментар.
+                                    h6(class="text-muted time") Създаден на: #{comment.createdOn}
+                            div(class="post-description")
+                                <p> #{comment.content}
+
+
+
