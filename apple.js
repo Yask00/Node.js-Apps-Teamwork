@@ -1,5 +1,3 @@
-/* globals __dirname */ // unused
-
 const async = require('./app/utils/async');
 const validator = require('./app/utils/validator');
 const config = require('./app/config');
@@ -41,7 +39,8 @@ async().then(() => require('./app/db').setup(config.connectionString))
             name: 'Михайловата къща Буйновци',
             phone: '0123456789',
             imageURL: 'http://www.bgvakancia.com/common_images/offers/2445/thumb_96ae22225500b89680d0d490f65b7eae.jpg',
-            description: 'Михайловата къща" е разположена в красивото балканско село Буйновци, в Балкана, на 11 км от гр. Елена. ',
+            description: 'Михайловата къща" е разположена в красивото ' +
+                'балканско село Буйновци, в Балкана, на 11 км от гр. Елена. ',
             location: 'Еленски Балкан',
             lattitude: '22',
             longitude: '22',
@@ -51,7 +50,8 @@ async().then(() => require('./app/db').setup(config.connectionString))
             name: 'Къща Станкови Цигов чарк',
             phone: '0123456781',
             imageURL: 'http://www.bgvakancia.com/common_images/offers/812/thumb_6d219cd52d0596c2ab6c443615ba76d3.jpg',
-            description: 'Къща за гости "СТАНКОВИ" се намира в невероятния планински курорт Цигов Чарк край язовир Батак.',
+            description: 'Къща за гости "СТАНКОВИ" се намира в невероятния ' +
+                'планински курорт Цигов Чарк край язовир Батак.',
             location: 'Централен Балкан',
             lattitude: '21',
             longitude: '21',

@@ -5,8 +5,8 @@ const attachTo = (app, data) => {
     const controller = require('../controllers/regions-controller').init(data);
 
     router
-        .get('/regions', (req, res) => {
-            return controller.getAllRegions(req, res);
+        .get('/regions/all', (req, res) => {
+            return controller.getAll(req, res);
         })
         // .get('/gallery', (req, res) => {
         //     return controller.getRegionsGallery(req, res);
@@ -24,17 +24,20 @@ const attachTo = (app, data) => {
         .get('/regions/orderservice', (req, res) => {
             return controller.getOrderServiceForm(req, res);
         }) // =============== TO: DELETE
-        .get('/regions/create', (req, res) => {
+        .get('/regions', (req, res) => {
             return controller.getCreateForm(req, res);
         })
-        .post('/regions/create', (req, res) => {
-            return controller.createNewRegion(req, res);
+        .post('/regions', (req, res) => {
+            return controller.createRegion(req, res);
         });
         // .get('/regions/:id', (req, res) => {
         //     return controller.getRegionDetails(req, res);
         // });
-        // .put('/update/:id', (req, res)=> {
+        // .put('/regions/:id', (req, res)=> {
         //     return controller.updateRegion(req, res);
+        // });
+        // .delete('/regions/:id', (req, res)=> {
+        //     return controller.deleteRegion(req, res);
         // });
 
     app.use(router);

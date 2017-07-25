@@ -2,7 +2,7 @@
 
 const async = require('../utils/async');
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 
 const dbSetup = (db, validator) => {
     return new Promise((res, rej) => {

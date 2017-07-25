@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
+// const eslint = require('gulp-eslint');
 const nodemon = require('gulp-nodemon');
 const destination = 'build';
 

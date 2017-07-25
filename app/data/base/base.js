@@ -1,4 +1,4 @@
-const hashing = require('../../utils/hashing');
+// const hashing = require('../../utils/hashing');
 const Static = require('../../models/static');
 const { ObjectID } = require('mongodb');
 
@@ -23,11 +23,11 @@ class BaseData {
     }
 
     create(model) {
-        if (Static.isValid(model, this.validator)) {
-            return this.collection.insert(model);
-        } else {
+        if (!Static.isValid(model, this.validator)) {
             return Promise.reject('Model validation failed!');
         }
+
+        return this.collection.insert(model);
     }
 }
 

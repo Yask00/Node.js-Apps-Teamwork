@@ -3,23 +3,59 @@ class RegionsController {
         this.data = data;
     }
 
-    getAllRegions(req, res) {
+    getAll(req, res) {
         this.data.regions.getAll({}, {})
             .then((regions) => {
-                res.render('region/all', {
+                res.render('regions/all', {
                     context: regions,
                     user: req.user,
                 });
             })
             .catch((err) => {
-                res.send(err);
+                res.render('user/error', { error: err });
+            });
+    }
+
+    getRegionDetails(req, res) {
+        this.data.regions.getById(req.params.id)
+            .then((dbRegion) =>
+                res.render('regions/details', {
+                    region: dbRegion,
+                    user: req.user,
+                }))
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
+    }
+
+    getRegionGallery(req, res) {
+        this.data.regions.getById(req.params.id)
+            .then((dbRegion) => {
+                res.render('regions/gallery', { region: dbRegion });
+            })
+            .catch((err) => {
+                res.render('user/error', { error: err });
             });
     }
 
     getCreateForm(req, res) {
-        return res.render('region/form', {
+        return res.render('regions/form', {
                     user: req.user,
                 });
+    }
+
+    getAddForm(req, res) {
+        return res.render('regions/addform', {
+            user: req.user,
+            regionId: req.params.id,
+        });
+    }
+
+    getUpdateForm(req, res) {
+        return res.render('regions/updateform', {
+            user: req.user,
+            regionId: req.params.id,
+        });
     }
 
     // =============== TO: DELETE this
@@ -41,34 +77,28 @@ class RegionsController {
                 });
     }// ============ TO: DELETE this
 
-    createNewRegion(req, res) {
-        const region = req.body;
-        region.hotels = [];
-
-        // validate region
-        this.data.regions.create(region)
-            .then(() => {
-                res.redirect('/regions');
-            })
-            .catch((err) => {
-                res.render('region/form', { error: err });
+    createRegion(req, res) {
+        this.data.regions.create(req.body)
+            .then((dbRegion) => {
+                req.flash('Region created succesfuly',
+                    `Регион ${dbRegion.name} е успешно създаден`);
+                res.render('regions/details', {
+                    message: req.flash('Region created succesfuly'),
+                    region: dbRegion,
+                });
+            }).catch((err) => {
+                req.flash('Failed creation',
+                    'Записът e неуспешен поради невалидни данни!');
+                res.render('regions/form', {
+                    message: req.flash('Failed creation'),
+                    user: req.user,
+                });
             });
     }
 
     // updateRegion(req, res) {
 
     // }
-
-    getRegionDetails(req, res) {
-        return res.render('region/details');
-    }
-
-    // getRegionsGallery(req, res) {
-
-    // },
-    // getOneRegionGallery(req, res) {
-
-    // },
 }
 
 const init = (data) => {

@@ -7,16 +7,16 @@ block body
             .hcard
                 header
                     h2
-                        a(href="/hotel-details")
+                        a(href="/hotel/" + hotel._id)
                             =hotel.name
                     h4
-                        a(href="/regions")
-                            =hotel.location
-                img(src='http://www.bgvakancia.com/common_images/offers/2445/thumb_96ae22225500b89680d0d490f65b7eae.jpg', alt='Mihaylov House')
+                        a(href="/region/" + hotel.region._id)
+                            =hotel.region
+                img.img-responsive(src=hotel.imageURL, alt=hotel.name)
                 .body
                     p
                         =hotel.description
-                    a.btn.btn-success.pull-left(href=("/hotel-details"))
-                        | Разгледай
-                    a.btn.btn-success.pull-right(href=("/hotel-gallery"))
-                        | Специално
+                    a.btn.btn-success(href="/hotel/" + hotel._id)
+                        | По-подробно
+                    a.btn.btn-success(href="/hotel/" + hotel._id + "/gallery")
+                        | Галерия
