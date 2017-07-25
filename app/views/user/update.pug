@@ -2,7 +2,7 @@ extend ../_shared/_master
 
 block body
         h2 #{error}
-        form(id="register-form" class="form-vertical" action='/updateuser' method="POST")
+        form(id="register-form" class="form-vertical" action='/users' method="POST")
             fieldset
                 div(id="legend")
                     legend
@@ -13,6 +13,7 @@ block body
                         | First Name
                     div(class="controls")
                         input(type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge")
+                        input(type="text" name="_method" value="PUT" class="hidden")
                         p(class="help-block")
                             | Please enter your first Name
 

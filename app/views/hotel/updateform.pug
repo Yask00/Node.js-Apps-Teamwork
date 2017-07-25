@@ -4,7 +4,7 @@ block body
     if (message && message.length > 0)
         div.flash-message-red
             | #{message}
-    form(id="register-form" class="form-vertical" action='/hotel/update' method="POST")
+    form(id="register-form" class="form-vertical" action='/hotels' method="POST")
         fieldset
             div(id="legend")
                 legend
@@ -15,6 +15,7 @@ block body
                 div(class="controls")
                     input(type="text" id="name" name="name" placeholder="" class="input-xlarge")
                     input(type="text" id="id" name="id" value=hotelId class="hidden")
+                    input(type="text" name="_method" value="PUT" class="hidden")
                     p(class="help-block")
                         | Hotel name can contain any letters and numbers, spaces and special characters
             div(class="control-group")

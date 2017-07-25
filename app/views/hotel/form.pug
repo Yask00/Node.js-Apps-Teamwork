@@ -4,7 +4,7 @@ block addoredit
     if (message && message.length > 0)
         div.flash-message-red
             | #{message}
-    form(id="register-form" class="form-vertical" action='/hotel/create' method="POST")
+    form(id="register-form" class="form-vertical" action='/hotels' method="POST")
         fieldset
             div(id="legend")
                 legend

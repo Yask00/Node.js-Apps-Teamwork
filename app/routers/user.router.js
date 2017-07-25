@@ -27,7 +27,7 @@ const attachTo = (app, data) => {
         .get('/loginerror', (req, res) => {
             return controller.getSignInForm(req, res, invalidCredentialsErr);
         })
-        .get('/add', (req, res) => {
+        .get('/users/order', (req, res) => {
             if (!req.isAuthenticated()) {
                 return controller.getSignInForm(req, res, loginFirstErr);
             }
@@ -36,7 +36,7 @@ const attachTo = (app, data) => {
         .get('/error', (req, res) => {
             return controller.showError(req, res);
         })
-        .get('/update', (req, res) => {
+        .get('/users', (req, res) => {
             if (!req.isAuthenticated()) {
                 return controller.getSignInForm(req, res, loginFirstErr);
             }
@@ -53,17 +53,20 @@ const attachTo = (app, data) => {
             failureRedirect: '/loginerror',
             failureFlash: true,
         }))
-        .post('/updateuser', (req, res) => {
+        .post('/users', (req, res) => {
+            if (!req.isAuthenticated()) {
+                return controller.getSignInForm(req, res);
+            }
+            if (req.body._method) {
+                return controller.update(req, res);
+            }
+            return controller.addItem(req, res);
+        })
+        .put('/users', (req, res) => {
             if (!req.isAuthenticated()) {
                 return controller.getSignInForm(req, res);
             }
             return controller.update(req, res);
-        })
-        .post('/add', (req, res) => {
-            if (!req.isAuthenticated()) {
-                return controller.getSignInForm(req, res);
-            }
-            return controller.add(req, res);
         });
 
     app.use(router);
