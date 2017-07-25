@@ -39,9 +39,14 @@ class HotelsController {
     }
 
     getCreateForm(req, res) {
-        return res.render('hotel/form', {
-            user: req.user,
-        });
+        this.data.regions.getAll()
+            .then((regions) => {
+                console.log(regions[0]);
+                return res.render('hotel/form', {
+                    user: req.user,
+                    regions,
+                });
+            });
     }
 
     getAddForm(req, res) {
@@ -100,13 +105,14 @@ class HotelsController {
     }
 
     createHotel(req, res) {
-        this.data.hotels.create(req.body)
+        return this.data.hotels.create(req.body)
             .then((dbHotel) => {
+                this.data.regions.updateCollection(dbHotel.ops[0]);
                 req.flash('Hotel created succesfuly',
                     `Хотел ${dbHotel.name} е успешно създаден`);
                 res.render('hotel/details', {
                     message: req.flash('Hotel created succesfuly'),
-                    hotel: dbHotel,
+                    hotel: dbHotel.ops[0],
                 });
             }).catch((err) => {
                 req.flash('Failed creation',

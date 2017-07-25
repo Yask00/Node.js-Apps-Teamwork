@@ -1,4 +1,5 @@
 const BaseData = require('./base/base');
+const { ObjectID } = require('mongodb');
 // const Static = require('../models/static');
 
 class RegionData extends BaseData {
@@ -10,12 +11,9 @@ class RegionData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
-    // updateCollection(region, params) {
-    //     const collection = params.collection;
-    //     const item = params.item;
-    //     return this.collection.update(
-    //         { _id: region._id }, { $push: { collection: item } });
-    // }
+    updateCollection(model) {
+        return this.collection.update({ _id: new ObjectID(model.regionId) }, { $push: { hotels: model } });
+    }
 
     // create(model) {
     //     model.hotels = [];

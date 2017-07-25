@@ -10,6 +10,15 @@ block addoredit
                 legend
                     | Add hotel
             div(class="control-group")
+                label(class="control-label" for="regionId")
+                    | Region
+                div(class="controls")
+                    select(id="regionId" name="regionId" class="input-xlarge")
+                        each region in regions
+                            option(value=region._id) #{region.name}
+                    p(class="help-block")
+                        | Choose region
+            div(class="control-group")
                 label(class="control-label" for="name")
                     | Name
                 div(class="controls")
