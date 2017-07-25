@@ -3,7 +3,8 @@ class Service {
         this._id = options._id;
         this.serviceType = options.serviceType;
         this.imageURL = options.imageURL;
-        this.hotelId = options.hotelId;
+        //this.hotelId = options.hotelId;
+        this.description = options.description;
         this.price = options.price;
     }
 

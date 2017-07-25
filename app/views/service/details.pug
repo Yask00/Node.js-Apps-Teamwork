@@ -1,0 +1,12 @@
+extend ../_shared/_master
+
+block body
+    if (message && message.length > 0)
+        div.flash-message-green
+            | #{message}
+    div
+        img(src=service.imageURL, alt='')
+        h2 #{service.serviceType}
+        p #{service.price}
+        p
+            a.btn.btn-primary.pull-right(href='#') Резервирай

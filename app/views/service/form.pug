@@ -1,0 +1,52 @@
+extend ../_shared/_master
+
+block body
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
+    form(id="register-form" class="form-vertical" action='/services' method="POST")
+        fieldset
+            div(id="legend")
+                legend
+                    | Add service
+            div(class="control-group")
+                label(class="control-label" for="serviceType")
+                    | Service Type
+                div(class="controls")
+                    select(id="serviceType" name="serviceType" class="input-xlarge")
+                        option(value='horse walk') horse walk
+                        option(value='bulgarian food dinner') bulgarian food dinner
+                        option(value='folk concert') folk concert
+                        option(value='bungee jump') bungee jump
+                        option(value='fire-dancer show') fire-dancer show
+                        option(value='parachute jump') parachute jump
+                        option(value='azis concert') azis concert
+                        option(value='veselin marinov concert') veselin marinov concert
+                        option(value='CHALGIA CLUB \"GYUBEK\" all night dancing') CHALGIA CLUB "GYUBEK" all night dancing
+                    p(class="help-block")
+                        | Choose one
+            div(class="control-group")
+                label(class="control-label" for="description")
+                    | Description
+                div(class="controls")
+                    input(type="text" id="description" name="description" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Enter description
+            div(class="control-group")
+                label(class="control-label" for="imageURL")
+                    | Image
+                div(class="controls")
+                    input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter valid image URL
+            div(class="control-group")
+                label(class="control-label" for="price")
+                    | Price
+                div(class="controls")
+                    input(type="text" id="price" name="price" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter price
+            div(class="control-group")
+                div(class="controls")
+                    button(class="btn btn-success")
+                        | Create service

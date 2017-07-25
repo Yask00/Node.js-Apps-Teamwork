@@ -53,14 +53,17 @@ class UserData extends BaseData {
                     const salt = resultUser.salt;
                     const passHash = hashing.hashPassword(salt, body.password);
                     body.password = passHash;
-                    return this.collection.update({ _id: resultUser._id }, {
-                        $set: {
-                            firstName: body.firstName,
-                            lastName: body.lastName,
-                            password: body.password,
-                            phone: body.phone,
-                        },
-                    });
+                    if (Static.isValid(resultUser, this.validator)) {
+                        return this.collection.update({ _id: resultUser._id }, {
+                            $set: {
+                                firstName: body.firstName,
+                                lastName: body.lastName,
+                                password: body.password,
+                                phone: body.phone,
+                            },
+                        });
+                    }
+                    return Promise.reject('Aaa, така не става, братчед!');
                 }
             });
     }

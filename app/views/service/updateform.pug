@@ -1,0 +1,40 @@
+extend ../_shared/_master
+
+block body
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
+   
+    form(id="register-form" class="form-vertical" action='/services' method="POST")
+        fieldset
+            div(id="legend")
+                legend
+                    | Update service
+
+            div(class="control-group")
+                label(class="control-label" for="description")
+                    | Description
+                div(class="controls")
+                    input(type="text" id="description" name="description" placeholder="" class="input-xlarge")
+                    input(type="text" id="id" name="id" value=serviceId class="hidden")
+                    p(class="help-block")
+                        | Enter description
+            div(class="control-group")
+                label(class="control-label" for="imageURL")
+                    | Image
+                div(class="controls")
+                    input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter valid image URL
+            div(class="control-group")
+                label(class="control-label" for="price")
+                    | Price
+                div(class="controls")
+                    input(type="text" id="price" name="price" placeholder="" class="input-xlarge")
+                    input(type="text" name="_method" value="PUT" class="hidden")
+                    p(class="help-block")
+                        | Please enter price
+            div(class="control-group")
+                div(class="controls")
+                    button(class="btn btn-success")
+                        | Update service

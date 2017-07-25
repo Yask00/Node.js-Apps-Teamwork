@@ -12,36 +12,39 @@ class HotelData extends BaseData {
     }
 
     updateCollection(id, body) {
-        const collections = {
-            rooms: { rooms: body },
-            services: { services: body },
-            comments: { comments: body },
-            likes: { likes: body },
-        };
-        const params = collections[body.collection];
         if (Static.isValid(body, this.validator)) {
+            const collections = {
+                rooms: { rooms: body },
+                services: { services: body },
+                comments: { comments: body },
+                likes: { likes: body },
+            };
+            const params = collections[body.collection];
             return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
         }
         return Promise.reject('Aaa, така не става, братчед!');
     }
 
     update(id, body) {
-        return this.getById(id)
-            .then((resultHotel) => {
-                if (resultHotel) {
-                    return this.collection.update({ _id: resultHotel._id }, {
-                        $set: {
-                            name: body.name,
-                            phone: body.phone,
-                            imageURL: body.imageURL,
-                            description: body.description,
-                            region: body.region,
-                            lattitude: body.lattitude,
-                            longitude: body.longitude,
-                        },
-                    });
-                }
-            });
+        if (Static.isValid(body, this.validator)) {
+            return this.getById(id)
+                .then((resultHotel) => {
+                    if (resultHotel) {
+                        return this.collection.update({ _id: resultHotel._id }, {
+                            $set: {
+                                name: body.name,
+                                phone: body.phone,
+                                imageURL: body.imageURL,
+                                description: body.description,
+                                region: body.region,
+                                lattitude: body.lattitude,
+                                longitude: body.longitude,
+                            },
+                        });
+                    }
+                });
+        }
+        return Promise.reject('Aaa, така не става, братчед!');
     }
 }
 

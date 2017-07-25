@@ -1,0 +1,18 @@
+extend ../_shared/_master
+
+block body
+    h1.htitle.text-center Мечтаната ваканция ви очаква!
+    .hcards
+        each service in context
+            .hcard
+                header
+                    h2
+                        a(href="/details")
+                            =service.serviceType
+
+                img(src=service.imageURL, alt='Some service')
+                .body
+                    p
+                        =service.price
+                    a.btn.btn-success.pull-left(href=('/details'))
+                        | Заяви
