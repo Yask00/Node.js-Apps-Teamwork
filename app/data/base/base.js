@@ -1,4 +1,3 @@
-// const hashing = require('../../utils/hashing');
 const Static = require('../../models/static');
 const { ObjectID } = require('mongodb');
 
@@ -28,6 +27,23 @@ class BaseData {
         }
 
         return this.collection.insert(model);
+    }
+
+    getDbModel(model) {
+        const dbModel = {};
+        if (Object.keys(model).length === 0) {
+            return Promise.reject('Редактирането е неуспешно!');
+        }
+        Object.keys(model)
+            .forEach((prop) => {
+                if (model[prop] && model[prop] !== model.id && model[prop] !== model._method) {
+                    dbModel[prop] = model[prop];
+                }
+            });
+        if (Static.isValid(dbModel, this.validator)) {
+            return dbModel;
+        }
+        return Promise.reject('Редактирането е неуспешно!');
     }
 }
 

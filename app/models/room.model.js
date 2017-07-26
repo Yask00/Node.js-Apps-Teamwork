@@ -1,13 +1,12 @@
 class Room {
     constructor(options) {
         this._id = options._id;
-        this.roomType = options.roomType; // ['one', 'two', 'three', 'four'],
+        this.roomType = options.roomType;
         this.imageURL = options.imageURL;
-        // this.hotelId = options.hotelId; // 24
+        this.hotelId = options.hotelId;
         this.description = options.description;
-        this.price = options.price; // 22,22
-        this.roomStatus = options.roomStatus; // free or booked
-        this.roomCount = options.roomCount; // 1 to 36
+        this.price = options.price;
+        this.roomStatus = options.roomStatus;
     }
 
     get id() {

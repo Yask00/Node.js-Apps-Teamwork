@@ -41,7 +41,6 @@ class HotelsController {
     getCreateForm(req, res) {
         this.data.regions.getAll()
             .then((regions) => {
-                console.log(regions[0]);
                 return res.render('hotel/form', {
                     user: req.user,
                     regions,
@@ -64,17 +63,21 @@ class HotelsController {
     }
 
     update(req, res) {
-        this.data.hotels.update(req.body.id, req.body)
+        let dbHotel;
+        this.data.hotels.update(req.body)
             .then(() => {
-                this.data.hotels.getById(req.body.id)
-                    .then((dbHotel) => {
-                        req.flash('Service updated succesfuly',
-                            `Хотелът e успешно променен`);
-                        res.render('hotel/details', {
-                            message: req.flash('Service updated succesfuly'),
-                            hotel: dbHotel,
-                        });
-                    });
+                return this.data.hotels.getById(req.body.id);
+            }).then((hotel) => {
+                dbHotel = hotel;
+                return this.data.regions.updateCollection(dbHotel);
+            }).then(() => {
+                req.flash('Hotel updated succesfuly',
+                    `Хотелът e успешно променен`);
+                res.render('hotel/details', {
+                    message: req.flash('Hotel updated succesfuly'),
+                    hotel: dbHotel,
+                    user: req.user,
+                });
             }).catch((err) => {
                 req.flash(
                     'Invalid data', 'Неуспешен запис: невалидни данни!');
@@ -87,12 +90,11 @@ class HotelsController {
     }
 
     add(req, res) {
-        this.data.hotels.updateCollection(req.body.hotelId, req.body)
+        this.data.hotels.addToCollection(req.body)
             .then(() => {
-                this.data.hotels.getById(req.body.hotelId)
-                    .then((dbHotel) => {
-                        res.render('hotel/gallery', { hotel: dbHotel });
-                    });
+                return this.data.hotels.getById(req.body.hotelId);
+            }).then((dbHotel) => {
+                res.render('hotel/gallery', { hotel: dbHotel });
             }).catch((err) => {
                 req.flash(
                     'Add failed', 'Неуспешен запис: невалидни данни!');

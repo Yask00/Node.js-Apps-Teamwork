@@ -1,6 +1,6 @@
 const BaseData = require('./base/base');
 const { ObjectID } = require('mongodb');
-// const Static = require('../models/static');
+const Static = require('../models/static');
 
 class RegionData extends BaseData {
     constructor(db, Model, validator) {
@@ -11,19 +11,26 @@ class RegionData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
-    updateCollection(model) {
-        return this.collection.update({ _id: new ObjectID(model.regionId) }, { $push: { hotels: model } });
+    removeFromCollection(body) {
+        return this.collection.update({}, {
+            $pull: { hotels: { _id: new ObjectID(body._id) } },
+        });
     }
 
-    // create(model) {
-    //     model.hotels = [];
+    updateCollection(body) {
+        const dbModel = this.getDbModel(body);
+        return this.removeFromCollection(dbModel)
+            .then(() => {
+                return this.addToCollection(dbModel);
+            });
+    }
 
-    //     if (Static.isValid(model, this.validator)) {
-    //         return this.collection.insert(model);
-    //     }
-
-    //     return Promise.reject('Region data validation failed!');
-    // }
+    addToCollection(body) {
+        if (Static.isValid(body, this.validator)) {
+            return this.collection.update({ _id: new ObjectID(body.regionId) }, { $push: { hotels: body } });
+        }
+        return Promise.reject('Добавянето е неуспешно!');
+    }
 }
 
 const init = (db, Model, validator) => {

@@ -1,4 +1,13 @@
 extend ../_shared/_master
 
 block body
-    h1 Room details
+    if (message && message.length > 0)
+        div.flash-message-green
+            | #{message}
+    div
+        img(src=room.imageURL, alt='')
+        h2 #{room.roomType}
+        h3 #{room.price}
+        h3 #{room.description}
+        h3 #{room.roomStatus}
+            a.btn.btn-primary.pull-right(href='#') Резервирай

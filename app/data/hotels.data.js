@@ -11,7 +11,21 @@ class HotelData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
-    updateCollection(id, body) {
+    removeFromCollection(body) {
+        return this.collection.update({}, {
+            $pull: { rooms: { _id: new ObjectID(body.roomId) } },
+        });
+    }
+
+    updateCollection(body) {
+        const dbModel = this.getDbModel(body);
+        return this.removeFromCollection(dbModel)
+            .then(() => {
+                return this.addToCollection(dbModel);
+            });
+    }
+
+    addToCollection(body) {
         if (Static.isValid(body, this.validator)) {
             const collections = {
                 rooms: { rooms: body },
@@ -20,31 +34,23 @@ class HotelData extends BaseData {
                 likes: { likes: body },
             };
             const params = collections[body.collection];
-            return this.collection.update({ _id: new ObjectID(id) }, { $push: params });
+            return this.collection.update({ _id: new ObjectID(body.hotelId) }, { $push: params });
         }
-        return Promise.reject('Редактирането е неуспешно!');
+        return Promise.reject('Добавянето е неуспешно!');
     }
 
-    update(id, body) {
-        if (Static.isValid(body, this.validator)) {
-            return this.getById(id)
-                .then((resultHotel) => {
-                    if (resultHotel) {
-                        return this.collection.update({ _id: resultHotel._id }, {
-                            $set: {
-                                name: body.name,
-                                phone: body.phone,
-                                imageURL: body.imageURL,
-                                description: body.description,
-                                region: body.region,
-                                lattitude: body.lattitude,
-                                longitude: body.longitude,
-                            },
-                        });
-                    }
+    update(body) {
+        let resultHotel;
+        return this.getById(body.id)
+            .then((result) => {
+                resultHotel = result;
+                const dbModel = this.getDbModel(body);
+                return Promise.resolve(dbModel);
+            }).then((dbModel) => {
+                return this.collection.update({ _id: resultHotel._id }, {
+                    $set: dbModel,
                 });
-        }
-        return Promise.reject('Редактирането е неуспешно!');
+            });
     }
 }
 

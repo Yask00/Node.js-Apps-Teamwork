@@ -4,29 +4,28 @@ block addoredit
     if (message && message.length > 0)
         div.flash-message-red
             | #{message}
-    form(id="register-form" class="form-vertical" action='/room/create' method="POST")
+    form(id="register-form" class="form-vertical" action='/rooms' method="POST")
         fieldset
             div(id="legend")
                 legend
-                    | Add room
+                    | Update room
 
             div(class="control-group")
                 label(class="control-label" for="roomType")
                     | Room Type
                 div(class="controls")
                     input(type="text" id="roomType" name="roomType" placeholder="" class="input-xlarge")
-                    //- input(type="text" id="hotelId" name="hotelId" value=hotelId class="hidden")
-                    //- input(type="text" id="collection" name="collection" value="rooms" class="hidden")
+                    input(type="text" id="roomId" name="roomId" value=roomId class="hidden")
+                    input(type="text" name="_method" value="PUT" class="hidden")
                     p(class="help-block")
                         | Enter one, two, three or four
-
             div(class="control-group")
-                            label(class="control-label" for="imageURL")
-                                | Image
-                            div(class="controls")
-                                input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
-                                p(class="help-block")
-                                    | Please enter valid image URL
+                label(class="control-label" for="imageURL")
+                    | Image
+                div(class="controls")
+                    input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter valid image URL
 
             div(class="control-group")
                 label(class="control-label" for="description")
@@ -48,17 +47,11 @@ block addoredit
                 label(class="control-label" for="roomStatus")
                     | Room Status
                 div(class="controls")
-                    input(type="text" id="roomStatus" name="roomStatus" placeholder="" class="input-xlarge")
+                    select(id="roomStatus" name="roomStatus" class="input-xlarge")
+                        option(value=free) free
+                        option(value=booked) booked
                     p(class="help-block")
-                        | Please enter free or booked
-
-            div(class="control-group")
-                label(class="control-label" for="roomCount")
-                    | Number of rooms
-                div(class="controls")
-                    input(type="text" id="roomCount" name="roomCount" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Please enter count of this type of room (1 - 36)
+                        | Choose one
 
             div(class="control-group")
                 div(class="controls")

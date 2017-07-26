@@ -15,28 +15,35 @@ class RoomsController {
     }
 
     getCreateForm(req, res) {
-        return res.render('room/roomForm', {
-            user: req.user,
-            message: req.flash('Failed creation'),
-        });
+        this.data.hotels.getAll()
+            .then((hotels) => {
+                return res.render('room/form', {
+                    user: req.user,
+                    hotels,
+                });
+            });
     }
 
     createRoom(req, res) {
+        let dbRoom;
         this.data.rooms.create(req.body)
-            .then((dbRoom) => {
+            .then((result) => {
+                dbRoom = result.ops[0];
+                return this.data.hotels.addToCollection(dbRoom);
+            })
+            .then(() => {
                 req.flash('Room created succesfuly',
-                    `Вашата тип стая беше успешно създаден, goto /allrooms`);
-
-                res.render('room/roomForm', {
+                    `Стая тип ${dbRoom.roomType} беше успешно създаденa`);
+                res.render('room/details', {
                     room: dbRoom,
                     user: req.user,
                     message: req.flash('Room created succesfuly'),
-                 });
+                });
             })
             .catch((err) => {
                 req.flash('Failed creation',
                     'Записът неуспешен поради невалидни данни!');
-                res.render('room/roomForm', {
+                res.render('room/form', {
                     message: req.flash('Failed creation'),
                     user: req.user,
                 });
@@ -55,31 +62,24 @@ class RoomsController {
             });
     }
 
-    getAddForm(req, res) {
-        return res.render('room/roomForm', {
-            user: req.user,
-            hotelId: req.params.id,
-        });
-    }
-
     getUpdateForm(req, res) {
-        return res.render('room/updateForm', {
+        return res.render('room/update', {
             user: req.user,
-            hotelId: req.params.id,
+            roomId: req.params.id,
         });
     }
 
     update(req, res) {
-        this.data.rooms.update(req.body.id, req.body)
+        this.data.rooms.update(req.body)
             .then(() => {
-                this.data.rooms.getById(req.body.id)
-                    .then((dbRoom) => {
-                        res.render('room/details', { room: dbRoom });
-                    });
+                return this.data.rooms.getById(req.body.roomId);
+            }).then((dbRoom) => {
+                this.data.hotels.updateCollection(dbRoom)
+                    .then(() => res.render('room/details', { room: dbRoom }));
             }).catch((err) => {
                 req.flash(
                     'Invalid data', 'Неуспешен запис: невалидни данни!');
-                res.render('room/updateform', {
+                res.render('room/update', {
                     user: req.user,
                     roomId: req.body.id,
                     message: req.flash('Invalid data'),

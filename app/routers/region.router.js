@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const attachTo = (app, data) => {
     const router = new Router();
-    const controller = require('../controllers/regions-controller').init(data);
+    const controller = require('../controllers/regions.controller').init(data);
 
     router
         .get('/regions/all', (req, res) => {
@@ -30,15 +30,15 @@ const attachTo = (app, data) => {
         .post('/regions', (req, res) => {
             return controller.createRegion(req, res);
         });
-        // .get('/regions/:id', (req, res) => {
-        //     return controller.getRegionDetails(req, res);
-        // });
-        // .put('/regions/:id', (req, res)=> {
-        //     return controller.updateRegion(req, res);
-        // });
-        // .delete('/regions/:id', (req, res)=> {
-        //     return controller.deleteRegion(req, res);
-        // });
+    // .get('/regions/:id', (req, res) => {
+    //     return controller.getRegionDetails(req, res);
+    // });
+    // .put('/regions/:id', (req, res)=> {
+    //     return controller.updateRegion(req, res);
+    // });
+    // .delete('/regions/:id', (req, res)=> {
+    //     return controller.deleteRegion(req, res);
+    // });
 
     app.use(router);
 };

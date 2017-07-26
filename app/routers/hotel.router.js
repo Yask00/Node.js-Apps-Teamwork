@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const attachTo = (app, data) => {
     const router = new Router();
-    const controller = require('../controllers/hotels-controller').init(data);
+    const controller = require('../controllers/hotels.controller').init(data);
 
     router
         .get('/allhotels', (req, res) => {

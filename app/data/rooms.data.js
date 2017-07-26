@@ -1,5 +1,5 @@
 const BaseData = require('./base/base');
-// const Static = require('../models/static');
+const Static = require('../models/static');
 // const { ObjectID } = require('mongodb');
 
 class RoomsData extends BaseData {
@@ -11,23 +11,16 @@ class RoomsData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
-    update(id, body) {
-        return this.getById(id)
+    update(body) {
+        return this.getById(body.roomId)
             .then((resultRoom) => {
                 if (!resultRoom) {
                     return Promise.reject('Редактирането е неуспешно!');
                 }
-
+                const dbModel = this.getDbModel(body);
                 return this.collection.update({ _id: resultRoom._id }, {
-                        $set: {
-                            roomType: body.roomType,
-                            imageURL: body.imageURL,
-                            description: body.description,
-                            price: body.price,
-                            roomStatus: body.roomStatus,
-                            roomCount: body.roomCount,
-                        },
-                    });
+                    $set: dbModel,
+                });
             });
     }
 }
