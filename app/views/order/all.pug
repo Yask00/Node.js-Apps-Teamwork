@@ -1,0 +1,17 @@
+extend ../_shared/_master
+
+block body
+    h1.htitle.text-center Всички направени поръчки....
+    .hcards
+        each order in context
+            .hcard
+                header
+                    h2
+                        a(href="" + order._id + '/details')
+                            | Order details
+                    h2
+                        a(href="")
+                            =order.paymentType
+                    h4
+                        a(href="")
+                            =order.price

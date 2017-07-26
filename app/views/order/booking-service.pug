@@ -1,28 +1,67 @@
 extend ../_shared/_master
 
 block body
-    .container
-        h2.well.well-sm Направи резервация
-        .row
-            .col-sm-6
-                h3 Къща за гости Доспат - Разходка с кон
-                img.img-responsive(src='https://i.ytimg.com/vi/zt7H_yYhs6o/maxresdefault.jpg' alt='разходка с кон') 
-                h4 Цена за 1 участник: 50 лв.
-                h4 Цена за 5 и повече участници: 40 лв.
-            .col-sm-6
-                form.form-horizontal(method='POST', action='/orders/service')
-                    .form-group
-                        label.col-sm-3.control-label(for="eventDate")                
-                            | Дата на провеждане
-                        .col-sm-9
-                            input.form-control(type='date')
-                    .form-group
-                        label.col-sm-3.control-label(for="nightsCount")
-                            | Брой участници
-                        .col-sm-9
-                            input.form-control(type='number')
-                    .form-group
-                        .col-sm-offset-3.col-sm-9
-                            input.btn.btn-primary(type='submit', value='Резервирай')
-                h4.alert-success.text-center
-                    | Очаквайте потвърждение на резервацията до края на деня        
+    //- .container
+    //-     h2.well.well-sm Направи резервация
+    //-     .row
+    //-         .col-sm-6
+    //-             h3 Къща за гости Доспат - Разходка с кон
+    //-             img.img-responsive(src='https://i.ytimg.com/vi/zt7H_yYhs6o/maxresdefault.jpg' alt='разходка с кон') 
+    //-             h4 Цена за 1 участник: 50 лв.
+    //-             h4 Цена за 5 и повече участници: 40 лв.
+    //-         .col-sm-6
+    //-             form.form-horizontal(method='POST', action='/orders/service')
+    //-                 .form-group
+    //-                     label.col-sm-3.control-label(for="eventDate")                
+    //-                         | Дата на провеждане
+    //-                     .col-sm-9
+    //-                         input.form-control(type='date')
+    //-                 .form-group
+    //-                     label.col-sm-3.control-label(for="nightsCount")
+    //-                         | Брой участници
+    //-                     .col-sm-9
+    //-                         input.form-control(type='number')
+    //-                 .form-group
+    //-                     .col-sm-offset-3.col-sm-9
+    //-                         input.btn.btn-primary(type='submit', value='Резервирай')
+    //-             h4.alert-success.text-center
+    //-                 | Очаквайте потвърждение на резервацията до края на деня        
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
+    form(id="register-form" class="form-vertical" action='/orders/room' method="POST")
+        fieldset
+            div(id="legend")
+                legend
+                    | Add Your order
+
+            //- div(class="control-group")
+            //-     label(class="control-label" for="hotelId")
+            //-         | Choose a hotel you want to book room in
+            //-     div(class="controls")
+            //-         select(id="hotelId" name="hotelId" class="input-xlarge")
+            //-             each hotel in hotels
+            //-                 option(value=hotel._id) #{hotel.name}
+
+            div(class="control-group")
+                label(class="control-label" for="nightsCount")
+                    | Брой нощувки
+                div(class="controls")
+                    input.form-control(type='number' id="nightsCount" name="nightsCount" placeholder="" class="input-xlarge")
+
+            div(class="control-group")
+                label(class="control-label" for="paymentType")
+                    | Payment Type
+                div(class="controls")
+                    input.form-control(id="paymentType" name="paymentType" placeholder="" class="input-xlarge")
+
+            div(class="control-group")
+                label(class="control-label" for="price")
+                    | Your total price will be:
+                div(class="controls")
+                    input(type="text" id="price" name="price" placeholder="" class="input-xlarge" value="999,99")
+
+            div(class="control-group")
+                div(class="controls")
+                    button(class="btn btn-success")
+                        | Add Order
