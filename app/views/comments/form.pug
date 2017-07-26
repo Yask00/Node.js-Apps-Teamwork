@@ -1,0 +1,38 @@
+extend ../_shared/_master
+
+block body
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
+    if !user
+        h1 Please LOGIN TO POST A Comment
+    else
+        form(id="register-form" class="form-vertical" action='/comments' method="POST")
+            fieldset
+                div(id="legend")
+                    legend
+                        | Add Comment
+
+                div(class="control-group")
+                    label(class="control-label" for="content")
+                        | Comment
+                    div(class="controls")
+                        input(type="text" id="content" name="content" placeholder="" class="input-xlarge")
+                        p(class="help-block")
+                            | Enter Comment
+
+                div(class="control-group")
+                    label(class="control-label" for="createdOn")
+                        | Creation Date
+                    div(class="controls")
+                        input(type="text" id="createdOn" name="createdOn" placeholder="" class="input-xlarge" readonly="readonly")
+                        p(class="help-block")
+                            | Please enter valid creation Date
+
+                div(class="control-group")
+                    div(class="controls")
+                        button(class="btn btn-success")
+                            | Add Comment
+
+block scripts
+    script(src='/public/js/createDate.js')

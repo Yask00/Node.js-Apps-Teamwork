@@ -1,0 +1,1 @@
+document.getElementById('createdOn').value = new Date().toDateString();
