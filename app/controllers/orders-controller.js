@@ -55,7 +55,6 @@ class OrdersController {
                 res.render('user/error', { error: err });
             });
     }
-
 }
 
 const init = (data) => {

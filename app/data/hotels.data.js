@@ -34,7 +34,9 @@ class HotelData extends BaseData {
                 likes: { likes: body },
             };
             const params = collections[body.collection];
-            return this.collection.update({ _id: new ObjectID(body.hotelId) }, { $push: params });
+            return this.collection.update(
+                { _id: new ObjectID(body.hotelId) },
+                { $push: params });
         }
         return Promise.reject('Добавянето е неуспешно!');
     }
@@ -47,9 +49,9 @@ class HotelData extends BaseData {
                 const dbModel = this.getDbModel(body);
                 return Promise.resolve(dbModel);
             }).then((dbModel) => {
-                return this.collection.update({ _id: resultHotel._id }, {
-                    $set: dbModel,
-                });
+                return this.collection.update(
+                    { _id: resultHotel._id },
+                    { $set: dbModel });
             });
     }
 }

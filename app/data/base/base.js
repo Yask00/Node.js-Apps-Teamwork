@@ -36,13 +36,16 @@ class BaseData {
         }
         Object.keys(model)
             .forEach((prop) => {
-                if (model[prop] && model[prop] !== model.id && model[prop] !== model._method) {
-                    dbModel[prop] = model[prop];
+                if (model[prop] &&
+                    model[prop] !== model.id &&
+                    model[prop] !== model._method) {
+                        dbModel[prop] = model[prop];
                 }
             });
         if (Static.isValid(dbModel, this.validator)) {
             return dbModel;
         }
+
         return Promise.reject('Редактирането е неуспешно!');
     }
 }

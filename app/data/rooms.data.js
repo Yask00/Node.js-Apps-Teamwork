@@ -1,5 +1,5 @@
 const BaseData = require('./base/base');
-const Static = require('../models/static');
+// const Static = require('../models/static');
 // const { ObjectID } = require('mongodb');
 
 class RoomsData extends BaseData {

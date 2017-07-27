@@ -7,16 +7,16 @@ block body
             .hcard
                 header
                     h2
-                        a(href="/hotel/" + hotel._id)
+                        a(href="/hotels/" + hotel._id)
                             =hotel.name
                     h4
-                        a(href="/region/" + hotel.region._id)
+                        a(href="/regions/" + hotel.region._id)
                             =hotel.region
                 img.img-responsive(src=hotel.imageURL, alt=hotel.name)
                 .body
                     p
                         =hotel.description
-                    a.btn.btn-success(href="/hotel/" + hotel._id)
+                    a.btn.btn-success(href="/hotels/" + hotel._id)
                         | По-подробно
-                    a.btn.btn-success(href="/hotel/" + hotel._id + "/gallery")
+                    a.btn.btn-success(href="/hotels/" + hotel._id + "/gallery")
                         | Галерия
