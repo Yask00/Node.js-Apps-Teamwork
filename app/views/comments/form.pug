@@ -12,12 +12,23 @@ block body
                 div(id="legend")
                     legend
                         | Add Comment
+                
+                div(class="control-group")
+                    label(class="control-label" for="hotelId")
+                        | Hotel
+                    div(class="controls")
+                        select(id="hotelId" name="hotelId" class="input-xlarge")
+                            each hotel in hotels
+                                option(value=hotel._id) #{hotel.name}
+                        p(class="help-block")
+                            | Choose Hotel to comment on
 
                 div(class="control-group")
                     label(class="control-label" for="content")
                         | Comment
                     div(class="controls")
                         input(type="text" id="content" name="content" placeholder="" class="input-xlarge")
+                        input(type="text" name="collection" value="comments" class="hidden")
                         p(class="help-block")
                             | Enter Comment
 
@@ -27,7 +38,7 @@ block body
                     div(class="controls")
                         input(type="text" id="createdOn" name="createdOn" placeholder="" class="input-xlarge" readonly="readonly")
                         p(class="help-block")
-                            | Please enter valid creation Date
+                            | Leave it like this
 
                 div(class="control-group")
                     div(class="controls")

@@ -1,6 +1,9 @@
 extend ../_shared/_master
 
 block body
+        if (message && message.length > 0)
+            div.flash-message-red
+                | #{message}
         div 
             h1 Потребителски профил
 
