@@ -29,6 +29,9 @@ block body
                     div(class="controls")
                         input(type="text" id="content" name="content" placeholder="" class="input-xlarge")
                         input(type="text" name="collection" value="comments" class="hidden")
+                        select(id="username" name="username" class="input-xlarge")
+                                if user
+                                    option(value=user.username) От името ви: #{user.username}
                         p(class="help-block")
                             | Enter Comment
 
