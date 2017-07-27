@@ -58,12 +58,6 @@ class RegionsController {
         });
     }
 
-    // =============== TO: DELETE this
-    getAdminPanel(req, res) {
-        return res.render('admin/panel', {
-                    user: req.user,
-                });
-    }
 
     getOrderRoomForm(req, res) {
         return res.render('order/booking-room', {

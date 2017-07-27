@@ -5,7 +5,7 @@ const attachTo = (app, data) => {
     const controller = require('../controllers/regions.controller').init(data);
 
     router
-        .get('/regions/all', (req, res) => {
+        .get('/allregions', (req, res) => {
             return controller.getAll(req, res);
         })
         // .get('/gallery', (req, res) => {
@@ -15,15 +15,13 @@ const attachTo = (app, data) => {
         //     return controller.getOneRegionGallery(req, res);
         // })
         // ================= TO: DELETE this
-        .get('/admin/panel', (req, res) => {
-            return controller.getAdminPanel(req, res);
-        })
-        .get('/regions/orderroom', (req, res) => {
-            return controller.getOrderRoomForm(req, res);
-        })
-        .get('/regions/orderservice', (req, res) => {
-            return controller.getOrderServiceForm(req, res);
-        }) // =============== TO: DELETE
+        
+        // .get('/regions/orderroom', (req, res) => {
+        //     return controller.getOrderRoomForm(req, res);
+        // })
+        // .get('/regions/orderservice', (req, res) => {
+        //     return controller.getOrderServiceForm(req, res);
+        // }) // =============== TO: DELETE
         .get('/regions', (req, res) => {
             return controller.getCreateForm(req, res);
         })

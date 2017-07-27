@@ -5,13 +5,13 @@ const attachTo = (app, data) => {
     const controller = require('../controllers/orders-controller').init(data);
 
     router
-        .get('/orders', (req, res) => {
+        .get('/allorders', (req, res) => {
             return controller.getAll(req, res);
         })
-        .get('/orders/booking', (req, res) => {
+        .get('/orders', (req, res) => {
             return controller.getBookingForm(req, res);
         })
-        .post('/orders/booking', (req, res) => {
+        .post('/orders', (req, res) => {
             return controller.createBooking(req, res);
         })
         .get('/orders/:id', (req, res) => {

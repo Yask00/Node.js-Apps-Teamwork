@@ -8,6 +8,12 @@ class IndexController {
                     user: req.user,
                 });
     }
+
+    getAdminPanel(req, res) {
+        return res.render('admin/panel', {
+                    user: req.user,
+                });
+    }
 }
 
 const init = (data) => {

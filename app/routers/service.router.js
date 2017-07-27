@@ -5,10 +5,10 @@ const attachTo = (app, data) => {
     const controller = require('../controllers/services.controller').init(data);
 
     router
-        .get('/services', (req, res) => {
+        .get('/allservices', (req, res) => {
             return controller.getAll(req, res);
         })
-        .get('/services/form', (req, res) => {
+        .get('/services', (req, res) => {
             return controller.getCreateForm(req, res);
         })
         .get('/services/:id', (req, res) => {

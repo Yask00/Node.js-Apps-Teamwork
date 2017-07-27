@@ -9,7 +9,7 @@ const attachTo = (app, data) => {
         .get('/allrooms', (req, res) => {
             return controller.getAllRooms(req, res);
         })
-        .get('/rooms/form', (req, res) => {
+        .get('/rooms', (req, res) => {
             return controller.getCreateForm(req, res);
         })
         .get('/rooms/:id/details', (req, res) => {
