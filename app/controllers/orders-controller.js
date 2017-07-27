@@ -31,8 +31,9 @@ class OrdersController {
             .then((dbOrder) => {
                 req.flash('Room order created succesfuly',
                     `Вашата поръчка беше успешна!`);
-                res.render('order/booking', {
+                res.render('home/index', {
                     message: req.flash('Room order created succesfuly'),
+                    user: req.user,
                 });
             }).catch((err) => {
                 req.flash('Failed creation',

@@ -7,12 +7,24 @@ class Order {
         this.price = options.price;
         this.nightsCount = options.nightsCount;
         this.serviceType = options.serviceType; // can be blank
+        this.username = options.username;
         // this.bookingRoom = [];
         // this.bookingService = [];
     }
 
     get id() {
         return this._id;
+    }
+
+    static toViewModel(model) {
+        const viewModel = new Comment();
+
+        Object.keys(model)
+            .forEach((prop) => {
+                viewModel[prop] = model[prop];
+            });
+
+        return viewModel;
     }
 }
 

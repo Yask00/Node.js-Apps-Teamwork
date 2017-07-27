@@ -32,19 +32,28 @@ block body
                                                 tr
                                                     td Телефон:
                                                     td #{user.phone}
+                                                //- tr
+                                                //-     td(class="submenu") Резeрвирани стаи:
+                                                //-         tr 
+                                                //-             each val in user.roomOrders
+                                                //-                 tr
+                                                //-                     td Начало на купона: #{val.startDate}г. &nbsp
+                                                //-                     td Продължителност на купона: #{val.nightsCount} дни.
+                                                //-     td(class="submenu") Резeрвирани услуги:
+                                                //-         tr
+                                                //-             each val in user.serviceOrders
+                                                //-                 tr
+                                                //-                     td Начало на купона: #{val.startDate}г. &nbsp
+                                                //-                     td Продължителност на купона: #{val.nightsCount} дни.
                                                 tr
-                                                    td(class="submenu") Резeрвирани стаи:
+                                                    td(class="submenu") Резeрвирани стаи/услуги:
                                                         tr 
-                                                            each val in user.roomOrders
+                                                            each val in orders
                                                                 tr
-                                                                    td Начало на купона: #{val.startDate}г. &nbsp
                                                                     td Продължителност на купона: #{val.nightsCount} дни.
-                                                    td(class="submenu") Резeрвирани услуги:
-                                                        tr
-                                                            each val in user.serviceOrders
-                                                                tr
-                                                                    td Начало на купона: #{val.startDate}г. &nbsp
-                                                                    td Продължителност на купона: #{val.nightsCount} дни.
+                                                                    td Платежно средство: #{val.paymentType}
+                                                                    td Видове услуги #{val.serviceType}
+
 
 
 
