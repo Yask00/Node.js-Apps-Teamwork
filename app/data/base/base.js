@@ -39,7 +39,7 @@ class BaseData {
                 if (model[prop] &&
                     model[prop] !== model.id &&
                     model[prop] !== model._method) {
-                        dbModel[prop] = model[prop];
+                    dbModel[prop] = model[prop];
                 }
             });
         if (Static.isValid(dbModel, this.validator)) {

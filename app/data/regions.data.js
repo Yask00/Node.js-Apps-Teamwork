@@ -13,13 +13,13 @@ class RegionData extends BaseData {
 
     removeFromCollection(body) {
         return this.collection.update({}, {
-            $pull: { hotels: { _id: new ObjectID(body._id) } },
+            $pull: { hotels: { _id: body._id } },
         });
     }
 
     updateCollection(body) {
         const dbModel = this.getDbModel(body);
-        return this.removeFromCollection(dbModel)
+        this.removeFromCollection(dbModel)
             .then(() => {
                 return this.addToCollection(dbModel);
             });
@@ -27,11 +27,27 @@ class RegionData extends BaseData {
 
     addToCollection(body) {
         if (Static.isValid(body, this.validator)) {
-            return this.collection.update(
-                { _id: new ObjectID(body.regionId) },
-                { $push: { hotels: body } });
+            return this.collection.update({ _id: new ObjectID(body.regionId) }, { $push: { hotels: body } });
         }
         return Promise.reject('Добавянето е неуспешно!');
+    }
+
+    update(body) {
+        let resultRegion;
+        return this.getById(body.regionId)
+            .then((result) => {
+                if (!result) {
+                    return Promise.reject('Редактирането е неуспешно!');
+                }
+                resultRegion = result;
+                const dbModel = this.getDbModel(body);
+                return Promise.resolve(dbModel);
+            }).then((dbModel) => {
+                delete dbModel.regionId;
+                return this.collection.update({ _id: resultRegion._id }, { $set: dbModel });
+            }).then((updatedRegion) => {
+                return Promise.resolve(resultRegion._id);
+            });
     }
 }
 

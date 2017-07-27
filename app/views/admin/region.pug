@@ -1,0 +1,26 @@
+extend ../admin/panel
+
+block addoredit
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
+    - var url = /regions/+regionId
+    form(id="register-form" class="form-vertical" action=url method="GET")
+        fieldset
+            div(id="legend")
+                legend
+                    | Choose region to edit
+
+            div(class="control-group")
+                label(class="control-label" for="regionId")
+                    | Hotel
+                div(class="controls")
+                    select(id="regionId" name="regionId" class="input-xlarge")
+                        each region in regions
+                            option(value=region._id) #{region.name}
+                    p(class="help-block")
+
+            div(class="control-group")
+                div(class="controls")
+                    button(class="btn btn-success")
+                        | Edit room

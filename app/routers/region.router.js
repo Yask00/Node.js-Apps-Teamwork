@@ -8,35 +8,27 @@ const attachTo = (app, data) => {
         .get('/allregions', (req, res) => {
             return controller.getAll(req, res);
         })
-        // .get('/gallery', (req, res) => {
-        //     return controller.getRegionsGallery(req, res);
-        // })
-        // .get('/:id/gallery', (req, res) => {
-        //     return controller.getOneRegionGallery(req, res);
-        // })
-        // ================= TO: DELETE this
-        
-        // .get('/regions/orderroom', (req, res) => {
-        //     return controller.getOrderRoomForm(req, res);
-        // })
-        // .get('/regions/orderservice', (req, res) => {
-        //     return controller.getOrderServiceForm(req, res);
-        // }) // =============== TO: DELETE
         .get('/regions', (req, res) => {
             return controller.getCreateForm(req, res);
         })
+        .get('/regions/:id/details', (req, res) => {
+            return controller.getRegionDetails(req, res);
+        })
+        .get('/regions/:id', (req, res) => {
+            return controller.getUpdateForm(req, res);
+        })
+        .get('/regionchoose', (req, res) => {
+            return controller.getChooseForm(req, res);
+        })
         .post('/regions', (req, res) => {
+            if (req.body._method) {
+                return controller.update(req, res);
+            }
             return controller.createRegion(req, res);
+        })
+        .put('/regions', (req, res) => {
+            return controller.update(req, res);
         });
-    // .get('/regions/:id', (req, res) => {
-    //     return controller.getRegionDetails(req, res);
-    // });
-    // .put('/regions/:id', (req, res)=> {
-    //     return controller.updateRegion(req, res);
-    // });
-    // .delete('/regions/:id', (req, res)=> {
-    //     return controller.deleteRegion(req, res);
-    // });
 
     app.use(router);
 };

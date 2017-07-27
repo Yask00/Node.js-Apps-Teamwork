@@ -1,4 +1,12 @@
 extend ../_shared/_master
 
 block body
-    h1 Hello from region details
+    if (message && message.length > 0)
+        div.flash-message-green
+            | #{message}
+    div
+        img(src=region.imageURL, alt='')
+        h2 #{region.name}
+        h3 #{region.description}
+        h3 #{region.regionType}
+            a.btn.btn-primary.pull-right(href='#') Резервирай

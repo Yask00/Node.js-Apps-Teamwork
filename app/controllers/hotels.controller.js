@@ -64,9 +64,9 @@ class HotelsController {
 
     update(req, res) {
         let dbHotel;
-        this.data.hotels.update(req.body)
-            .then(() => {
-                return this.data.hotels.getById(req.body.id);
+        return this.data.hotels.update(req.body)
+            .then((id) => {
+                return this.data.hotels.getById(id);
             }).then((hotel) => {
                 dbHotel = hotel;
                 return this.data.regions.updateCollection(dbHotel);
@@ -107,15 +107,22 @@ class HotelsController {
     }
 
     createHotel(req, res) {
-        return this.data.hotels.create(req.body)
-            .then((dbHotel) => {
-                this.data.regions.updateCollection(dbHotel.ops[0]);
-                req.flash('Hotel created succesfuly',
-                    `Хотел ${dbHotel.name} е успешно създаден`);
-                res.render('hotel/details', {
-                    message: req.flash('Hotel created succesfuly'),
-                    hotel: dbHotel.ops[0],
-                });
+        let body;
+        return this.data.regions.getById(req.body.regionId)
+            .then((dbRegion) => {
+                body = req.body;
+                body.region = dbRegion.name;
+            }).then(() => {
+                return this.data.hotels.create(body);
+            }).then((dbHotel) => {
+                this.data.regions.addToCollection(dbHotel.ops[0]);
+                res.redirect('./profile');
+                // req.flash('Hotel created succesfuly',
+                //     `Хотел ${dbHotel.ops[0].name} е успешно създаден`);
+                // res.render('hotel/details', {
+                //     message: req.flash('Hotel created succesfuly'),
+                //     hotel: dbHotel.ops[0],
+                // });
             }).catch((err) => {
                 req.flash('Failed creation',
                     'Записът e неуспешен поради невалидни данни!');

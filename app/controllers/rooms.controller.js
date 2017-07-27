@@ -29,9 +29,8 @@ class RoomsController {
         this.data.rooms.create(req.body)
             .then((result) => {
                 dbRoom = result.ops[0];
-                return this.data.hotels.addToCollection(dbRoom);
-            })
-            .then(() => {
+                return this.data.hotels.addToCollection(dbRoom, 'rooms');
+            }).then(() => {
                 req.flash('Room created succesfuly',
                     `Стая тип ${dbRoom.roomType} беше успешно създаденa`);
                 res.render('room/details', {
@@ -70,12 +69,21 @@ class RoomsController {
     }
 
     update(req, res) {
-        this.data.rooms.update(req.body)
-            .then(() => {
-                return this.data.rooms.getById(req.body.roomId);
-            }).then((dbRoom) => {
-                this.data.hotels.updateCollection(dbRoom)
-                    .then(() => res.render('room/details', { room: dbRoom }));
+        let dbRoom;
+        return this.data.rooms.update(req.body)
+            .then((id) => {
+                return this.data.rooms.getById(id);
+            }).then((room) => {
+                dbRoom = room;
+                return this.data.hotels.updateCollection(dbRoom, 'rooms');
+            }).then(() => {
+                req.flash('Room updated succesfuly',
+                    `Стаята e успешно промененa`);
+                res.render('room/details', {
+                    message: req.flash('Room updated succesfuly'),
+                    room: dbRoom,
+                    user: req.user,
+                });
             }).catch((err) => {
                 req.flash(
                     'Invalid data', 'Неуспешен запис: невалидни данни!');

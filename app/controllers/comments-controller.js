@@ -23,7 +23,6 @@ class CommentsController {
     }
 
     createComment(req, res) {
-        console.log(req.body);
         this.data.comments.create(req.body)
             .then((dbComment) => {
                 req.flash('Comment created succesfuly',
