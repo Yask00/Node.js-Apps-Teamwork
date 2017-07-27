@@ -21,6 +21,7 @@ class HotelsController {
             .then((dbHotel) =>
                 res.render('hotel/details', {
                     hotel: dbHotel,
+                    comments: dbHotel.comments,
                     user: req.user,
                 }))
             .catch((err) => {

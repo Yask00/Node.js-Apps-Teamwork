@@ -1,6 +1,6 @@
 const BaseData = require('./base/base');
-// const Static = require('../models/static');
-// const { ObjectID } = require('mongodb');
+const Static = require('../models/static');
+const { ObjectID } = require('mongodb');
 
 class CommentsData extends BaseData {
     constructor(db, Model, validator) {

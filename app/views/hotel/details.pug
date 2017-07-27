@@ -73,6 +73,22 @@ block body
         // END navigator
     // END prod wrapper
     div(style='clear:both')
+        each comment in comments
+                div(class="container")
+                    div(class="row")
+                        div(class="col-sm-12")
+                            div(class="panel panel-white post")
+                                div(class="post-heading")
+                                    div(class="pull-left image")
+                                        img(src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image")
+                                    div(class="pull-left meta")
+                                        div(class="title h5")
+                                            a(href="#")
+                                                b Потребител: #{comment.username}
+                                            |  направи следния коментар.
+                                        h6(class="text-muted time") Създаден на: #{comment.createdOn}
+                                div(class="post-description")
+                                    <p> #{comment.content}
 
 block scripts    
     script(src='http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js')

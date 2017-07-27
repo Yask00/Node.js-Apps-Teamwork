@@ -17,25 +17,34 @@ class CommentsController {
     }
 
     getCreateForm(req, res) {
-        return res.render('comments/form', {
-            user: req.user,
+        this.data.hotels.getAll()
+        .then((hotels) => {
+            return res.render('comments/form', {
+                user: req.user,
+                hotels,
+            });
         });
     }
 
     createComment(req, res) {
+        let dbComment;
         this.data.comments.create(req.body)
-            .then((dbComment) => {
+            .then((result) => {
+                dbComment = result.ops[0]; // create(req.body)
+                return this.data.hotels.addToCollection(dbComment);
+            })
+            .then(() => {
                 req.flash('Comment created succesfuly',
                     `Коментарът ви e успешно създаден, goto /comments`);
-                res.render('comments/form', {
+                res.render('user/profile', {
                     message: req.flash('Comment created succesfuly'),
                     user: req.user,
-                    comment: req.body,
                 });
-            }).catch((err) => {
+            })
+            .catch((err) => {
                 req.flash('Failed creation',
                     'Записът e неуспешен поради невалидни данни!');
-                res.render('comments/form', {
+                res.render('user/profile', {
                     message: req.flash('Failed creation'),
                     user: req.user,
                 });

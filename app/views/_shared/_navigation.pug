@@ -17,11 +17,13 @@ mixin navigation
                         a(href="/allregions") Региони
                     if user
                         li
-                            a(href="/regions/orderroom") Резервирай стая
-                        li
-                            a(href="/regions/orderservice") Резервирай забавление
+                            a(href="/orders") Резервирай стая/услуга
+                        //- li
+                        //-     a(href="/regions/orderservice") Резервирай забавление
                         li
                             a(href="/admin/panel") Админ Панел
+                        li
+                            a(href="/comments") Коментирай хотел
                 ul(class="nav navbar-nav navbar-right")
                     if !user
                         li

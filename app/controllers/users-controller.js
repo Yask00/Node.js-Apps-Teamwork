@@ -29,7 +29,13 @@ class UsersController {
     getUserProfile(req, res) {
         this.data.users.getById(req.user._id)
             .then((dbUser) => {
-                res.render('user/profile', { user: dbUser });
+                this.data.orders.getAll({ username: dbUser.username })
+                .then((dbOrders) => {
+                    res.render('user/profile', {
+                    user: dbUser,
+                    orders: dbOrders,
+                });
+                });
             });
     }
 
