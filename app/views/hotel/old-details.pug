@@ -1,0 +1,108 @@
+extend ../_shared/_master
+
+block body
+    if (message && message.length > 0)
+        div.flash-message-green
+            | #{message}
+    // tab panes
+    #prod_wrapper
+        #panes
+            div
+                img(src='http://www.bgvakancia.com/common_images/offers/5921/2f8d32047513f75baf96dbde657f709b.jpg', alt='')
+                h2 Апартамент Къпина
+                p Апартаментът разполага със спалня с двойно легло, хол (с разтегателен диван), самостоятелна спалня с две отделни легла, голяма баня на долното ниво 
+                p (подходящ е за 6 човека). 
+                p
+                    a.btn.btn-primary.pull-right(href='#') Резервирай
+            div
+                img(src='http://www.bgvakancia.com/common_images/offers/5921/4f6cbebad860b3763dce6f1182d4a06a.jpg', alt='')
+                h2 Апартамент Лалe
+                p Апартаментът разполага с хол с разтегателен диван и разтегателен фотьойл, спалня с двойно легло, самостоятелна баня (подходящ е  за 5 човека). 
+                p *Лале може да се раздели на две самостоятелни спални.
+                p
+                    a.btn.btn-primary.pull-right(href='#') Резервирай
+            div
+                img(src='http://www.bgvakancia.com/common_images/offers/5921/2f0407e5521f9c805a963546c9d99135.jpg', alt='')
+                h2 Двойна стая
+                p Всички спални са оборудвани с отопление, телевизор, имат санитарен възел и което е най-важното имат своя уникален характер - така че всеки да намери своето кътче и любимо място.
+                p
+                    a.btn.btn-primary.pull-right(href='#') Резервирай
+            div
+                img(src='http://waterfallsbg.info/assets/Petkanovi/IMG_0163.JPG', alt='')
+                h2 Къпане във водопад, разходка по реката
+                p Мястото е страхотно за разходки сред природата и за освежаване на свободното време. Ние ще ви предложим много интересни занимания - къпане във водопад, разходка по реката, посещение на пещери, скоростни разходки с джип, колоездене, стрелба с лък
+                p
+                    a.btn.btn-primary.pull-right(href='#') Резервирай
+            div
+                img(src='http://www.bgvakancia.com/common_images/offers/5921/aa9cc4baea8a072e0def5b3d129a103e.jpg', alt='')
+                h2 Механа край реката
+                p Две от къщите се сгушили край реката, мостът над нея води през каменни пътеки, дървета и цветя до другите две къщи на хълма. Оттам се откриват фантастични панорами. 
+                p Всяка къща има механа, там приготвяме обеди и вечери по поръчка.
+                p
+                    a.btn.btn-primary.pull-right(href='#') Резервирай
+        // END tab panes
+        br(clear='all')
+        // navigator
+        #prod_nav
+            ul
+                li
+                    a(href='#')
+                        img(src='http://www.bgvakancia.com/common_images/offers/5921/2f8d32047513f75baf96dbde657f709b.jpg', width='160', alt='')
+                        strong Апартамент Къпина
+                        |  2 броя
+                li
+                    a(href='#')
+                        img(src='http://www.bgvakancia.com/common_images/offers/5921/4f6cbebad860b3763dce6f1182d4a06a.jpg', width='160', alt='')
+                        strong Апартамент Лале
+                        |  3 броя
+                li
+                    a(href='#')
+                        img(src='http://www.bgvakancia.com/common_images/offers/5921/2f0407e5521f9c805a963546c9d99135.jpg', width='160', alt='')
+                        strong Двойна стая
+                        |  10 броя
+                li
+                    a(href='#')
+                        img(src='http://waterfallsbg.info/assets/Petkanovi/IMG_0163.JPG', width='160', alt='')
+                        strong Къпане във водопад
+                        |  Незабравимо
+                li
+                    a(href='#')
+                        img(src='http://www.bgvakancia.com/common_images/offers/5921/aa9cc4baea8a072e0def5b3d129a103e.jpg', width='160', alt='')
+                        strong Механа край реката
+                        |  Български госби
+        // END navigator
+    // END prod wrapper
+    div(style='clear:both')
+        each comment in comments
+                div(class="container")
+                    div(class="row")
+                        div(class="col-sm-12")
+                            div(class="panel panel-white post")
+                                div(class="post-heading")
+                                    div(class="pull-left image")
+                                        img(src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image")
+                                    div(class="pull-left meta")
+                                        div(class="title h5")
+                                            a(href="#")
+                                                b Потребител: #{comment.username}
+                                            |  направи следния коментар.
+                                        h6(class="text-muted time") Създаден на: #{comment.createdOn}
+                                div(class="post-description")
+                                    <p> #{comment.content}
+
+block scripts    
+    script(src='http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js')
+    script.
+        $(function () {
+            $("#prod_nav ul").tabs("#panes > div", {
+                effect: 'fade',
+                fadeOutSpeed: 400
+            });
+        });
+    script.
+        $(document).ready(function () {
+            $(".pane-list li").click(function () {
+                window.location = $(this).find("a").attr("href");
+                return false;
+            });
+        });

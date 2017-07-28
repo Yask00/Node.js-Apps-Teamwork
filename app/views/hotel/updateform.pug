@@ -1,52 +1,52 @@
-extend ../_shared/_master
+extend ../admin/panel
 
-block body
+block addoredit
     if (message && message.length > 0)
         div.flash-message-red
             | #{message}
-    form(id="register-form" class="form-vertical" action='/hotels' method="POST")
-        fieldset
-            div(id="legend")
-                legend
-                    | Update hotel Info
-                    
-            div(class="control-group")
-                label(class="control-label" for="name")
-                    | Name
-                div(class="controls")
-                    input(type="text" id="name" name="name" placeholder="" class="input-xlarge")
-                    input(type="text" id="hotelId" name="hotelId" value=hotelId class="hidden")
-                    input(type="text" name="_method" value="PUT" class="hidden")
-                    p(class="help-block")
-                        | Hotel name can contain any letters and numbers, spaces and special characters
-
-            div(class="control-group")
-                label(class="control-label" for="phone")
-                    | Phone number
-                div(class="controls")
-                    input(type="text" id="phone" name="phone" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Enter Phone number
-
-            div(class="control-group")
-                label(class="control-label" for="imageURL")
-                    | Image
-                div(class="controls")
-                    input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Please enter valid image URL
-
-            div(class="control-group")
-                label(class="control-label" for="description")
-                    | Description
-                div(class="controls")
-                    input(type="text" id="description" name="description" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Please enter Hotel description
-
-            div(class="control-group")
-                div(class="controls")
-                    button(class="btn btn-success")
-                        | Edit Hotel Info
-
-
+    h2 Редактирай хотел
+    form.form-horizontal(action='/hotels' method="POST")
+        .form-group
+            label.col-sm-3.control-label(for="name")
+                | Име на хотела
+            .col-sm-9
+                input.form-control(type="text" id="name" name="name" value=hotel.name)
+                input.hidden(type="text" id="id" name="id" value=hotelId)
+                input.hidden(type="text" name="_method" value="PUT")
+                p.form-text.text-muted
+                    | Името се състои само от букви, цифри, интервали, тире и запетая
+        .form-group
+            label.col-sm-3.control-label(for="phone")
+                | Телефон
+            .col-sm-9
+                input.form-control(type="text" id="phone" name="phone" value=hotel.phone)
+        .form-group
+            label.col-sm-3.control-label(for='imageURL')
+                | Изображение
+            .col-sm-9
+                input.form-control(type='text' name='imageURL' id='imageURL' value=hotel.imageURL)
+                p.form-text.text-muted
+                    | Въведете валиден URL адрес
+        .form-group
+            label.col-sm-3.control-label(for='description') 
+                | Кратко описание
+            .col-sm-9
+                textarea.form-control(name='description' id='description' placeholder=hotel.description)
+        .form-group
+            label.col-sm-3.control-label(for='region') 
+                | Регион
+            .col-sm-9
+                input.form-control(type='text' name='region' id='region' value=hotel.region disabled)
+        .form-group
+            label.col-sm-3.control-label(for='lattitude') 
+                | Ширина(lattitude)
+            .col-sm-9
+                input.form-control(name='lattitude' id='lattitude' value=hotel.lattitude disabled)
+        .form-group
+            label.col-sm-3.control-label(for='region') 
+                | Дължина(longitude)
+            .col-sm-9
+                input.form-control(name='longitude' id='longitude' value=hotel.longitude disabled)
+        .form-group
+            .col-sm-offset-3.col-sm-9
+                input.btn.btn-success(type='submit', value='Редактирай')

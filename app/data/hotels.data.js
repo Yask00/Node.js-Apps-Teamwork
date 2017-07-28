@@ -40,20 +40,32 @@ class HotelData extends BaseData {
     }
 
     update(body) {
+        // let resultHotel;
+        // return this.getById(body.hotelId)
+        //     .then((result) => {
+        //         if (!result) {
+        //             return Promise.reject('Редактирането е неуспешно!');
+        //         }
+        //         resultHotel = result;
+        //         const dbModel = this.getDbModel(body);
+        //         return Promise.resolve(dbModel);
+        //     }).then((dbModel) => {
+        //         delete dbModel.hotelId;
+        //         return this.collection.update(
+        //            { _id: resultHotel._id }, { $set: dbModel });
+        //     }).then(() => {
+        //         return Promise.resolve(resultHotel._id);
+        //     });
         let resultHotel;
-        return this.getById(body.hotelId)
+        return this.getById(body.id)
             .then((result) => {
-                if (!result) {
-                    return Promise.reject('Редактирането е неуспешно!');
-                }
                 resultHotel = result;
                 const dbModel = this.getDbModel(body);
                 return Promise.resolve(dbModel);
             }).then((dbModel) => {
-                delete dbModel.hotelId;
-                return this.collection.update({ _id: resultHotel._id }, { $set: dbModel });
-            }).then(() => {
-                return Promise.resolve(resultHotel._id);
+                return this.collection.update(
+                    { _id: resultHotel._id },
+                    { $set: dbModel });
             });
     }
 }

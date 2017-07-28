@@ -57,36 +57,79 @@ class HotelsController {
     }
 
     getUpdateForm(req, res) {
-        return res.render('hotel/updateform', {
-            user: req.user,
-            hotelId: req.params.id,
-        });
+        // return res.render('hotel/updateform', {
+        //     user: req.user,
+        //     hotelId: req.params.id,
+        // });
+        const hotelId = req.params.id;
+        this.data.hotels.getById(hotelId)
+            .then((hotel) => {
+                return res.render('hotel/updateform', {
+                    user: req.user,
+                    hotelId: hotelId,
+                    hotel: hotel,
+                });
+            });
     }
+
+    // update(req, res) {
+    //     let dbHotel;
+    //     return this.data.hotels.update(req.body)
+    //         .then((id) => {
+    //             return this.data.hotels.getById(id);
+    //         }).then((hotel) => {
+    //             dbHotel = hotel;
+    //             return this.data.regions.updateCollection(dbHotel);
+    //         }).then(() => {
+    //             req.flash('Hotel updated succesfuly',
+    //                 `Хотелът e успешно променен`);
+    //             res.render('hotel/details', {
+    //                 message: req.flash('Hotel updated succesfuly'),
+    //                 hotel: dbHotel,
+    //                 user: req.user,
+    //             });
+    //         }).catch((err) => {
+    //             req.flash(
+    //                 'Invalid data', 'Неуспешен запис: невалидни данни!');
+    //             res.render('hotel/updateform', {
+    //                 user: req.user,
+    //                 hotelId: req.body.id,
+    //                 message: req.flash('Invalid data'),
+    //             });
+    //         });
+    // }
 
     update(req, res) {
         let dbHotel;
-        return this.data.hotels.update(req.body)
-            .then((id) => {
-                return this.data.hotels.getById(id);
-            }).then((hotel) => {
+        this.data.hotels.update(req.body)
+            .then(() => {
+                return this.data.hotels.getById(req.body.id);
+            })
+            .then((hotel) => {
                 dbHotel = hotel;
                 return this.data.regions.updateCollection(dbHotel);
-            }).then(() => {
+            })
+            .then(() => {
                 req.flash('Hotel updated succesfuly',
-                    `Хотелът e успешно променен`);
+                    `Хотелът e успешно променен!`);
                 res.render('hotel/details', {
                     message: req.flash('Hotel updated succesfuly'),
                     hotel: dbHotel,
                     user: req.user,
                 });
-            }).catch((err) => {
+            })
+            .catch((err) => {
                 req.flash(
                     'Invalid data', 'Неуспешен запис: невалидни данни!');
-                res.render('hotel/updateform', {
-                    user: req.user,
-                    hotelId: req.body.id,
-                    message: req.flash('Invalid data'),
-                });
+                this.data.hotels.getById(req.body.id)
+                    .then((hotel) => {
+                        return res.render('hotel/updateform', {
+                            user: req.user,
+                            hotelId: req.body.id,
+                            hotel: hotel,
+                            message: req.flash('Invalid data'),
+                        });
+                    });
             });
     }
 
