@@ -31,12 +31,12 @@ class CommentsController {
         this.data.comments.create(req.body)
             .then((result) => {
                 dbComment = result.ops[0]; // create(req.body)
-                return this.data.hotels.addToCollection(dbComment);
+                return this.data.hotels.addToCollection(dbComment, 'comments');
             })
-            .then(() => {
+            .then((dbHotel) => {
                 req.flash('Comment created succesfuly',
                     `Коментарът ви e успешно създаден, goto /comments`);
-                res.render('user/profile', {
+                res.render('home/index', {
                     message: req.flash('Comment created succesfuly'),
                     user: req.user,
                 });

@@ -20,3 +20,21 @@ block body
                                     p=room.price
                             a.btn.btn-primary.center(href='#') 
                                 | Резервирай
+
+                if comments
+                    each comment in comments
+                        div(class="container")
+                            div(class="row")
+                                div(class="col-sm-12")
+                                    div(class="panel panel-white post")
+                                        div(class="post-heading")
+                                            div(class="pull-left image")
+                                                img(src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image")
+                                            div(class="pull-left meta")
+                                                div(class="title h5")
+                                                    a(href="#")
+                                                        b Потребител: #{comment.username}
+                                                    |  направи следния коментар.
+                                                h6(class="text-muted time") Създаден на: #{comment.createdOn}
+                                        div(class="post-description")
+                                            <p> #{comment.content}
