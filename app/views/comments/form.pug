@@ -7,46 +7,45 @@ block body
     if !user
         h1 Please LOGIN TO POST A Comment
     else
-        form(id="register-form" class="form-vertical" action='/comments' method="POST")
-            fieldset
-                div(id="legend")
-                    legend
-                        | Add Comment
-                
-                div(class="control-group")
-                    label(class="control-label" for="hotelId")
-                        | Hotel
-                    div(class="controls")
-                        select(id="hotelId" name="hotelId" class="input-xlarge")
+        h2 Добави Коментар
+        div(class="container")
+            form.form-horizontal(action='/comments' method="POST")
+                .form-group
+                    label.col-sm-3.control-label(for="hotelId")
+                        | Регион
+                    .col-sm-9
+                        select.form-control(id="hotelId" name="hotelId")
                             each hotel in hotels
                                 option(value=hotel._id) #{hotel.name}
-                        p(class="help-block")
-                            | Choose Hotel to comment on
+                        p.form-text.text-muted
+                            | Изберете регион
 
-                div(class="control-group")
-                    label(class="control-label" for="content")
-                        | Comment
-                    div(class="controls")
-                        input(type="text" id="content" name="content" placeholder="" class="input-xlarge")
+                .form-group
+                    label.col-sm-3.control-label(for='content') 
+                        | Вашето мнение
+                    .col-sm-9
+                        textarea.form-control(name='content' id='content' placeholder="Вашето мнение" required)
                         input(type="text" name="collection" value="comments" class="hidden")
-                        select(id="username" name="username" class="input-xlarge")
-                                if user
-                                    option(value=user.username) От името ви: #{user.username}
-                        p(class="help-block")
-                            | Enter Comment
 
-                div(class="control-group")
-                    label(class="control-label" for="createdOn")
-                        | Creation Date
-                    div(class="controls")
-                        input(type="text" id="createdOn" name="createdOn" placeholder="" class="input-xlarge" readonly="readonly")
-                        p(class="help-block")
-                            | Leave it like this
+                .form-group
+                    label.col-sm-3.control-label(for="hotelId")
+                        | Потребител
+                    .col-sm-9
+                        select.form-control(id="username" name="username")
+                            if user
+                                option(value=user.username) #{user.username}
 
-                div(class="control-group")
-                    div(class="controls")
-                        button(class="btn btn-success")
-                            | Add Comment
+                .form-group
+                    label.col-sm-3.control-label(for="createdOn")
+                        | Създанео на
+                    .col-sm-9
+                        input.form-control(type="text" id="createdOn" name="createdOn" required readonly="readonly")
+                        p.form-text.text-muted
+                            |Създадено на
+                
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        input.btn.btn-success(type='submit', value='Добави')
 
 block scripts
     script(src='/public/js/createDate.js')
