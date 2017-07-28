@@ -4,18 +4,28 @@ block body
     if (message && message.length > 0)
         div.flash-message-red
             | #{message}
-    div(class="intro-header")
-        div(class="container")
-            div(class="row")
-                div(class="col-lg-12")
-                    div(class="intro-message")
+    .intro-header
+        .container
+            .row
+                .col-lg-12
+                    .intro-message
                         h1 DREAM REST
-                        h3 Добре дошли, намерете своето място за отдих
-                        hr(class="intro-divider")
+                        h3 Да открием заедно вашата почивка-мечта!
+                        hr.intro-divider
                         ul(class="list-inline")
                             li
-                                a(href="/login")
-                                    button(type="button" class="btn btn-block redbtn") Влезте
-                            li
-                                a(href="/register")
-                                    button(type="button" class="btn btn-block greenbtn") Регистрирайте се
+                                 a.btn.btn-info(href="/allhotels") Напред
+                    //- #myCarousel.carousel.slide(data-ride="carousel")
+                    //-     .carousel-inner
+                    //-         .item.active
+                    //-             img(src="/public/images/okite-na-boga.png" alt="Okite na Boga" style="width:100%")
+                    //-         .item
+                    //-             img(src="/public/images/rila.png" alt="Rilski ezera" style="width:100%")
+                    //-         .item
+                    //-             img(src="/public/images/letnica.png" alt="Letnica" style="width:100%")
+                    //-         .item
+                    //-             img(src="/public/images/ropotamo.png" alt="Ropotamo" style="width:100%")
+                    //-         .item
+                    //-             img(src="/public/images/rodopi.png" alt="Rodopi" style="width:100%")
+                    //-         .item
+                    //-             img(src="/public/images/dospat.png" alt="Dospat" style="width:100%")

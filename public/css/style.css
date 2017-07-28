@@ -423,20 +423,21 @@ html {
 }
 
 
-.intro-header {
+ .intro-header {
     margin-top: -22px;
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../images/intro.jpg) no-repeat center center;
+    background: url(../images/dospat.png) no-repeat center center;
     background-size: cover;
-}
+} 
 
 .intro-message {
     position: relative;
     padding-top: 20%;
     padding-bottom: 20%;
+    z-index:100;
 }
 
 .intro-message > h1 {
