@@ -1,17 +1,28 @@
 extend ../_shared/_master
 
 block body
-    h1.htitle.text-center Всички направени поръчки....
+    h1.htitle.text-center Само ако си админ ги виждаш
     .hcards
-        each order in context
-            .hcard
-                header
-                    h2
-                        a(href="" + order._id + '/details')
-                            | Order details
-                    h2
-                        a(href="")
-                            =order.paymentType
-                    h4
-                        a(href="")
-                            =order.price
+        if user && user.role === 'admin'
+            each order in context
+                .hcard
+                    header
+                        h2
+                            a(href="/orders/" + order._id)
+                                | Order details: #{order._id}
+                        hr
+                        h2
+                            a(href="/orders/" + order._id)
+                                | By username: #{order.username}
+                        hr
+                        h2
+                            a(href="/orders/" + order._id)
+                                | In Hotel: #{order.hotel}
+                        hr
+                        h2
+                            a(href="/orders/" + order._id)
+                                | Price: #{order.price}
+                        h4
+                            a(href="/orders/" + order._id)
+                                button(type="button" class="btn btn-default btn-block") 
+                                    | Отмени поръчката

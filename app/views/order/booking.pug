@@ -11,23 +11,43 @@ block body
                 div(id="legend")
                     legend
                         | Add Your order
-                        
+                
+                div(class="control-group")
+                    label(class="control-label" for="hotel")
+                        | ИЗберете своя хотел
+                    div(class="controls")
+                        select(id="hotel" name="hotel" class="input-xlarge")
+                            each hotel in hotels
+                                option(value=hotel.name) #{hotel.name}
+                hr
+
                 div(class="control-group")
                     label(class="control-label" for="nightsCount")
                         | Брой нощувки
                     div(class="controls")
                         input.form-control(type='number' id="nightsCount" name="nightsCount" placeholder="" class="input-xlarge")
+                hr
 
                 div(class="control-group")
+                    label(class="control-label" for="room")
+                        | Изберете тип стая
+                    div(class="controls")
+                        select(id="room" name="room" class="input-xlarge")
+                            option(value="one") Едно легло
+                            option(value="two") Две легла
+                            option(value="three") Три легла
+                            option(value="four") Четири легла
+                hr
+                
+                div(class="control-group")
                     label(class="control-label" for="paymentType")
-                        | Payment Type
+                        | Начин на плащане
                     div(class="controls")
                         select(id="paymentType" name="paymentType" class="input-xlarge")
                             option(value="В брой") В брой
                             option(value="По банков път") По банков път
                             option(value="EasyPay") EasyPay
-                        p(class="help-block")
-                            | Choose you way po pay
+                hr
 
                 div(class="control-group")
                     label(class="control-label" for="serviceType")
@@ -40,15 +60,15 @@ block body
                 div(class="control-group")
                     div(class="controls")
                         input.form-control(id="price" name="price" value="11,11" class="hidden" placeholder="" class="input-xlarge")
-
+                hr
                 div(class="control-group")
                     label(class="control-label" for="username")
-                        | Payment details
+                        | Детайли
                     div(class="controls")
-                        select(id="username" name="username" class="input-xlarge")
+                        select(id="username" name="username" class="input-xlarge" class="hidden")
                                 option(value=user.username) For this account owner
                         p(class="help-block")
-                            | Your total $$ willl be sent to your email
+                            | Ще потвърдим до час на имейл вашата поръчка
 
                 div(class="control-group")
                     div(class="controls")

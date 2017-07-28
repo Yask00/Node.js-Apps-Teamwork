@@ -38,7 +38,7 @@ class OrdersController {
             }).catch((err) => {
                 req.flash('Failed creation',
                     'Записът e неуспешен поради невалидни данни!');
-                res.render('order/booking', {
+                res.render('home/index', {
                     message: req.flash('Failed creation'),
                     user: req.user,
                 });
@@ -55,6 +55,18 @@ class OrdersController {
             .catch((err) => {
                 res.render('user/error', { error: err });
             });
+    }
+
+    removeOrder(req, res) {
+            this.data.orders.remove(req.params.id)
+            .then((removedOrder) =>
+                res.render('order/removed', {
+                    user: req.user,
+                    order: removedOrder,
+                }))
+           .catch((err) => {
+                    res.render('user/error', { error: err });
+                });
     }
 }
 

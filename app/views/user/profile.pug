@@ -32,27 +32,29 @@ block body
                                                 tr
                                                     td Телефон:
                                                     td #{user.phone}
-                                                //- tr
-                                                //-     td(class="submenu") Резeрвирани стаи:
-                                                //-         tr 
-                                                //-             each val in user.roomOrders
-                                                //-                 tr
-                                                //-                     td Начало на купона: #{val.startDate}г. &nbsp
-                                                //-                     td Продължителност на купона: #{val.nightsCount} дни.
-                                                //-     td(class="submenu") Резeрвирани услуги:
-                                                //-         tr
-                                                //-             each val in user.serviceOrders
-                                                //-                 tr
-                                                //-                     td Начало на купона: #{val.startDate}г. &nbsp
-                                                //-                     td Продължителност на купона: #{val.nightsCount} дни.
+
                                                 tr
                                                     td(class="submenu") Резeрвирани стаи/услуги:
                                                         tr 
                                                             each val in orders
-                                                                tr
-                                                                    td Продължителност на купона: #{val.nightsCount} дни.
-                                                                    td Платежно средство: #{val.paymentType}
-                                                                    td Видове услуги #{val.serviceType}
+                                                                tr  
+                                                                    td(class="submenu") Резервация #{val._id}:
+                                                                        tr
+                                                                            td Хотел: #{val.hotel}
+                                                                    td
+                                                                        tr
+                                                                            td Денонощия: #{val.nightsCount}
+                                                                    td
+                                                                        tr
+                                                                            td Стая тип: #{val.room}
+                                                                    td
+                                                                        tr
+                                                                            td Платежно средство: #{val.paymentType}
+                                                                    td
+                                                                        tr
+                                                                            td Видове услуги #{val.serviceType}
+                                                                    
+                                                                   
 
 
 

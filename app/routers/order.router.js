@@ -17,6 +17,9 @@ const attachTo = (app, data) => {
         .get('/orders/:id', (req, res) => {
             return controller.getOrderDetails(req, res);
         })
+        .post('/orders/:id', (req, res) => {
+            return controller.removeOrder(req, res);
+        })
         // .get('/orders/service', (req, res) => {
         //     return controller.getCreateForm(req, res);
         // })

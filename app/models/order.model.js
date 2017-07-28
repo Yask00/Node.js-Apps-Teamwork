@@ -8,6 +8,8 @@ class Order {
         this.nightsCount = options.nightsCount;
         this.serviceType = options.serviceType; // can be blank
         this.username = options.username;
+        this.hotel = options.hotel;
+        this.room = options.room;
         // this.bookingRoom = [];
         // this.bookingService = [];
     }

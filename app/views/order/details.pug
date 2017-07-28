@@ -1,5 +1,29 @@
 extend ../_shared/_master
 
 block body
-    h1
-        | Details for specific order
+
+    if user && user.role === 'admin'
+        form(id="register-form" class="form-vertical" action=('/orders/' + order._id) method="POST")
+            fieldset
+                div(id="legend")
+                    legend
+                        | Remove this order
+
+                div(class="control-group")
+                    div(class="controls")
+                        input.form-control(id="id" name="id" value="#{order._id}" class="hidden" placeholder="" class="input-xlarge")
+
+                h2 Id: #{order._id}
+                h2 Цена: #{order.price}
+                h2 Хотел: #{order.hotel}
+                h2 Стая: #{order.room}
+                h2 Плащане тип: #{order.paymentType}
+                h2 Услуги #{order.serviceType}
+                h2 Потребител #{order.username}
+                
+               
+
+                div(class="control-group")
+                    div(class="controls")
+                        button(class="btn btn-success")
+                            | Remove order

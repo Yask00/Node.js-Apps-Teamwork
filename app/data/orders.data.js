@@ -1,6 +1,6 @@
 const BaseData = require('./base/base');
-// const Static = require('../models/static');
-// const { ObjectID } = require('mongodb');
+const Static = require('../models/static');
+const { ObjectID } = require('mongodb');
 
 class OrderData extends BaseData {
     constructor(db, Model, validator) {
@@ -15,6 +15,10 @@ class OrderData extends BaseData {
     //     return this.collection.update(
         // { _id: new ObjectID(model.hotelId) }, { $push: { hotels: model } });
     // }
+
+    remove(id) {
+        return this.collection.remove( { '_id': ObjectID(id) } );
+    }
 }
 
 const init = (db, Model, validator) => {
