@@ -12,12 +12,6 @@ block body
                     // Sidebar toggle button
                     a.sidebar-toggle(href='#', data-toggle='push-menu', role='button')
                         span.sr-only Toggle navigation
-                    .navbar-custom-menu
-                        ul.nav.navbar-nav                      
-                            // Control Sidebar Toggle Button
-                            li
-                                a(href='#', data-toggle='control-sidebar')
-                                    i.fa.fa-gears
             aside.main-sidebar
                 section.sidebar
                     ul.sidebar-menu.custom-my(data-widget='tree')
@@ -66,44 +60,13 @@ block body
                                         i.fa.fa-picture-o
                                         span Услуга
                                 li
-                                    a(href='/allorders') 
+                                    a(href='#') 
                                         i.fa.fa-shopping-basket
                                         span Поръчка
             .content-wrapper
                 section.content.container-fluid
                     block addoredit
-
-            aside.control-sidebar.control-sidebar-light
-                ul.nav.nav-tabs.nav-justified.control-sidebar-tabs
-                    li.active
-                        a(href='#control-sidebar-home-tab', data-toggle='tab')
-                            i.fa.fa-home
-                    li
-                        a(href='#control-sidebar-settings-tab', data-toggle='tab')
-                            i.fa.fa-gears
-                // Tab panes
-                .tab-content
-                    // Home tab content
-                    #control-sidebar-home-tab.tab-pane.active
-                        h3.control-sidebar-heading Recent Activity
-                        ul.control-sidebar-menu
-                            li
-                                a(href='javascript:;')
-                                    i.menu-icon.fa.fa-birthday-cake.bg-red
-                                    .menu-info
-                                        h4.control-sidebar-subheading Здрасти
-                                        p Това е добре!
-                        // /.control-sidebar-menu
-                        h3.control-sidebar-heading Нещо ново
-                        ul.control-sidebar-menu
-                            li
-                                a(href='javascript:;')
-                                    h4.control-sidebar-subheading
-                                        | Ръст на поръчките
-                                        span.pull-right-container
-                                            span.label.label-danger.pull-right 70%
-                                    .progress.progress-xxs
-                                        .progress-bar.progress-bar-danger(style='width: 70%')
+      
             .control-sidebar-bg
 block scripts
     script(src='/public/js/admin.js')

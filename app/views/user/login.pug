@@ -4,17 +4,12 @@ block body
     if (message && message.length > 0)
         div.flash-message-red
             | #{message}
-    div(class="container")
-        div(class="card card-container")
-            img(id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png")
-            p(id="profile-name" class="profile-name-card")
-            form(class="form-signin" action="/login" method="POST")
-                span(id="reauth-email" class="reauth-email")
-                input(type="text" id="inputEmail" class="form-control" name="username" placeholder="Username" required autofocus)
+    .container
+        .card.card-container
+            img#profile-img.profile-img-card(src="//ssl.gstatic.com/accounts/ui/avatar_2x.png")
+            form.form-signin(action="/login" method="POST")
+                input#inputEmail.form-control(type="text" name="username" placeholder="Username" required autofocus)
+                input#inputPassword.form-control(type="password" name="password" placeholder="Password" required)
 
-                input(type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required)
-
-                button(class="btn btn-lg btn-primary btn-block btn-signin" type="submit")
-                    | Sign in
-
-
+                button.btn.btn-lg.btn-primary.btn-block.btn-signin(type="submit")
+                    | Влез

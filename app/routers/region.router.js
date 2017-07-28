@@ -14,6 +14,9 @@ const attachTo = (app, data) => {
         .get('/regions/:id/details', (req, res) => {
             return controller.getRegionDetails(req, res);
         })
+        .get('/regions/:id/review', (req, res) => {
+            return controller.getRegionReview(req, res);
+        })
         .get('/regions/:id', (req, res) => {
             return controller.getUpdateForm(req, res);
         })

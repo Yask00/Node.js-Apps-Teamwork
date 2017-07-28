@@ -28,6 +28,18 @@ class RegionsController {
             });
     }
 
+    getRegionReview(req, res) {
+        this.data.regions.getById(req.params.id)
+            .then((dbRegion) =>
+                res.render('regions/review', {
+                    region: dbRegion,
+                    user: req.user,
+                }))
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
+    }
+
     getChooseForm(req, res) {
         this.data.regions.getAll()
             .then((regions) =>

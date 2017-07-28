@@ -1,0 +1,24 @@
+extend ../_shared/_master
+
+block body
+    .wrapall
+        if (message && message.length > 0)
+            div.flash-message-red
+                | #{message}
+        h1.htitle=region.name
+        if user
+            a.btn.btn-default(href='/regions/' + region._id) Редактирай
+            a.btn.btn-warning(href='/regions/' + region._id + '/delete') Изтрий
+        if !region.hotels
+            h3 Все още няма хотели в този регион.
+        else
+            .hcards
+                each hotel in region.hotels
+                    .hcard
+                        header
+                            h2
+                                a(href='/hotels/' + hotel.id + "/details")
+                                    =hotel.name                            
+                        img.img-responsive(src=hotel.imageURL, alt=hotel.name)
+                        .body
+                            p=hotel.description

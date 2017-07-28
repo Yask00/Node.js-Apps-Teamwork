@@ -2,8 +2,12 @@ html {
   box-sizing: border-box;
 }
 
-body {
-    /*background-image: url('/public/images/fon.jpg');*/
+.wrapall {
+    margin-top: -50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 100%;
+    background-image: url('/public/images/bgr.png');
 }
 
 *, 
@@ -58,7 +62,8 @@ body {
 
 .hcard header {
   padding: 10px;
-  background-color: #317eac;
+  /* background-color: #317eac; */
+  background-color: #044e95;
   color: #fff;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -502,4 +507,3 @@ body {
     background-color: green;
     color: black;
 }
-

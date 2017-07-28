@@ -162,14 +162,16 @@ h6,
 }
 /* General Links */
 a {
-  color: #3c8dbc;
+  /* color: #3c8dbc; */
+  color: orange;
 }
 a:hover,
 a:active,
 a:focus {
   outline: none;
   text-decoration: none;
-  color: #72afd2;
+  /* color: #72afd2; */
+  color: darkred;
 }
 /* Page Header */
 .page-header {
@@ -524,12 +526,12 @@ a:focus {
 }
 .sidebar-menu.custom-my li.header {
   padding: 10px 25px 10px 15px;
-  font-size: 15px;
+  font-size: 17px;
   color: orange;
 }
 .sidebar-menu.custom-my li span {
-  font-size: 13px;
-  color: navy;
+  font-size: 15px;
+  color: orange;
 }
 .sidebar-menu li > a > .fa-angle-left,
 .sidebar-menu li > a > .pull-right-container > .fa-angle-left {

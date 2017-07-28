@@ -15,67 +15,43 @@
     "lattitude": "42.8700",
     "longitude": "25.8943"
 }, {
-    "name": "",
-    "phone": "",
-    "imageURL": "http://www.bgvakancia.com/common_images/offers/3588/cc8b4d2f44c40872cf52a09afe113d19.jpg",
-    "description": "",
-    "region": "",
-    "lattitude": "",
-    "longitude": ""
+    "name": "Бистрилишки къщи",
+    "phone": "035879865",
+    "imageURL": "http://www.bgvakancia.com/common_images/offers/3125/7ea5bd27d03c9860e3eb7de16887f7f3.jpg",
+    "description": "Тишина, уют, дискретност, гостоприемство и спокойствие. Туризъм, екскурзии до Белоградчишки скали, Чипровци, Берковица, Клисурски, Лопушански,Чипровски манастири.",
+    "region": "Западна Стара Планина",
+    "lattitude": "43.3551",
+    "longitude": "23.1029"
 }, {
-    "name": "",
-    "phone": "",
-    "imageURL": "",
-    "description": "",
-    "region": "",
-    "lattitude": "",
-    "longitude": ""
+    "name": "Миховата Къща, Долна Рикса",
+    "phone": "033667744",
+    "imageURL": "http://www.bgvakancia.com/common_images/offers/3487/53781c4330e451334874bacae4bca62f.jpg",
+    "description": "Къщата се намира сред много зеленина на 150-200 метра от река Цибрица. Реката предлага възможности за риболов. В района тишината и спокойствието са нарушавани само от песента на птиците.",
+    "region": "Западна Стара Планина",
+    "lattitude": "43.5458",
+    "longitude": "23.0174"
 }, {
-    "name": "",
-    "phone": "",
-    "imageURL": "",
-    "description": "",
-    "region": "",
-    "lattitude": "",
-    "longitude": ""
+    "name": "Къща за гости, Белоградчик",
+    "phone": "033558837",
+    "imageURL": "http://www.bgvakancia.com/common_images/offers/2916/4e1dbc014f401bb834bb1c45429b36e0.jpg",
+    "description": "В райското кътче Белоградчик - разгледайте уникалните скални образувания, научете легендите свързани с тях. Опитайте местните вина и отседнете в моята малка къща за гости",
+    "region": "Западна Стара Планина",
+    "lattitude": "43.6271",
+    "longitude": "22.6761"
 }, {
-    "name": "",
-    "phone": "",
-    "imageURL": "",
-    "description": "",
-    "region": "",
-    "lattitude": "",
-    "longitude": ""
+    "name": "Горски Кът, Гранитово",
+    "phone": "034897867",
+    "imageURL": "http://www.bgvakancia.com/common_images/offers/6049/c276d8a58cf1b020a28c4f2026cc8978.jpg",
+    "description": "Къща за гости Горски Кът се намира в село Гранитово на 9 км. разстояние от гр. Белоградчик. Подходяща е за почивка през всички сезони, топла през зимата и прохладна през лятото.",
+    "region": "Западна Стара Планина",
+    "lattitude": "43.6813",
+    "longitude": "22.6941"
 }, {
-    "name": "",
-    "phone": "",
-    "imageURL": "",
-    "description": "",
-    "region": "",
-    "lattitude": "",
-    "longitude": ""
+    "name": "Екоселище Глинените къщи",
+    "phone": "034558734",
+    "imageURL": "http://www.bgvakancia.com/common_images/offers/7163/7f1a6f0b7b6b9e2c4387120cef997e5a.jpg",
+    "description": "Екоселище Глинените къщи се намира в с.Извос само на 4 километра от Белоградчишките скали. Красивата природа, тишината и спокойствието правят къщите ни идеални за отдих и откъсване от забързаното ежедневие",
+    "region": "Западна Стара Планина",
+    "lattitude": "43.6007",
+    "longitude": "22.67"
 }]
-
-/*
-pri update -> 
-
-    "region": {
-        "_id": "",
-        "name": ""
-    }
-
-    "rooms": [{
-        "_id": "",
-        "roomType": "",
-        "price": "",
-        "weekPrice": ""
-    }]
-    
-    "comments": [{
-        "_id": "",
-        "username": "",
-        "text": "",
-        "createdOn": ""
-    }]
-}]
-*/
