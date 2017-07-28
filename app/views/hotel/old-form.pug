@@ -1,0 +1,75 @@
+extend ../admin/panel
+
+block addoredit
+    if (message && message.length > 0)
+        div.flash-message-red
+            | #{message}
+    form(id="register-form" class="form-vertical" action='/hotels' method="POST")
+        fieldset
+            div(id="legend")
+                legend
+                    | Add Hotel
+            div(class="control-group")
+                label(class="control-label" for="regionId")
+                    | Region
+                div(class="controls")
+                    select(id="regionId" name="regionId" class="input-xlarge")
+                        each region in regions
+                            option(value=region._id) #{region.name}
+                    p(class="help-block")
+                        | Choose region
+                        
+            div(class="control-group")
+                label(class="control-label" for="name")
+                    | Name
+                div(class="controls")
+                    input(type="text" id="name" name="name" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Hotel name can contain any letters and numbers, spaces and special characters
+
+            div(class="control-group")
+                label(class="control-label" for="phone")
+                    | Phone number
+                div(class="controls")
+                    input(type="text" id="phone" name="phone" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Enter Phone number
+
+            div(class="control-group")
+                label(class="control-label" for="imageURL")
+                    | Image
+                div(class="controls")
+                    input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter valid image URL
+
+            div(class="control-group")
+                label(class="control-label" for="description")
+                    | Description
+                div(class="controls")
+                    input(type="text" id="description" name="description" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Please enter Hotel description
+
+            div(class="control-group")
+                label(class="control-label" for="lattitude")
+                    | Lattitude
+                div(class="controls")
+                    input(type="text" id="lattitude" name="lattitude" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Enter Hotel lattitude. Example: +90.0
+
+            div(class="control-group")
+                label(class="control-label" for="longitude")
+                    | Longitude
+                div(class="controls")
+                    input(type="text" id="longitude" name="longitude" placeholder="" class="input-xlarge")
+                    p(class="help-block")
+                        | Enter Hotel longitude. Example: -127.554334
+
+            div(class="control-group")
+                div(class="controls")
+                    button(class="btn btn-success")
+                        | Add Hotel
+
+

@@ -4,72 +4,51 @@ block addoredit
     if (message && message.length > 0)
         div.flash-message-red
             | #{message}
-    form(id="register-form" class="form-vertical" action='/hotels' method="POST")
-        fieldset
-            div(id="legend")
-                legend
-                    | Add Hotel
-            div(class="control-group")
-                label(class="control-label" for="regionId")
-                    | Region
-                div(class="controls")
-                    select(id="regionId" name="regionId" class="input-xlarge")
-                        each region in regions
-                            option(value=region._id) #{region.name}
-                    p(class="help-block")
-                        | Choose region
-                        
-            div(class="control-group")
-                label(class="control-label" for="name")
-                    | Name
-                div(class="controls")
-                    input(type="text" id="name" name="name" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Hotel name can contain any letters and numbers, spaces and special characters
-
-            div(class="control-group")
-                label(class="control-label" for="phone")
-                    | Phone number
-                div(class="controls")
-                    input(type="text" id="phone" name="phone" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Enter Phone number
-
-            div(class="control-group")
-                label(class="control-label" for="imageURL")
-                    | Image
-                div(class="controls")
-                    input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Please enter valid image URL
-
-            div(class="control-group")
-                label(class="control-label" for="description")
-                    | Description
-                div(class="controls")
-                    input(type="text" id="description" name="description" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Please enter Hotel description
-
-            div(class="control-group")
-                label(class="control-label" for="lattitude")
-                    | Lattitude
-                div(class="controls")
-                    input(type="text" id="lattitude" name="lattitude" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Enter Hotel lattitude. Example: +90.0
-
-            div(class="control-group")
-                label(class="control-label" for="longitude")
-                    | Longitude
-                div(class="controls")
-                    input(type="text" id="longitude" name="longitude" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Enter Hotel longitude. Example: -127.554334
-
-            div(class="control-group")
-                div(class="controls")
-                    button(class="btn btn-success")
-                        | Add Hotel
-
-
+    h2 Добави хотел
+    form.form-horizontal(action='/hotels' method="POST")
+        .form-group
+            label.col-sm-3.control-label(for="name")
+                | Име на хотела
+            .col-sm-9
+                input.form-control(type="text" id="name" name="name" required)
+                p.form-text.text-muted
+                    | Името се състои само от букви, цифри, интервали, тире и запетая
+        .form-group
+            label.col-sm-3.control-label(for="regionId")
+                | Регион
+            .col-sm-9
+                select.form-control(id="regionId" name="regionId")
+                    each region in regions
+                        option(value=region._id) #{region.name}
+                p.form-text.text-muted
+                    | Изберете регион
+        .form-group
+            label.col-sm-3.control-label(for="phone")
+                | Телефон
+            .col-sm-9
+                input.form-control(type="text" id="phone" name="phone" placeholder="0888 111888" required)
+        .form-group
+            label.col-sm-3.control-label(for='imageURL')
+                | Изображение
+            .col-sm-9
+                input.form-control(type='text' name='imageURL' id='imageURL' placeholder="Адрес на изображението" required)
+                p.form-text.text-muted
+                    | Въведете валиден URL адрес
+        .form-group
+            label.col-sm-3.control-label(for='description') 
+                | Кратко описание
+            .col-sm-9
+                textarea.form-control(name='description' id='description' placeholder="Описание" required)
+        .form-group
+            label.col-sm-3.control-label(for='lattitude') 
+                | Ширина(lattitude)
+            .col-sm-9
+                input.form-control(name='lattitude' id='lattitude' placeholder="42.1234" required)
+        .form-group
+            label.col-sm-3.control-label(for='region') 
+                | Дължина(longitude)
+            .col-sm-9
+                input.form-control(name='longitude' id='longitude' placeholder="27.1234" required)
+        .form-group
+            .col-sm-offset-3.col-sm-9
+                input.btn.btn-success(type='submit', value='Добави')
