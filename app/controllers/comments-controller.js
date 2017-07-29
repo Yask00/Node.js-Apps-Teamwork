@@ -35,7 +35,7 @@ class CommentsController {
             })
             .then((dbHotel) => {
                 req.flash('Comment created succesfuly',
-                    `Коментарът ви e успешно създаден, goto /comments`);
+                    `Коментарът ви e успешно създаден`);
                 res.render('home/index', {
                     message: req.flash('Comment created succesfuly'),
                     user: req.user,

@@ -9,20 +9,24 @@ block body
                     header
                         h2
                             a(href="/orders/" + order._id)
-                                | Order details: #{order._id}
+                                | Детайли: #{order._id}
                         hr
                         h2
                             a(href="/orders/" + order._id)
-                                | By username: #{order.username}
+                                | От потребител: #{order.username}
                         hr
                         h2
                             a(href="/orders/" + order._id)
-                                | In Hotel: #{order.hotel}
+                                | В хотел: #{order.hotel}
                         hr
                         h2
                             a(href="/orders/" + order._id)
-                                | Price: #{order.price}
-                        h4
-                            a(href="/orders/" + order._id)
-                                button(type="button" class="btn btn-default btn-block") 
-                                    | Отмени поръчката
+                                | Цена: #{order.price}
+
+                    a(href="/orders/" + order._id)
+                        button(type="button" class="redbtn")
+                            | Отмени поръчката
+
+                    a(href="/")
+                        button(type="button" class="greenbtn")
+                            | Потвърди/Изпрати email
