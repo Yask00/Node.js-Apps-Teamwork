@@ -21,7 +21,8 @@ class RoomsData extends BaseData {
                 return Promise.resolve(dbModel);
             }).then((dbModel) => {
                 delete dbModel.roomId;
-                return this.collection.update({ _id: resultRoom._id }, { $set: dbModel });
+                return this.collection.update(
+                    { _id: resultRoom._id }, { $set: dbModel });
             }).then(() => {
                 return Promise.resolve(resultRoom._id);
             });

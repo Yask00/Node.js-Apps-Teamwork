@@ -27,7 +27,9 @@ class RegionData extends BaseData {
 
     addToCollection(body) {
         if (Static.isValid(body, this.validator)) {
-            return this.collection.update({ _id: new ObjectID(body.regionId) }, { $push: { hotels: body } });
+            return this.collection.update(
+                { _id: new ObjectID(body.regionId) },
+                { $push: { hotels: body } });
         }
         return Promise.reject('Добавянето е неуспешно!');
     }
@@ -44,7 +46,8 @@ class RegionData extends BaseData {
                 return Promise.resolve(dbModel);
             }).then((dbModel) => {
                 delete dbModel.regionId;
-                return this.collection.update({ _id: resultRegion._id }, { $set: dbModel });
+                return this.collection.update(
+                    { _id: resultRegion._id }, { $set: dbModel });
             }).then((updatedRegion) => {
                 return Promise.resolve(resultRegion._id);
             });

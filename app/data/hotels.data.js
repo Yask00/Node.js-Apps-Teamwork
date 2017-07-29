@@ -34,7 +34,8 @@ class HotelData extends BaseData {
                 'likes': { likes: body },
             };
             const params = collections[collection];
-            return this.collection.update({ _id: new ObjectID(body.hotelId) }, { $push: params });
+            return this.collection.update(
+                { _id: new ObjectID(body.hotelId) }, { $push: params });
         }
         return Promise.reject('Добавянето е неуспешно!');
     }
