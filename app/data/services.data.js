@@ -1,6 +1,6 @@
 const BaseData = require('./base/base');
 const Static = require('../models/static');
-// const { ObjectID } = require('mongodb');
+const { ObjectID } = require('mongodb');
 
 class ServiceData extends BaseData {
     constructor(db, Model, validator) {
@@ -12,23 +12,8 @@ class ServiceData extends BaseData {
     }
 
     update(id, body) {
-        if (Static.isValid(body, this.validator)) {
-            return this.getById(id)
-                .then((resultService) => {
-                    if (resultService) {
-                        return this.collection.update(
-                            { _id: resultService._id }, {
-                                $set: {
-                                    description: body.description,
-                                    imageURL: body.imageURL,
-                                    hotelId: body.id,
-                                    price: body.price,
-                                },
-                        });
-                    }
-                });
-        }
-        return Promise.reject('Редактирането е неуспешно!');
+        const dbModel = this.getDbModel(body);
+        return this.collection.update({ _id: new ObjectID(id) }, { $set: dbModel });
     }
 }
 

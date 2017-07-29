@@ -12,14 +12,14 @@ class RegionData extends BaseData {
     }
 
     removeFromCollection(body) {
-        return this.collection.update({}, {
+        return this.collection.update({ _id: new ObjectID(body.regionId) }, {
             $pull: { hotels: { _id: body._id } },
         });
     }
 
     updateCollection(body) {
         const dbModel = this.getDbModel(body);
-        this.removeFromCollection(dbModel)
+        return this.removeFromCollection(dbModel)
             .then(() => {
                 return this.addToCollection(dbModel);
             });
@@ -32,22 +32,9 @@ class RegionData extends BaseData {
         return Promise.reject('Добавянето е неуспешно!');
     }
 
-    update(body) {
-        let resultRegion;
-        return this.getById(body.regionId)
-            .then((result) => {
-                if (!result) {
-                    return Promise.reject('Редактирането е неуспешно!');
-                }
-                resultRegion = result;
-                const dbModel = this.getDbModel(body);
-                return Promise.resolve(dbModel);
-            }).then((dbModel) => {
-                delete dbModel.regionId;
-                return this.collection.update({ _id: resultRegion._id }, { $set: dbModel });
-            }).then((updatedRegion) => {
-                return Promise.resolve(resultRegion._id);
-            });
+    update(id, body) {
+        const dbModel = this.getDbModel(body);
+        return this.collection.update({ _id: new ObjectID(id) }, { $set: dbModel });
     }
 }
 

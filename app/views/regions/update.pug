@@ -2,16 +2,23 @@ extend ../admin/panel
 
 block addoredit
     if (message && message.length > 0)
-        div.flash-message-red
+        div.flash-message-green
             | #{message}
+    if (error && error.length > 0)
+        div.flash-message-red
+            | #{error}
+
     h2 Редактирай регион
-    form.form-horizontal(method="POST", action="/regions")
+    form.form-horizontal(id="update-form" method="GET", action="")
+        .form-group
+            label.col-sm-3.control-label(for='regionId') Изберете регион
+                select.form-control(name='regionId' id='regionId')
+                    each region in regions
+                        option.form-control(value=region._id) #{region.name}
         .form-group
             label.col-sm-3.control-label(for='imageURL') Изображение
             .col-sm-9
-                input.form-control(type='text' name='imageURL' id='imageURL' placeholder='Адрес на изображението' required)
-                input(type="text" id="regionId" name="regionId" value=regionId class="hidden")
-                input(type="text" name="_method" value="PUT" class="hidden")
+                input.form-control(type='text' name='imageURL' id='imageURL' placeholder='Адрес на изображението')
         .form-group
             label.col-sm-3.control-label(for='description') Кратко описание
             .col-sm-9
@@ -19,3 +26,6 @@ block addoredit
         .form-group
             .col-sm-offset-3.col-sm-9
                 input.btn.btn-primary(type='submit', value='Промени')
+    block scripts
+        script(src='/public/js/requester.js')
+        script(src='/public/js/region.js')

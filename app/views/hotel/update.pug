@@ -1,0 +1,48 @@
+extend ../admin/panel
+
+block addoredit
+    if (message && message.length > 0)
+        div.flash-message-green
+            | #{message}
+    if (error && error.length > 0)
+        div.flash-message-red
+            | #{error}
+
+    h2 Редактирай хотел
+    form.form-horizontal(id="hotel-update-form" action='' method="GET")
+        .form-group
+            label.col-sm-3.control-label(for='hotelId') Изберете хотел
+                select.form-control(name='hotelId' id='hotelId')
+                    each hotel in hotels
+                        option.form-control(value=hotel._id) #{hotel.name}
+        .form-group
+            label.col-sm-3.control-label(for="name")
+                | Ново име на хотела
+            .col-sm-9
+                input.form-control(type="text" id="name" name="name" )
+                p.form-text.text-muted
+                    | Името се състои само от букви, цифри, интервали, тире и запетая
+        .form-group
+            label.col-sm-3.control-label(for="phone")
+                | Телефон
+            .col-sm-9
+                input.form-control(type="text" id="phone" name="phone" )
+        .form-group
+            label.col-sm-3.control-label(for='imageURL')
+                | Изображение
+            .col-sm-9
+                input.form-control(type='text' name='imageURL' id='imageURL')
+                p.form-text.text-muted
+                    | Въведете валиден URL адрес
+        .form-group
+            label.col-sm-3.control-label(for='description') 
+                | Кратко описание
+            .col-sm-9
+                textarea.form-control(name='description' id='description' )
+        .form-group
+            .col-sm-offset-3.col-sm-9
+                input.btn.btn-success(type='submit', value='Редактирай')
+
+    block scripts
+        script(src='/public/js/requester.js')
+        script(src='/public/js/hotel.js')

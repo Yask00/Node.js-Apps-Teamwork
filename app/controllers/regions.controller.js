@@ -34,78 +34,56 @@ class RegionsController {
                 res.render('regions/review', {
                     region: dbRegion,
                     user: req.user,
-                }))
-            .catch((err) => {
+                })).catch((err) => {
                 res.render('user/error', { error: err });
             });
     }
 
-    getChooseForm(req, res) {
+    getUpdateForm(req, res) {
         this.data.regions.getAll()
             .then((regions) =>
-                res.render('admin/region', {
-                    regions: regions,
+                res.render('regions/update', {
+                    message: req.flash('Region success'),
+                    error: req.flash('Region error'),
                     user: req.user,
-                }))
-            .catch((err) => {
-                res.render('user/error', { error: err });
-            });
+                    regions,
+                }));
     }
 
     getCreateForm(req, res) {
         return res.render('regions/form', {
+            message: req.flash('Region success'),
+            error: req.flash('Region error'),
             user: req.user,
-        });
-    }
-
-    getUpdateForm(req, res) {
-        return res.render('regions/update', {
-            user: req.user,
-            regionId: req.params.id,
         });
     }
 
     createRegion(req, res) {
         this.data.regions.create(req.body)
-            .then(() => {
-                res.redirect('./profile');
-                // req.flash('Region created',
-                //     `Регион ${dbRegion.ops[0].name} е успешно създаден`);
-                // res.render('regions/details', {
-                //     message: req.flash('Region created'),
-                //     user: req.user,
-                //     region: dbRegion.ops[0],
-                // });
+            .then((result) => {
+                const dbRegion = result.ops[0];
+                req.flash('Region success',
+                    `Регион ${dbRegion.name} e успешно добавен`);
+                return this.getCreateForm(req, res);
             }).catch((err) => {
-                req.flash('Failed creation',
+                req.flash('Region error',
                     'Записът e неуспешен поради невалидни данни!');
-                res.render('regions/form', {
-                    message: req.flash('Failed creation'),
-                    user: req.user,
-                });
+                return this.getCreateForm(req, res);
             });
     }
 
     update(req, res) {
-        return this.data.regions.update(req.body)
-            .then((id) => {
-                return this.data.regions.getById(id);
-            }).then((dbRegion) => {
+        return this.data.regions.update(req.params.id, req.body)
+            .then(() => {
+                return this.data.hotels.getById(req.params.id);
+            }).then((region) => {
                 req.flash('Region success',
-                    `Регион ${dbRegion.name} e успешно променен`);
-                res.render('regions/details', {
-                    message: req.flash('Region success'),
-                    region: dbRegion,
-                    user: req.user,
-                });
+                    `Регион ${region.name} e успешно променен`);
+                return this.getUpdateForm(req, res);
             }).catch((err) => {
-                req.flash(
-                    'Invalid data', 'Неуспешен запис: невалидни данни!');
-                res.render('regions/update', {
-                    user: req.user,
-                    regionId: req.body.regionId,
-                    message: req.flash('Invalid data'),
-                });
+                req.flash('Region error',
+                    'Неуспешен запис: невалидни данни!');
+                return this.getUpdateForm(req, res);
             });
     }
 }

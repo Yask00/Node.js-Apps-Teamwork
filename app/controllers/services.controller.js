@@ -10,10 +10,7 @@ class ServicesController {
                     context: services,
                     user: req.user,
                 });
-            })
-            .catch((err) => {
-                res.render('user/error', { error: err });
-            });
+            }).catch((err) => res.render('user/error', { error: err }));
     }
 
     getDetails(req, res) {
@@ -22,65 +19,64 @@ class ServicesController {
                 res.render('service/details', {
                     service: dbService,
                     user: req.user,
-                })).catch((err) => {
-                    res.render('user/error', { error: err });
-                });
+                })).catch((err) => res.render('user/error', { error: err }));
     }
 
     getCreateForm(req, res) {
-        return res.render('service/form', {
-            user: req.user,
-        });
-    }
-
-    getUpdateForm(req, res) {
-        return res.render('service/updateform', {
-            user: req.user,
-            serviceId: req.params.id,
-        });
-    }
-
-    update(req, res) {
-        console.log(req.body);
-        this.data.services.update(req.body.id, req.body)
-            .then(() => {
-                this.data.services.getById(req.body.id)
-                    .then((dbService) => {
-                        req.flash('Service updated succesfuly',
-                            `Услугата успешно променена`);
-                        res.render('service/details', {
-                            message: req.flash('Service updated succesfuly'),
-                            service: dbService,
-                        });
-                    });
-            }).catch((err) => {
-                req.flash(
-                    'Invalid data', 'Неуспешен запис: невалидни данни!');
-                res.render('service/updateform', {
+        this.data.hotels.getAll()
+            .then((hotels) => {
+                return res.render('service/form', {
+                    message: req.flash('Service success'),
+                    error: req.flash('Service error'),
                     user: req.user,
-                    serviceId: req.body.id,
-                    message: req.flash('Invalid data'),
+                    hotels,
                 });
             });
     }
 
-    createService(req, res) {
-        console.log(req.body);
-        this.data.services.create(req.body)
-            .then((dbService) => {
-                req.flash('Service created succesfuly',
-                    `Услугата e успешно създаденa`);
-                res.render('service/details', {
-                    message: req.flash('Service created succesfuly'),
-                    service: req.body,
-                });
-            }).catch((err) => {
-                req.flash('Failed creation',
-                    'Записът e неуспешен поради невалидни данни!');
-                res.render('service/form', {
-                    message: req.flash('Failed creation'),
+    getUpdateForm(req, res) {
+        this.data.services.getAll()
+            .then((services) =>
+                res.render('service/update', {
+                    message: req.flash('Service success'),
+                    error: req.flash('Service error'),
                     user: req.user,
-                });
+                    services,
+                }));
+    }
+
+    createService(req, res) {
+        return this.data.services.create(req.body)
+            .then((result) => {
+                const dbService = result.ops[0];
+                this.data.hotels.addToCollection(dbService, 'services');
+                req.flash('Service success',
+                    `Услуга ${dbService.serviceType} e успешно добавена`);
+                return this.getCreateForm(req, res);
+            }).catch((err) => {
+                req.flash('Service error',
+                    'Записът неуспешен поради невалидни данни!');
+                return this.getCreateForm(req, res);
+            });
+    }
+
+    update(req, res) {
+        let dbService;
+        return this.data.services.update(req.params.id, req.body)
+            .then(() => {
+                return this.data.services.getById(req.params.id);
+            }).then((service) => {
+                dbService = service;
+                return this.data.hotels.updateCollection(dbService, 'services');
+            }).then(() => {
+                req.flash('Service success',
+                    `Услуга ${dbService.serviceType} e успешно промененa`);
+                return this.getUpdateForm(req, res);
+            }).catch((err) => {
+                console.log(err);
+                req.flash(
+                    'Service error', 'Неуспешен запис: невалидни данни!');
+                return this.getUpdateForm(req, res);
             });
     }
 }

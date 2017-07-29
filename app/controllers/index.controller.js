@@ -4,15 +4,15 @@ class IndexController {
     }
 
     getIndexPage(req, res) {
-                res.render('home/index', {
-                    user: req.user,
-                });
+        res.render('home/index', {
+            user: req.user,
+        });
     }
 
     getAdminPanel(req, res) {
         return res.render('admin/panel', {
-                    user: req.user,
-                });
+            user: req.user,
+        });
     }
 }
 

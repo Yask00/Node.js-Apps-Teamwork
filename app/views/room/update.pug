@@ -2,59 +2,58 @@ extend ../admin/panel
 
 block addoredit
     if (message && message.length > 0)
-        div.flash-message-red
+        div.flash-message-green
             | #{message}
-    form(id="register-form" class="form-vertical" action='/rooms' method="POST")
-        fieldset
-            div(id="legend")
-                legend
-                    | Update room
-
-            div(class="control-group")
-                label(class="control-label" for="roomType")
-                    | Room Type
-                div(class="controls")
-                    input(type="text" id="roomType" name="roomType" placeholder="" class="input-xlarge")
-                    input(type="text" id="roomId" name="roomId" value=roomId class="hidden")
-                    input(type="text" name="_method" value="PUT" class="hidden")
-                    p(class="help-block")
-                        | Enter one, two, three or four
-                        
-            div(class="control-group")
-                label(class="control-label" for="imageURL")
-                    | Image
-                div(class="controls")
-                    input(type="text" id="imageURL" name="imageURL" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Please enter valid image URL
-
-            div(class="control-group")
-                label(class="control-label" for="description")
-                    | Description
-                div(class="controls")
-                    input(type="text" id="description" name="description" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Enter room description
-
-            div(class="control-group")
-                label(class="control-label" for="price")
-                    | Price
-                div(class="controls")
-                    input(type="text" id="price" name="price" placeholder="" class="input-xlarge")
-                    p(class="help-block")
-                        | Please enter room price
-
-            div(class="control-group")
-                label(class="control-label" for="roomStatus")
-                    | Room Status
-                div(class="controls")
-                    select(id="roomStatus" name="roomStatus" class="input-xlarge")
-                        option(value=free) free
-                        option(value=booked) booked
-                    p(class="help-block")
-                        | Choose one
-
-            div(class="control-group")
-                div(class="controls")
-                    button(class="btn btn-success")
-                        | Edit room
+    if (error && error.length > 0)
+        div.flash-message-red
+            | #{error}
+    h2 Промени стая
+    form.form-horizontal(id="update-form" action='' method="GET")
+        .form-group
+            label.col-sm-3.control-label(for="roomId")
+                | Стая
+            .col-sm-9
+                select.form-control(id="roomId" name="roomId")
+                    each room in rooms
+                        option(value=room._id) #{room.roomType} #{room.price}
+                p.form-text.text-muted
+                    | Изберете стая за редактиране
+        .form-group
+            label.col-sm-3.control-label(for="roomType")
+                | Тип стая
+            .col-sm-9
+                input.form-control(type="text" id="roomType" name="roomType")
+                p.form-text.text-muted
+                    | Брой легла - единична, двойна, тройка или четворка
+        .form-group
+            label.col-sm-3.control-label(for='imageURL')
+                | Изображение
+            .col-sm-9
+                input.form-control(type='text' name='imageURL' id='imageURL' placeholder="Адрес на изображението")
+                p.form-text.text-muted
+                    | Въведете валиден URL адрес
+        .form-group
+            label.col-sm-3.control-label(for='description') 
+                | Кратко описание
+            .col-sm-9
+                textarea.form-control(name='description' id='description' placeholder="Описание")
+        .form-group
+            label.col-sm-3.control-label(for="price")
+                | Цена за нощувка
+            .col-sm-9
+                input.form-control(type="text" id="price" name="price" placeholder="30,50")
+        .form-group
+            label.col-sm-3.control-label(for="roomStatus")
+                | Статус
+            .col-sm-9
+                select.form-control(id="roomStatus" name="roomStatus")
+                    option(value=free) free
+                    option(value=booked) booked
+                p.form-text.text-muted
+                    | Свободна или заета
+        .form-group
+            .col-sm-offset-3.col-sm-3
+                input.btn.btn-primary(type='submit', value='Промени')
+    block scripts
+        script(src='/public/js/requester.js')
+        script(src='/public/js/room.js')

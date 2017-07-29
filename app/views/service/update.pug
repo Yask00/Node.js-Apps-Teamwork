@@ -7,17 +7,17 @@ block addoredit
     if (error && error.length > 0)
         div.flash-message-red
             | #{error}
-    h2 Добави нова услуга
-    form.form-horizontal(method="POST", action="/services")
+    h2 Редактиране на услуга
+    form.form-horizontal(id="update-form" method="GET", action="")
         .form-group
-            label.col-sm-3.control-label(for="hotelId")
-                | Хотел
+            label.col-sm-3.control-label(for="serviceId")
+                | Услуга за промяна
             .col-sm-9
-                select.form-control(id="hotelId" name="hotelId")
-                    each hotel in hotels
-                        option(value=hotel._id) #{hotel.name}
+                select.form-control(id="serviceId" name="serviceId")
+                    each service in services
+                        option(value=service._id) #{service.serviceType}
                 p.form-text.text-muted
-                    | Изберете хотел
+                    | Изберете услуга за редактиране
         .form-group
             label.col-sm-3.control-label(for="serviceType")
                 | Вид услуга
@@ -39,16 +39,19 @@ block addoredit
         .form-group
             label.col-sm-3.control-label(for='imageURL') Изображение
             .col-sm-9
-                input.form-control(type='text' name='imageURL' id='imageURL' placeholder='Адрес на изображението' required)
+                input.form-control(type='text' name='imageURL' id='imageURL' placeholder='Адрес на изображението')
         .form-group
             label.col-sm-3.control-label(for='description') 
                 | Кратко описание
             .col-sm-9
-                textarea.form-control(name='description' id='description' placeholder="Описание" required)
+                textarea.form-control(name='description' id='description' placeholder="Описание")
         .form-group
             label.col-sm-3.control-label(for='price') Цена на услугата
             .col-sm-9
                 input.form-control(type='text' name='price' id='price' placeholder='Цена')
         .form-group
             .col-sm-offset-3.col-sm-3
-                input.btn.btn-primary(type='submit', value='Добави')
+                input.btn.btn-primary(type='submit', value='Промени')
+    block scripts
+        script(src='/public/js/requester.js')
+        script(src='/public/js/service.js')

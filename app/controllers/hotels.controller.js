@@ -43,110 +43,41 @@ class HotelsController {
         this.data.regions.getAll()
             .then((regions) => {
                 return res.render('hotel/form', {
+                    message: req.flash('Hotel success'),
+                    error: req.flash('Hotel error'),
                     user: req.user,
                     regions,
                 });
             });
     }
 
-    getAddForm(req, res) {
-        return res.render('hotel/addform', {
-            user: req.user,
-            hotelId: req.params.id,
-        });
-    }
-
     getUpdateForm(req, res) {
-        // return res.render('hotel/updateform', {
-        //     user: req.user,
-        //     hotelId: req.params.id,
-        // });
-        const hotelId = req.params.id;
-        this.data.hotels.getById(hotelId)
-            .then((hotel) => {
-                return res.render('hotel/updateform', {
+        this.data.hotels.getAll()
+            .then((hotels) =>
+                res.render('hotel/update', {
+                    message: req.flash('Hotel success'),
+                    error: req.flash('Hotel error'),
                     user: req.user,
-                    hotelId: hotelId,
-                    hotel: hotel,
-                });
-            });
+                    hotels,
+                }));
     }
-
-    // update(req, res) {
-    //     let dbHotel;
-    //     return this.data.hotels.update(req.body)
-    //         .then((id) => {
-    //             return this.data.hotels.getById(id);
-    //         }).then((hotel) => {
-    //             dbHotel = hotel;
-    //             return this.data.regions.updateCollection(dbHotel);
-    //         }).then(() => {
-    //             req.flash('Hotel updated succesfuly',
-    //                 `Хотелът e успешно променен`);
-    //             res.render('hotel/details', {
-    //                 message: req.flash('Hotel updated succesfuly'),
-    //                 hotel: dbHotel,
-    //                 user: req.user,
-    //             });
-    //         }).catch((err) => {
-    //             req.flash(
-    //                 'Invalid data', 'Неуспешен запис: невалидни данни!');
-    //             res.render('hotel/updateform', {
-    //                 user: req.user,
-    //                 hotelId: req.body.id,
-    //                 message: req.flash('Invalid data'),
-    //             });
-    //         });
-    // }
 
     update(req, res) {
         let dbHotel;
-        this.data.hotels.update(req.body)
+        return this.data.hotels.update(req.params.id, req.body)
             .then(() => {
-                return this.data.hotels.getById(req.body.id);
-            })
-            .then((hotel) => {
+                return this.data.hotels.getById(req.params.id);
+            }).then((hotel) => {
                 dbHotel = hotel;
                 return this.data.regions.updateCollection(dbHotel);
-            })
-            .then(() => {
-                req.flash('Hotel updated succesfuly',
-                    `Хотелът e успешно променен!`);
-                res.render('hotel/details', {
-                    message: req.flash('Hotel updated succesfuly'),
-                    hotel: dbHotel,
-                    user: req.user,
-                });
-            })
-            .catch((err) => {
-                req.flash(
-                    'Invalid data', 'Неуспешен запис: невалидни данни!');
-                this.data.hotels.getById(req.body.id)
-                    .then((hotel) => {
-                        return res.render('hotel/updateform', {
-                            user: req.user,
-                            hotelId: req.body.id,
-                            hotel: hotel,
-                            message: req.flash('Invalid data'),
-                        });
-                    });
-            });
-    }
-
-    add(req, res) {
-        this.data.hotels.addToCollection(req.body)
-            .then(() => {
-                return this.data.hotels.getById(req.body.hotelId);
-            }).then((dbHotel) => {
-                res.render('hotel/gallery', { hotel: dbHotel });
+            }).then(() => {
+                req.flash('Hotel success',
+                    `Хотелът ${dbHotel.name} e успешно променен!`);
+                return this.getUpdateForm(req, res);
             }).catch((err) => {
                 req.flash(
-                    'Add failed', 'Неуспешен запис: невалидни данни!');
-                res.render('hotel/addform', {
-                    user: req.user,
-                    hotelId: req.body.hotelId,
-                    message: req.flash('Add failed'),
-                });
+                    'Hotel error', 'Неуспешен запис: невалидни данни!');
+                return this.getUpdateForm(req, res);
             });
     }
 
@@ -158,22 +89,16 @@ class HotelsController {
                 body.region = dbRegion.name;
             }).then(() => {
                 return this.data.hotels.create(body);
-            }).then((dbHotel) => {
-                this.data.regions.addToCollection(dbHotel.ops[0]);
-                res.redirect('./profile');
-                // req.flash('Hotel created succesfuly',
-                //     `Хотел ${dbHotel.ops[0].name} е успешно създаден`);
-                // res.render('hotel/details', {
-                //     message: req.flash('Hotel created succesfuly'),
-                //     hotel: dbHotel.ops[0],
-                // });
+            }).then((hotel) => {
+                const dbHotel = hotel.ops[0];
+                this.data.regions.addToCollection(dbHotel);
+                req.flash('Hotel success',
+                    `Хотел ${dbHotel.name} e успешно добавен`);
+                return this.getCreateForm(req, res);
             }).catch((err) => {
-                req.flash('Failed creation',
+                req.flash('Hotel error',
                     'Записът e неуспешен поради невалидни данни!');
-                res.render('hotel/form', {
-                    message: req.flash('Failed creation'),
-                    user: req.user,
-                });
+                return this.getCreateForm(req, res);
             });
     }
 }

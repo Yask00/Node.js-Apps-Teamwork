@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { checker } = require('../utils/authCheck');
 
 
 const attachTo = (app, data) => {
@@ -10,22 +11,27 @@ const attachTo = (app, data) => {
             return controller.getAllRooms(req, res);
         })
         .get('/rooms', (req, res) => {
-            return controller.getCreateForm(req, res);
+            if (checker.checkAll(req, res)) {
+                return controller.getCreateForm(req, res);
+            }
         })
         .get('/rooms/:id/details', (req, res) => {
             return controller.getRoomDetails(req, res);
         })
-        .get('/rooms/:id', (req, res) => {
-            return controller.getUpdateForm(req, res);
+        .get('/rooms/update', (req, res) => {
+            if (checker.checkAll(req, res)) {
+                return controller.getUpdateForm(req, res);
+            }
         })
         .post('/rooms', (req, res) => {
-            if (req.body._method) {
+            if (checker.checkAll(req, res)) {
+                return controller.createRoom(req, res);
+            }
+        })
+        .put('/rooms/:id', (req, res) => {
+            if (checker.checkAll(req, res)) {
                 return controller.update(req, res);
             }
-            return controller.createRoom(req, res);
-        })
-        .put('/rooms', (req, res) => {
-            return controller.update(req, res);
         });
 
     app.use(router);

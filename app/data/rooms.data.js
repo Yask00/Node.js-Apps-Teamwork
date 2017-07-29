@@ -1,4 +1,5 @@
 const BaseData = require('./base/base');
+const { ObjectID } = require('mongodb');
 
 class RoomsData extends BaseData {
     constructor(db, Model, validator) {
@@ -9,22 +10,9 @@ class RoomsData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
-    update(body) {
-        let resultRoom;
-        return this.getById(body.roomId)
-            .then((result) => {
-                if (!result) {
-                    return Promise.reject('Редактирането е неуспешно!');
-                }
-                resultRoom = result;
-                const dbModel = this.getDbModel(body);
-                return Promise.resolve(dbModel);
-            }).then((dbModel) => {
-                delete dbModel.roomId;
-                return this.collection.update({ _id: resultRoom._id }, { $set: dbModel });
-            }).then(() => {
-                return Promise.resolve(resultRoom._id);
-            });
+    update(id, body) {
+        const dbModel = this.getDbModel(body);
+        return this.collection.update({ _id: new ObjectID(id) }, { $set: dbModel });
     }
 }
 

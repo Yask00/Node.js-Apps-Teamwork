@@ -11,15 +11,23 @@ class HotelData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
-    removeFromCollection(body) {
-        return this.collection.update({}, {
-            $pull: { rooms: { _id: body._id } },
+    removeFromCollection(body, collection) {
+        //const id = body._id;
+        const collections = {
+            'rooms': { rooms: { _id: body._id } },
+            'services': { services: { _id: body._id } },
+            'comments': { comments: { _id: body._id } },
+            'likes': { likes: { _id: body._id } },
+        };
+        const params = collections[collection];
+        return this.collection.update({ _id: new ObjectID(body.hotelId) }, {
+            $pull: params,
         });
     }
 
     updateCollection(body, collection) {
         const dbModel = this.getDbModel(body);
-        return this.removeFromCollection(dbModel)
+        return this.removeFromCollection(dbModel, collection)
             .then(() => {
                 return this.addToCollection(dbModel, collection);
             });
@@ -39,34 +47,9 @@ class HotelData extends BaseData {
         return Promise.reject('Добавянето е неуспешно!');
     }
 
-    update(body) {
-        // let resultHotel;
-        // return this.getById(body.hotelId)
-        //     .then((result) => {
-        //         if (!result) {
-        //             return Promise.reject('Редактирането е неуспешно!');
-        //         }
-        //         resultHotel = result;
-        //         const dbModel = this.getDbModel(body);
-        //         return Promise.resolve(dbModel);
-        //     }).then((dbModel) => {
-        //         delete dbModel.hotelId;
-        //         return this.collection.update(
-        //            { _id: resultHotel._id }, { $set: dbModel });
-        //     }).then(() => {
-        //         return Promise.resolve(resultHotel._id);
-        //     });
-        let resultHotel;
-        return this.getById(body.id)
-            .then((result) => {
-                resultHotel = result;
-                const dbModel = this.getDbModel(body);
-                return Promise.resolve(dbModel);
-            }).then((dbModel) => {
-                return this.collection.update(
-                    { _id: resultHotel._id },
-                    { $set: dbModel });
-            });
+    update(id, body) {
+        const dbModel = this.getDbModel(body);
+        return this.collection.update({ _id: new ObjectID(id) }, { $set: dbModel });
     }
 }
 

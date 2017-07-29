@@ -24,7 +24,7 @@ const init = (data, config, db) => {
         secret: config.secret,
         resave: true,
         saveUninitialized: true,
-        cookie: { httpOnly: true, maxAge: 600000 },
+        cookie: { httpOnly: true, maxAge: 60000000 },
     }));
     app.use(flash());
 
