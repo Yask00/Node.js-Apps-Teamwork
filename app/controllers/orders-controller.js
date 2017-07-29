@@ -58,15 +58,19 @@ class OrdersController {
     }
 
     removeOrder(req, res) {
-            this.data.orders.remove(req.params.id)
-            .then((removedOrder) =>
-                res.render('order/removed', {
+        this.data.orders.remove(req.params.id)
+            .then((removedOrder) => {
+                req.flash('Order removed succesfuly',
+                    `Тази поръчка беше успешно премахната!`);
+                res.render('home/index', {
                     user: req.user,
                     order: removedOrder,
-                }))
-           .catch((err) => {
-                    res.render('user/error', { error: err });
+                    message: req.flash('Order removed succesfuly'),
                 });
+            })
+            .catch((err) => {
+                res.render('user/error', { error: err });
+            });
     }
 }
 

@@ -262,7 +262,7 @@ html {
 }
 
 .flash-message-red {
-    background-color: red;
+    background-color: orange;
     border: 1px solid black;
     border-radius: 5px;
     margin: 20px auto;
@@ -277,7 +277,7 @@ html {
 }
 
 .flash-message-green {
-    background-color: green;
+    background-color: orange;
     border: 1px solid black;
     border-radius: 5px;
     margin: 20px auto;
@@ -496,14 +496,14 @@ html {
 .redbtn {
     background-color: red;
     color: white;
+    width:100%;
+    font-size: 18px;
 }
 
 .greenbtn {
     background-color: green;
     color: white;
+    width:100%;
+    font-size: 18px;
 }
 
-.greenbtn:hover {
-    background-color: green;
-    color: black;
-}

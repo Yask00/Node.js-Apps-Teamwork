@@ -15,11 +15,12 @@ mixin navigation
                         a(href="/allhotels") Хотели
                     li
                         a(href="/allregions") Региони
-                    if user
+                    if user && user.role !== 'admin'
                         li
                             a(href="/orders") Резервирай стая/услуга
                         //- li
                         //-     a(href="/regions/orderservice") Резервирай забавление
+                    if user && user.role === 'admin'
                         li
                             a(href="/admin/panel") Админ Панел
                         //- li

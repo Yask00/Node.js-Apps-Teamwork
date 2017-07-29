@@ -13,15 +13,42 @@ block body
                     div(class="controls")
                         input.form-control(id="id" name="id" value="#{order._id}" class="hidden" placeholder="" class="input-xlarge")
 
-                h2 Id: #{order._id}
-                h2 Цена: #{order.price}
-                h2 Хотел: #{order.hotel}
-                h2 Стая: #{order.room}
-                h2 Плащане тип: #{order.paymentType}
-                h2 Услуги #{order.serviceType}
-                h2 Потребител #{order.username}
+
+                div(class="control-group")
+                    label(class="control-label" for="price")
+                        | Цена
+                    div(class="controls")
+                        input.form-control(id="price" name="price" value=order.price placeholder="" class="input-xlarge" disabled/)
                 
-               
+                div(class="control-group")
+                    label(class="control-label" for="hotel")
+                        | Хотел
+                    div(class="controls")
+                        input.form-control(id="hotel" name="hotel" value=order.hotel placeholder="" class="input-xlarge" disabled/)
+                
+                div(class="control-group")
+                    label(class="control-label" for="room")
+                        | Стая
+                    div(class="controls")
+                        input.form-control(id="room" name="room" value=order.room placeholder="" class="input-xlarge" disabled/)
+                
+                div(class="control-group")
+                    label(class="control-label" for="paymentType")
+                        | Плащане тип:
+                    div(class="controls")
+                        input.form-control(id="paymentType" name="paymentType" value=order.paymentType placeholder="" class="input-xlarge" disabled/)
+                
+                div(class="control-group")
+                    label(class="control-label" for="serviceType")
+                        | Услуги:
+                    div(class="controls")
+                        input.form-control(id="serviceType" name="serviceType" value=order.serviceType placeholder="" class="input-xlarge" disabled/)
+                
+                div(class="control-group")
+                    label(class="control-label" for="username")
+                        | Потребител:
+                    div(class="controls")
+                        input.form-control(id="username" name="username" value=order.username placeholder="" class="input-xlarge" disabled/)
 
                 div(class="control-group")
                     div(class="controls")
