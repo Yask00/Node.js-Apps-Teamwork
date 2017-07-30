@@ -9,6 +9,9 @@
             imageURL: $('#imageURL').val(),
             description: $('#description').val(),
         }
+        if ($('#single')) {
+            options.data.single = true;
+        }
         requester.put(url, options).then((result) => {
             $('body').html(result);
         });

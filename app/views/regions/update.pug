@@ -10,11 +10,15 @@ block addoredit
 
     h2 Редактирай регион
     form.form-horizontal(id="update-form" method="GET", action="")
-        .form-group
-            label.col-sm-3.control-label(for='regionId') Изберете регион
-                select.form-control(name='regionId' id='regionId')
-                    each region in regions
-                        option.form-control(value=region._id) #{region.name}
+        if (regions)
+            .form-group
+                label.col-sm-3.control-label(for='regionId') Изберете регион
+                    select.form-control(name='regionId' id='regionId')
+                        each region in regions
+                            option.form-control(value=region._id) #{region.name}
+        else
+            input.form-control(type="text" id="regionId" name="regionId" value=regionId class="hidden")
+            input.form-control(type="text" id="single" name="single" value=true class="hidden")
         .form-group
             label.col-sm-3.control-label(for='imageURL') Изображение
             .col-sm-9

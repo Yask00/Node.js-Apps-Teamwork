@@ -4,7 +4,7 @@ class RegionsController {
     }
 
     getAll(req, res) {
-        this.data.regions.getAll({}, {})
+        return this.data.regions.getAll({}, {})
             .then((regions) => {
                 res.render('regions/all', {
                     context: regions,
@@ -17,7 +17,7 @@ class RegionsController {
     }
 
     getRegionDetails(req, res) {
-        this.data.regions.getById(req.params.id)
+        return this.data.regions.getById(req.params.id)
             .then((dbRegion) =>
                 res.render('regions/details', {
                     region: dbRegion,
@@ -29,7 +29,7 @@ class RegionsController {
     }
 
     getRegionReview(req, res) {
-        this.data.regions.getById(req.params.id)
+        return this.data.regions.getById(req.params.id)
             .then((dbRegion) =>
                 res.render('regions/review', {
                     region: dbRegion,
@@ -40,14 +40,22 @@ class RegionsController {
     }
 
     getUpdateForm(req, res) {
-        this.data.regions.getAll()
-            .then((regions) =>
-                res.render('regions/update', {
-                    message: req.flash('Region success'),
-                    error: req.flash('Region error'),
-                    user: req.user,
-                    regions,
-                }));
+        if (!req.single) {
+            return this.data.regions.getAll()
+                .then((regions) =>
+                    res.render('regions/update', {
+                        message: req.flash('Region success'),
+                        error: req.flash('Region error'),
+                        user: req.user,
+                        regions,
+                    }));
+        }
+        return res.render('regions/update', {
+            message: req.flash('Region success'),
+            error: req.flash('Region error'),
+            user: req.user,
+            regionId: req.params.id,
+        });
     }
 
     getCreateForm(req, res) {
@@ -59,7 +67,7 @@ class RegionsController {
     }
 
     createRegion(req, res) {
-        this.data.regions.create(req.body)
+        return this.data.regions.create(req.body)
             .then((result) => {
                 const dbRegion = result.ops[0];
                 req.flash('Region success',
@@ -73,16 +81,23 @@ class RegionsController {
     }
 
     update(req, res) {
+        const single = req.body.single;
         return this.data.regions.update(req.params.id, req.body)
             .then(() => {
                 return this.data.hotels.getById(req.params.id);
             }).then((region) => {
                 req.flash('Region success',
                     `Регион ${region.name} e успешно променен`);
+                if (single) {
+                    return this.getRegionDetails(req, res);
+                }
                 return this.getUpdateForm(req, res);
             }).catch((err) => {
                 req.flash('Region error',
                     'Неуспешен запис: невалидни данни!');
+                if (single) {
+                    return this.getRegionDetails(req, res);
+                }
                 return this.getUpdateForm(req, res);
             });
     }

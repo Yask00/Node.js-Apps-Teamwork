@@ -12,9 +12,9 @@ mixin navigation
             div(class="collapse navbar-collapse" id="myNavbar")
                 ul(class="nav navbar-nav")
                     li
-                        a(href="/allhotels") Хотели
+                        a(href="/hotels/all") Хотели
                     li
-                        a(href="/allregions") Региони
+                        a(href="/regions/all") Региони
                     if user && user.role !== 'admin'
                         li
                             a(href="/orders") Резервирай стая/услуга

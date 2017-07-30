@@ -85,7 +85,6 @@ class HotelsController {
                 req.flash('Hotel success',
                     `Хотелът ${dbHotel.name} e успешно променен!`);
                 if (single) {
-                    console.log(single);
                     return this.getHotelDetails(req, res);
                 }
                 return this.getUpdateForm(req, res);

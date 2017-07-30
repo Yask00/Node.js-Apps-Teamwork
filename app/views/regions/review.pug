@@ -6,7 +6,7 @@ block body
             div.flash-message-red
                 | #{message}
         h1.htitle=region.name
-        if user
+        if user && user.role === 'admin'
             a.btn.btn-default(href='/regions/' + region._id) Редактирай
             a.btn.btn-warning(href='/regions/' + region._id + '/delete') Изтрий
         if !region.hotels
@@ -17,7 +17,7 @@ block body
                     .hcard
                         header
                             h2
-                                a(href='/hotels/' + hotel.id + "/details")
+                                a(href='/hotels/' + hotel._id + "/details")
                                     =hotel.name                            
                         img.img-responsive(src=hotel.imageURL, alt=hotel.name)
                         .body
