@@ -10,7 +10,7 @@ const showError = (req, res) => {
 };
 
 const checker = {
-    checkAll(req, res, controller) {
+    checkAll(req, res) {
         if (!req.isAuthenticated()) {
             res.redirect(303, '/login');
             return false;
@@ -22,7 +22,7 @@ const checker = {
         return true;
     },
 
-    checkRole(req, res, controller) {
+    checkRole(req, res) {
         if (!auth.isInRole(req, 'admin')) {
             showError(req, res);
             return false;
@@ -30,7 +30,7 @@ const checker = {
         return true;
     },
 
-    checkAuth(req, res, controller) {
+    checkAuth(req, res) {
         if (!req.isAuthenticated()) {
             res.redirect(303, '/login');
             return false;

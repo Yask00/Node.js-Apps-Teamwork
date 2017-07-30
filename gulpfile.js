@@ -31,14 +31,14 @@ gulp.task('start', () => {
 // PRETESTS FOR ISTANBUL COVERAGE
 gulp.task('pre-test', () => {
     return gulp.src([
-        './app/data/**/*.js',
-        './app/controllers/*.js',
-        './app/models/*.js',
-        './app/routers/*.js',
-        './app./config/*.js',
-        './app./db/*.js',
-        './server.js',
-    ])
+            './app/data/**/*.js',
+            './app/controllers/*.js',
+            './app/models/*.js',
+            './app/routers/*.js',
+            './app./config/*.js',
+            './app./db/*.js',
+            './server.js',
+        ])
         .pipe(istanbul({
             includeUntested: true,
         }))
@@ -48,9 +48,9 @@ gulp.task('pre-test', () => {
 // UNIT TESTING
 gulp.task('tests:unit', ['pre-test'], () => {
     return gulp.src([
-        './tests/unit/**/*.js',
-        './tests/integration/**/*.js',
-    ])
+            './tests/unit/**/*.js',
+            './tests/integration/**/*.js',
+        ])
         .pipe(mocha({
             reporter: 'spec',
         }))

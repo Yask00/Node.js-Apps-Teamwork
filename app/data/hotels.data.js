@@ -12,7 +12,6 @@ class HotelData extends BaseData {
     }
 
     removeFromCollection(body, collection) {
-        //const id = body._id;
         const collections = {
             'rooms': { rooms: { _id: body._id } },
             'services': { services: { _id: body._id } },
@@ -42,8 +41,7 @@ class HotelData extends BaseData {
                 'likes': { likes: body },
             };
             const params = collections[collection];
-            return this.collection.update(
-                { _id: new ObjectID(body.hotelId) }, { $push: params });
+            return this.collection.update({ _id: new ObjectID(body.hotelId) }, { $push: params });
         }
         return Promise.reject('Добавянето е неуспешно!');
     }

@@ -10,11 +10,15 @@ block addoredit
 
     h2 Редактирай хотел
     form.form-horizontal(id="hotel-update-form" action='' method="GET")
-        .form-group
-            label.col-sm-3.control-label(for='hotelId') Изберете хотел
-                select.form-control(name='hotelId' id='hotelId')
-                    each hotel in hotels
-                        option.form-control(value=hotel._id) #{hotel.name}
+        if (hotels)
+            .form-group
+                label.col-sm-3.control-label(for='hotelId') Изберете хотел
+                    select.form-control(name='hotelId' id='hotelId')
+                        each hotel in hotels
+                            option.form-control(value=hotel._id) #{hotel.name}
+        else
+            input.form-control(type="text" id="hotelId" name="hotelId" value=hotelId class="hidden")
+            input.form-control(type="text" id="single" name="single" value=true class="hidden")
         .form-group
             label.col-sm-3.control-label(for="name")
                 | Ново име на хотела

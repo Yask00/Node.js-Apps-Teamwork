@@ -4,6 +4,9 @@ block body
     if (message && message.length > 0)
         .flash-message-green
             | #{message}
+    if (error && error.length > 0)
+        div.flash-message-red
+            | #{error}
     h1=hotel.name
     .container
         .row

@@ -4,7 +4,7 @@ class HotelsController {
     }
 
     getAll(req, res) {
-        this.data.hotels.getAll()
+        return this.data.hotels.getAll()
             .then((hotels) => {
                 res.render('hotel/all', {
                     context: hotels,
@@ -17,9 +17,11 @@ class HotelsController {
     }
 
     getHotelDetails(req, res) {
-        this.data.hotels.getById(req.params.id)
+        return this.data.hotels.getById(req.params.id)
             .then((dbHotel) =>
                 res.render('hotel/details', {
+                    message: req.flash('Hotel success'),
+                    error: req.flash('Hotel error'),
                     hotel: dbHotel,
                     comments: dbHotel.comments,
                     user: req.user,
@@ -30,7 +32,7 @@ class HotelsController {
     }
 
     getHotelGallery(req, res) {
-        this.data.hotels.getById(req.params.id)
+        return this.data.hotels.getById(req.params.id)
             .then((dbHotel) => {
                 res.render('hotel/gallery', { hotel: dbHotel });
             })
@@ -40,7 +42,7 @@ class HotelsController {
     }
 
     getCreateForm(req, res) {
-        this.data.regions.getAll()
+        return this.data.regions.getAll()
             .then((regions) => {
                 return res.render('hotel/form', {
                     message: req.flash('Hotel success'),
@@ -52,17 +54,26 @@ class HotelsController {
     }
 
     getUpdateForm(req, res) {
-        this.data.hotels.getAll()
-            .then((hotels) =>
-                res.render('hotel/update', {
-                    message: req.flash('Hotel success'),
-                    error: req.flash('Hotel error'),
-                    user: req.user,
-                    hotels,
-                }));
+        if (!req.single) {
+            return this.data.hotels.getAll()
+                .then((hotels) =>
+                    res.render('hotel/update', {
+                        message: req.flash('Hotel success'),
+                        error: req.flash('Hotel error'),
+                        user: req.user,
+                        hotels,
+                    }));
+        }
+        return res.render('hotel/update', {
+            message: req.flash('Hotel success'),
+            error: req.flash('Hotel error'),
+            user: req.user,
+            hotelId: req.params.id,
+        });
     }
 
     update(req, res) {
+        const single = req.body.single;
         let dbHotel;
         return this.data.hotels.update(req.params.id, req.body)
             .then(() => {
@@ -73,10 +84,17 @@ class HotelsController {
             }).then(() => {
                 req.flash('Hotel success',
                     `Хотелът ${dbHotel.name} e успешно променен!`);
+                if (single) {
+                    console.log(single);
+                    return this.getHotelDetails(req, res);
+                }
                 return this.getUpdateForm(req, res);
             }).catch((err) => {
                 req.flash(
                     'Hotel error', 'Неуспешен запис: невалидни данни!');
+                if (single) {
+                    return this.getHotelDetails(req, res);
+                }
                 return this.getUpdateForm(req, res);
             });
     }

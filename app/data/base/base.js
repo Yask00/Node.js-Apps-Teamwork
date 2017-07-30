@@ -38,7 +38,7 @@ class BaseData {
             .forEach((prop) => {
                 if (model[prop] &&
                     model[prop] !== model.id &&
-                    model[prop] !== model._method) {
+                    model[prop] !== model.single) {
                     dbModel[prop] = model[prop];
                 }
             });

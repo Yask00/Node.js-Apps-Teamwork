@@ -1,12 +1,13 @@
 const { Router } = require('express');
 const { checker } = require('../utils/authCheck');
+const auth = require('../middleware/auth.middleware');
 
 const attachTo = (app, data) => {
     const router = new Router();
     const controller = require('../controllers/hotels.controller').init(data);
 
     router
-        .get('/allhotels', (req, res) => {
+        .get('/hotels/all', (req, res) => {
             return controller.getAll(req, res);
         })
         .get('/hotels/:id/details', (req, res) => {
@@ -24,6 +25,16 @@ const attachTo = (app, data) => {
             if (checker.checkAll(req, res)) {
                 return controller.getCreateForm(req, res);
             }
+        })
+        .get('/hotels/:id', (req, res) => {
+            if (req.isAuthenticated() && auth.isInRole(req, 'admin')) {
+                req.single = true;
+                return controller.getUpdateForm(req, res);
+            }
+            if (req.isAuthenticated()) {
+                return res.redirect(`/hotels/${req.params.id}/details`);
+            }
+            res.redirect(303, '/login');
         })
         .post('/hotels', (req, res) => {
             if (checker.checkAll(req, res)) {
