@@ -12,6 +12,9 @@
             price: $('#price').val(),
             roomStatus: $('#roomStatus').val(),
         }
+        if ($('#single')) {
+            options.data.single = true;
+        }
         requester.put(url, options).then((result) => {
             $('body').html(result);
         });

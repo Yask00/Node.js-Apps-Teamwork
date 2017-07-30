@@ -16,7 +16,7 @@ block body
                 each room in hotel.rooms
                     .col-md-4.col-sm-6
                         .thumbnail
-                            a(href='/room/' + room.id)
+                            a(href='/rooms/' + room._id)
                                 img.img-responsive(src=room.imageURL, alt=room.roomType)
                                 .caption
                                     p=room.roomType

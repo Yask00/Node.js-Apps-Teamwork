@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { checker } = require('../utils/authCheck');
+const auth = require('../middleware/auth.middleware');
 
 
 const attachTo = (app, data) => {
@@ -7,7 +8,7 @@ const attachTo = (app, data) => {
     const controller = require('../controllers/rooms.controller').init(data);
 
     router
-        .get('/allrooms', (req, res) => {
+        .get('/rooms/all', (req, res) => {
             return controller.getAllRooms(req, res);
         })
         .get('/rooms', (req, res) => {
@@ -22,6 +23,16 @@ const attachTo = (app, data) => {
             if (checker.checkAll(req, res)) {
                 return controller.getUpdateForm(req, res);
             }
+        })
+        .get('/rooms/:id', (req, res) => {
+            if (req.isAuthenticated() && auth.isInRole(req, 'admin')) {
+                req.single = true;
+                return controller.getUpdateForm(req, res);
+            }
+            if (req.isAuthenticated()) {
+                return res.redirect(`/rooms/${req.params.id}/details`);
+            }
+            res.redirect(303, '/login');
         })
         .post('/rooms', (req, res) => {
             if (checker.checkAll(req, res)) {

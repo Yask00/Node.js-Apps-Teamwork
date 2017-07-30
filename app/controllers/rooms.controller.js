@@ -38,14 +38,22 @@ class RoomsController {
     }
 
     getUpdateForm(req, res) {
-        this.data.rooms.getAll()
-            .then((rooms) =>
-                res.render('room/update', {
-                    message: req.flash('Room success'),
-                    error: req.flash('Room error'),
-                    user: req.user,
-                    rooms: rooms,
-                }));
+        if (!req.single) {
+            this.data.rooms.getAll()
+                .then((rooms) =>
+                    res.render('room/update', {
+                        message: req.flash('Room success'),
+                        error: req.flash('Room error'),
+                        user: req.user,
+                        rooms: rooms,
+                    }));
+        }
+        return res.render('room/update', {
+            message: req.flash('Hotel success'),
+            error: req.flash('Hotel error'),
+            user: req.user,
+            roomId: req.params.id,
+        });
     }
 
     createRoom(req, res) {
@@ -64,6 +72,7 @@ class RoomsController {
     }
 
     update(req, res) {
+        const single = req.body.single;
         let dbRoom;
         return this.data.rooms.update(req.params.id, req.body)
             .then(() => {
@@ -74,10 +83,16 @@ class RoomsController {
             }).then(() => {
                 req.flash('Room success',
                     `Стая ${dbRoom.roomType} e успешно промененa`);
+                if (single) {
+                    return this.getRoomDetails(req, res);
+                }
                 return this.getUpdateForm(req, res);
             }).catch((err) => {
                 req.flash(
                     'Room error', 'Неуспешен запис: невалидни данни!');
+                if (single) {
+                    return this.getRoomDetails(req, res);
+                }
                 return this.getUpdateForm(req, res);
             });
     }

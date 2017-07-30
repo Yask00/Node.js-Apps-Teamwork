@@ -9,22 +9,26 @@ block addoredit
             | #{error}
     h2 Промени стая
     form.form-horizontal(id="update-form" action='' method="GET")
-        .form-group
-            label.col-sm-3.control-label(for="roomId")
-                | Стая
-            .col-sm-9
-                select.form-control(id="roomId" name="roomId")
-                    each room in rooms
-                        option(value=room._id) #{room.roomType} #{room.price}
-                p.form-text.text-muted
-                    | Изберете стая за редактиране
+        if (rooms)
+            .form-group
+                label.col-sm-3.control-label(for="roomId")
+                    | Стая
+                .col-sm-9
+                    select.form-control(id="roomId" name="roomId")
+                        each room in rooms
+                            option(value=room._id) #{room.roomType} #{room.price}
+                    p.form-text.text-muted
+                        | Изберете стая за редактиране
+        else
+            input.form-control(type="text" id="roomId" name="roomId" value=roomId class="hidden")
+            input.form-control(type="text" id="single" name="single" value=true class="hidden")
         .form-group
             label.col-sm-3.control-label(for="roomType")
                 | Тип стая
             .col-sm-9
                 input.form-control(type="text" id="roomType" name="roomType")
                 p.form-text.text-muted
-                    | Брой легла - единична, двойна, тройка или четворка
+                    | Брой легла - единична, двойна, тройна или четворна
         .form-group
             label.col-sm-3.control-label(for='imageURL')
                 | Изображение
