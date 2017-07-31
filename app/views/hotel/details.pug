@@ -9,42 +9,18 @@ block body
             | #{error}
     h1=hotel.name
     .container
-        .row
+        .row.row-margin-bottom
             if !hotel.rooms
                 h3 Все още няма добавени стаи
             else
                 each room in hotel.rooms
-                    .col-md-4.col-sm-6
-                        .thumbnail
-                            a(href='/rooms/' + room._id)
-                                img.img-responsive(src=room.imageURL, alt=room.roomType)
-                                .caption
-                                    p=room.roomType
-                                    p=room.price
-                            a.btn.btn-primary.center(href='#') 
-                                | Резервирай
-                div(class="container")
-                    button(type="button" class="btn btn-primary btn-block show-comments") Покажи коментарите за този хотел
-                    
-                    if comments
-                        each comment in comments
-                            div(class="container container-comment hidden")
-                                div(class="row")
-                                    div(class="col-sm-12")
-                                        div(class="panel panel-white post")
-                                            div(class="post-heading")
-                                                div(class="pull-left image")
-                                                    img(src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image")
-                                                div(class="pull-left meta")
-                                                    div(class="title h5")
-                                                        a(href="#")
-                                                            b Потребител: #{comment.username}
-                                                        |  направи следния коментар.
-                                                    h6(class="text-muted time") Създаден на: #{comment.createdOn}
-                                            div(class="post-description")
-                                                <p> #{comment.content}
-                    a(href="/comments")
-                        button(type="button" class="btn btn-default btn-block") Оставете коментар за този хотел
-
-block scripts
-    script(src='/public/js/comments.js')
+                    .col-lg-4.col-sm-6
+                        .room-card
+                            img(src=room.imageURL)
+                            div.text-center
+                                span.label.label-primary Цена: #{room.price}лв
+                                if room.roomStatus === 'free'
+                                    span.label.label-success Свободна
+                                else
+                                    span.label.label-danger Заета
+                            p=room.description

@@ -1,0 +1,67 @@
+[{    
+    "roomType" : "двойна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/5271/3b34ada383f85cb21b7a3d216ac16dea.jpg",
+    "description" : "На етаж 1, баня и тоалетна, телевизор. Изглед - към градината. Вилата се отоплява с локално парно.",
+    "price" : "44",
+    "roomStatus" : "free"
+}, {    
+    "roomType" : "двойна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/5271/add34d2801cf6766311beac972b984ef.jpg",
+    "description" : "На етаж 2, баня и тоалетна, телевизор. Изглед - към градината. Вилата се отоплява с локално парно.",
+    "price" : "66",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "тройна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/5271/3b34ada383f85cb21b7a3d216ac16dea.jpg",
+    "description" : "На етаж 2, баня и тоалетна, телевизор. Изглед - към планината. Вилата се отоплява с локално парно.",
+    "price" : "66",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/6624/712bb7e02fcfa3a73ac5cbde1b4a0ffc.jpg",
+    "description" : "Намира се на етаж 2, разполага с баня и тоалетна, телевизор. Изглед - към градината.",
+    "price" : "60",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/6624/aeaee1a47674758f671d4414cbb086f3.jpg",
+    "description" : "Намира се на етаж 2, разполага с баня и тоалетна, телевизор. Изглед - към планината. Има допълнително детско легло.",
+    "price" : "60",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/6624/14b32dda4fb488658b1362f07858406c.jpg",
+    "description" : "Намира се на етаж 1, разполага с баня и тоалетна, телевизор. Изглед - към градината.",
+    "price" : "60",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/6624/ef002673ee3ee09d9cc92b5d899af842.jpg",
+    "description" : "Намира се на етаж 1, разполага с баня и тоалетна, телевизор. Изглед - към планината. Има допълнително детско легло",
+    "price" : "60",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/6624/be8e48548891b785c68042a13521368d.jpg",
+    "description" : "Намира се на етаж 2, разполага с баня и тоалетна, телевизор. Изглед - към градината.",
+    "price" : "60",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "",
+    "description" : "",
+    "price" : "",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "",
+    "description" : "",
+    "price" : "",
+    "roomStatus" : "free"
+}, {
+    "roomType" : "двойна",
+    "imageURL" : "",
+    "description" : "",
+    "price" : "",
+    "roomStatus" : "free"
+}]
