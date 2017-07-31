@@ -6,6 +6,8 @@ const babel = require('gulp-babel');
 const nodemon = require('gulp-nodemon');
 const destination = 'build';
 
+const seleniumConfig = require('./app/config/selenium-config');
+
 gulp.task('copy:templates', () => {
     return gulp.src('src/**/*.pug')
         .pipe(gulp.dest(destination));
@@ -57,14 +59,35 @@ gulp.task('tests:unit', ['pre-test'], () => {
         .pipe(istanbul.writeReports());
 });
 
+
+const { MongoClient } = require('mongodb');
+const validator = require('./app/utils/validator');
+
+gulp.task('test-server:start', () => {
+    return Promise.resolve()
+        .then(() => require('./app/db').setup(seleniumConfig.connectionString))
+        .then((db) => require('./app/dbsetup')(db, validator))
+        .then((db) => require('./app/data').setupData(db, validator)
+        .then((data) => require('./app/app').init(data, seleniumConfig, db)))
+        .then((app) => app.listen(seleniumConfig.PORT, () =>
+        console.log(`CORS-enabled app running on http://localhost:${seleniumConfig.PORT}`)));
+});
+
+gulp.task('test-server:stop', () => {
+    return MongoClient.connect(seleniumConfig.connectionString)
+        .then((db) => {
+            return db.dropDatabase();
+        });
+});
+
 // SELENIUM TESTING
-//gulp.task('tests:browser', ['test-server:start'], () => {
-//    return gulp.src('./tests/browser/**/*.js')
-//        .pipe(mocha({
-//            reporter: 'list',
-//            timeout: 20000,
-//        }))
-//        .once('end', () => {
-//            gulp.start('test-server:stop');
-//        });
-//});
+gulp.task('tests:browser', ['test-server:start'], () => {
+   return gulp.src('./tests/browser/**/*.js')
+       .pipe(mocha({
+           reporter: 'list',
+           timeout: 600000,
+       }))
+       .once('end', () => {
+           gulp.start('test-server:stop');
+       });
+});
