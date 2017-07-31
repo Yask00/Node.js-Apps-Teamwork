@@ -1,0 +1,99 @@
+extend ../_shared/_master
+
+block body
+    if (message && message.length > 0)
+        .flash-message-green
+            | #{message}
+    if (error && error.length > 0)
+        .flash-message-red
+            | #{error}
+    h1 Потребителски профил
+        .container
+            .row
+                div(class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad")
+                    div(class="panel panel-info")
+                        div(class="panel-heading")
+                            h3( class="panel-title") Потребителско име: #{user.username}
+                        div(class="panel-body")
+                            div(class="row")
+                                div(class="col-md-3 col-lg-3 " align="center")
+                                    img(alt="User Pic" src="https://www.microsoft.com/en-us/research/wp-content/themes/microsoft-research-theme/images/blank-avatar.png" class="img-circle img-responsive")
+                                div(class=" col-md-9 col-lg-9")
+                                    table(class="table table-user-information")
+                                        tbody
+                                            tr
+                                                td Име:
+                                                td #{user.firstName}
+                                            tr
+                                                td Фамилия:
+                                                td #{user.lastName}
+                                            tr
+                                                td E-mail: 
+                                                td #{user.email}
+                                            tr
+                                                td Телефон:
+                                                td #{user.phone}
+
+                                            tr
+                                                td(class="submenu") Резeрвирани стаи/услуги:
+                                                    tr 
+                                                        each val in orders
+                                                            tr  
+                                                                td(class="submenu") Резервация #{val._id}:
+                                                                    tr
+                                                                        td Хотел: #{val.hotel}
+                                                                td
+                                                                    tr
+                                                                        td Денонощия: #{val.nightsCount}
+                                                                td
+                                                                    tr
+                                                                        td Стая тип: #{val.room}
+                                                                td
+                                                                    tr
+                                                                        td Платежно средство: #{val.paymentType}
+                                                                td
+                                                                    tr
+                                                                        td Видове услуги #{val.serviceType}
+                                                                
+                                                                
+
+
+
+
+
+block scripts
+script.
+    $(document).ready(function() {
+    var panels = $('.user-infos');
+    var panelsButton = $('.dropdown-user');
+    panels.hide();
+
+    //Click dropdown
+    panelsButton.click(function() {
+        //get data-for attribute
+        var dataFor = $(this).attr('data-for');
+        var idFor = $(dataFor);
+
+        //current button
+        var currentButton = $(this);
+        idFor.slideToggle(400, function() {
+            //Completed slidetoggle
+            if(idFor.is(':visible'))
+            {
+                currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
+            }
+            else
+            {
+                currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
+            }
+        })
+    });
+
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('button').click(function(e) {
+        e.preventDefault();
+        alert("This is a demo.\n :-)");
+    });
+    });
