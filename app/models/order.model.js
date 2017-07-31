@@ -1,17 +1,14 @@
 class Order {
     constructor(options) {
         this._id = options._id;
-        // this.userId = options.userId;
-        this.paymentType = options.paymentType;
-        // 'В брой', 'По банков път', 'EasyPay'
-        this.price = options.price;
+        this.hotelId = options.hotelId;
         this.nightsCount = options.nightsCount;
+        this.room = options.room;
+        this.price = options.price;
+        this.paymentType = options.paymentType;
         this.serviceType = options.serviceType; // can be blank
         this.username = options.username;
-        this.hotel = options.hotel;
-        this.room = options.room;
-        // this.bookingRoom = [];
-        // this.bookingService = [];
+        this.userId = options.userId;
     }
 
     get id() {

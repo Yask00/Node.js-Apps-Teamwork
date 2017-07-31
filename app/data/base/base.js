@@ -25,7 +25,7 @@ class BaseData {
         if (!Static.isValid(model, this.validator)) {
             return Promise.reject('Model validation failed!');
         }
-
+        console.log(model);
         return this.collection.insert(model);
     }
 

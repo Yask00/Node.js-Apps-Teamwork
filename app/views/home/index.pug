@@ -2,8 +2,11 @@ extend ../_shared/_master
 
 block body
     if (message && message.length > 0)
-        div.flash-message-red
+        div.flash-message-green
             | #{message}
+    if (error && error.length > 0)
+        div.flash-message-red
+            | #{error}
     .intro-header
         .container
             .row

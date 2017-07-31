@@ -4,6 +4,7 @@ class Room {
         this.roomType = options.roomType;
         this.imageURL = options.imageURL;
         this.hotelId = options.hotelId;
+        this.hotelName = options.hotelName;
         this.description = options.description;
         this.price = options.price;
         this.roomStatus = options.roomStatus;

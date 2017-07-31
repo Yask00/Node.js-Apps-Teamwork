@@ -57,8 +57,14 @@ class RoomsController {
     }
 
     createRoom(req, res) {
-        return this.data.rooms.create(req.body)
-            .then((result) => {
+        let body;
+        return this.data.hotels.getById(req.body.hotelId)
+            .then((dbHotel) => {
+                body = req.body;
+                body.hotelName = dbHotel.name;
+            }).then(() => {
+                return this.data.rooms.create(body);
+            }).then((result) => {
                 const dbRoom = result.ops[0];
                 this.data.hotels.addToCollection(dbRoom, 'rooms');
                 req.flash('Room success',

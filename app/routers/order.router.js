@@ -2,19 +2,22 @@ const { Router } = require('express');
 
 const attachTo = (app, data) => {
     const router = new Router();
-    const controller = require('../controllers/orders-controller').init(data);
+    const controller = require('../controllers/orders.controller').init(data);
 
     router
-        .get('/allorders', (req, res) => {
+        .get('/orders/all', (req, res) => {
             return controller.getAll(req, res);
         })
         .get('/orders', (req, res) => {
             return controller.getBookingForm(req, res);
         })
+        .get('/orders/:roomId', (req, res) => {
+            return controller.getExactBookingForm(req, res);
+        })
         .post('/orders', (req, res) => {
             return controller.createBooking(req, res);
         })
-        .get('/orders/:id', (req, res) => {
+        .get('/orders/:id/details', (req, res) => {
             return controller.getOrderDetails(req, res);
         })
         .post('/orders/:id', (req, res) => {
@@ -29,7 +32,7 @@ const attachTo = (app, data) => {
         //     }
         //     return controller.createHotel(req, res);
         // })
-        ;
+    ;
 
     app.use(router);
 };

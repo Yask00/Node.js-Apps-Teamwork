@@ -3,40 +3,45 @@ extend ../_shared/_master
 block body
 
     if (message && message.length > 0)
-        div.flash-message-red
+        div.flash-message-green
             | #{message}
+    if (error && error.length > 0)
+        div.flash-message-red
+            | #{error}
     if user
         form(id="register-form" class="form-vertical" action='/orders' method="POST")
             fieldset
                 div(id="legend")
                     legend
-                        | Add Your order
+                        | Направете резервация
                 
                 div(class="control-group")
                     label(class="control-label" for="hotel")
-                        | ИЗберете своя хотел
+                        | Изберете хотел
                     div(class="controls")
                         select(id="hotel" name="hotel" class="input-xlarge")
                             each hotel in hotels
-                                option(value=hotel.name) #{hotel.name}
+                                option(value=hotel) #{hotel.name}
+                hr
+
+                div(class="control-group")
+                    label(class="control-label" for="roomId")
+                        | Изберете тип стая
+                    div(class="controls")
+                        select(id="roomId" name="roomId" class="input-xlarge")
                 hr
 
                 div(class="control-group")
                     label(class="control-label" for="nightsCount")
                         | Брой нощувки
                     div(class="controls")
-                        input.form-control(type='number' id="nightsCount" name="nightsCount" placeholder="" class="input-xlarge")
+                        input.form-control(type='text' id="nightsCount" name="nightsCount" placeholder="0" class="input-xlarge")
                 hr
 
                 div(class="control-group")
-                    label(class="control-label" for="room")
-                        | Изберете тип стая
+                    label(id="totalPrice" class="control-label" for="price")
                     div(class="controls")
-                        select(id="room" name="room" class="input-xlarge")
-                            option(value="one") Едно легло
-                            option(value="two") Две легла
-                            option(value="three") Три легла
-                            option(value="four") Четири легла
+                        input.form-control(id="price" name="price" class="hidden")
                 hr
                 
                 div(class="control-group")
@@ -50,30 +55,30 @@ block body
                 hr
 
                 div(class="control-group")
-                    label(class="control-label" for="serviceType")
-                        | Добавете услуга
+                    label(class="control-label" for="serviceId")
+                        | Изберете допълнителна услуга
                     div(class="controls")
-                        input.form-control(id="serviceType" name="serviceType" placeholder="" value="Не искам услуга" class="input-xlarge")
-                        p(class="help-block")
-                            | Оставете така ако не искате услуга/и към поръчката
+                        select(id="serviceId" name="serviceId" class="input-xlarge")
+                hr
 
                 div(class="control-group")
+                    label(class="control-label" for="participants")
+                        | Брой участници
                     div(class="controls")
-                        input.form-control(id="price" name="price" value="11,11" class="hidden" placeholder="" class="input-xlarge")
+                        input.form-control(type='text' id="participants" name="participants" placeholder="0" class="input-xlarge")
                 hr
+
                 div(class="control-group")
                     label(class="control-label" for="username")
-                        | Детайли
+                        | Потребител: #{user.username}
                     div(class="controls")
-                        select(id="username" name="username" class="input-xlarge" class="hidden")
-                                option(value=user.username) For this account owner
+                        input.form-control(id="username" name="username" value=user.username class="hidden")
                         p(class="help-block")
                             | Ще потвърдим до час на имейл вашата поръчка
 
                 div(class="control-group")
                     div(class="controls")
                         button(class="btn btn-success")
-                            | Add Order
-    else
-        h2
-            | Please login to book room or service
+                            | Резервирай
+    block scripts
+        script(src='/public/js/order.js')

@@ -27,12 +27,12 @@ const attachTo = (app, data) => {
         .get('/loginerror', (req, res) => {
             return controller.getSignInForm(req, res, invalidCredentialsErr);
         })
-        .get('/users/order', (req, res) => {
-            if (!req.isAuthenticated()) {
-                return controller.getSignInForm(req, res, loginFirstErr);
-            }
-            return controller.getAddForm(req, res);
-        })
+        // .get('/users/order', (req, res) => {
+        //     if (!req.isAuthenticated()) {
+        //         return controller.getSignInForm(req, res, loginFirstErr);
+        //     }
+        //     return controller.getAddForm(req, res);
+        // })
         .get('/error', (req, res) => {
             return controller.showError(req, res);
         })

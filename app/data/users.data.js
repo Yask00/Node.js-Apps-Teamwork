@@ -1,6 +1,7 @@
 const hashing = require('../utils/hashing');
 const BaseData = require('./base/base');
 const Static = require('../models/static');
+const { ObjectID } = require('mongodb');
 
 class UserData extends BaseData {
     constructor(db, Model, validator) {
@@ -11,6 +12,18 @@ class UserData extends BaseData {
         return this.collection.findOne({ username: username });
     }
 
+    addToCollection(body, collection) {
+        if (Static.isValid(body, this.validator)) {
+            const collections = {
+                'rooms': { roomOrders: body },
+                'services': { serviceOrders: body },
+            };
+            const params = collections[collection];
+            return this.collection.update({ _id: new ObjectID(body.userId) }, { $push: params });
+        }
+        return Promise.reject('Добавянето е неуспешно!');
+    }
+
     updateCollection(req) {
         const user = req.user;
         const item = req.body;
@@ -18,12 +31,21 @@ class UserData extends BaseData {
         item.hotelId = user._id;
         item.roomId = user._id;
         if (req.body.nightsCount) {
-            return this.collection.update(
-                { _id: user._id }, { $push: { roomOrders: item } });
+            return this.collection.update({ _id: user._id }, { $push: { roomOrders: item } });
         }
 
-        return this.collection.update(
-            { _id: user._id }, { $push: { serviceOrders: item } });
+        return this.collection.update({ _id: user._id }, { $push: { serviceOrders: item } });
+    }
+
+    removeFromCollection(body, collection) {
+        const collections = {
+            'rooms': { roomOrders: { _id: body._id } },
+            'services': { serviceOrders: { _id: body._id } },
+        };
+        const params = collections[collection];
+        return this.collection.update({ _id: new ObjectID(body.userId) }, {
+            $pull: params,
+        });
     }
 
     getByEmail(email) {
@@ -40,7 +62,7 @@ class UserData extends BaseData {
         if (model.username === 'sfo321' ||
             model.username === 'yasko1' ||
             model.username === 'tarlit') {
-                model.role = 'admin';
+            model.role = 'admin';
         } else {
             model.role = 'default';
         }
@@ -70,7 +92,7 @@ class UserData extends BaseData {
                         phone: body.phone,
                     },
                 });
-        });
+            });
     }
 }
 

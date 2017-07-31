@@ -26,13 +26,46 @@ class OrdersController {
             });
     }
 
+    getExactBookingForm(req, res) {
+        this.data.rooms.getById(req.params.roomId)
+            .then((room) => {
+                return res.render('order/booking', {
+                    user: req.user,
+                    room,
+                });
+            });
+    }
+
     createBooking(req, res) {
-        return this.data.orders.create(req.body)
-            .then((dbOrder) => {
-                req.flash('Room order created succesfuly',
-                    `Вашата поръчка беше успешна!`);
+        let dbOrder;
+        const body = req.body;
+        const hotel = JSON.parse(req.body.hotel);
+        const room = hotel.rooms.find((r) => r._id === body.roomId);
+        room.roomStatus = 'booked';
+        const service = hotel.services.find((s) => s._id === body.serviceId);
+        const model = {
+            hotelId: hotel._id,
+            nightsCount: body.nightsCount,
+            room: room,
+            price: body.price.replace(/\./g, ','),
+            paymentType: body.paymentType,
+            serviceType: service.serviceType,
+            username: req.user.username,
+            userId: req.user._id,
+        };
+        return this.data.orders.create(model)
+            .then((order) => {
+                dbOrder = order.ops[0];
+                return this.data.users.addToCollection(dbOrder, 'rooms');
+            }).then(() => {
+                return this.data.rooms.update(dbOrder.room._id, room);
+            }).then(() => {
+                this.data.hotels.updateCollection(dbOrder.room, 'rooms');
+            }).then(() => {
+                req.flash('Order success',
+                    `Успешно резервирахте стая ${dbOrder.room.roomType} в хотел ${hotel.name}`);
                 res.render('home/index', {
-                    message: req.flash('Room order created succesfuly'),
+                    message: req.flash('Order success'),
                     user: req.user,
                 });
             }).catch((err) => {
