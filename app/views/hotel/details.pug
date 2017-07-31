@@ -27,3 +27,24 @@ block body
                                 else
                                     span.label.label-danger Заета
                             p=room.description
+        .container
+            button.btn.btn-primary.btn-block.text-center.show-comments() Покажи коментарите за хотела
+            if comments
+                each comment in comments
+                    .container.container-comment.hidden
+                        .row
+                            .col-sm-12
+                                .panel.panel-white.post
+                                    .post-heading
+                                        .pull-left.image
+                                            img.img-circle.avatar(src="http://bootdey.com/img/Content/user_1.jpg" alt="profile image")
+                                        .pull-left.meta
+                                            .title.h5
+                                                a(href="#")
+                                                    b Потребител: #{comment.username}
+                                            h6.text-muted.time Създаден на: #{comment.createdOn}
+                                    .post-description
+                                        p #{comment.content}
+            a.btn.btn-default.btn-block.text-center(href="/comments") Добави коментар за този хотел
+block scripts
+    script(src='/public/js/comments.js')

@@ -2,31 +2,32 @@ extend ../_shared/_master
 
 block body
     if (message && message.length > 0)
-        div.flash-message-red
+        .flash-message-green
             | #{message}
+    if (error && error.length > 0)
+        div.flash-message-red
+            | #{error}
     if !user
-        h1 Please LOGIN TO POST A Comment
+        h1 За да можете да коментирате трябва да сте регистриран!
     else
         h2 Добави Коментар
         div(class="container")
             form.form-horizontal(action='/comments' method="POST")
                 .form-group
                     label.col-sm-3.control-label(for="hotelId")
-                        | Регион
+                        | Хотел
                     .col-sm-9
                         select.form-control(id="hotelId" name="hotelId")
                             each hotel in hotels
                                 option(value=hotel._id) #{hotel.name}
                         p.form-text.text-muted
-                            | Изберете регион
-
+                            | Изберете хотел
                 .form-group
                     label.col-sm-3.control-label(for='content') 
                         | Вашето мнение
                     .col-sm-9
-                        textarea.form-control(name='content' id='content' placeholder="Вашето мнение" required)
+                        textarea.form-control(name='content' id='content' placeholder="Вашето мнение за хотела" required)
                         input(type="text" name="collection" value="comments" class="hidden")
-
                 .form-group
                     label.col-sm-3.control-label(for="hotelId")
                         | Потребител
@@ -34,18 +35,15 @@ block body
                         select.form-control(id="username" name="username")
                             if user
                                 option(value=user.username) #{user.username}
-
                 .form-group
                     label.col-sm-3.control-label(for="createdOn")
-                        | Създанео на
+                        | Създаден на
                     .col-sm-9
                         input.form-control(type="text" id="createdOn" name="createdOn" required readonly="readonly")
                         p.form-text.text-muted
-                            |Създадено на
-                
+                            |Дата на създаване на коментара                
                 .form-group
                     .col-sm-offset-3.col-sm-9
                         input.btn.btn-success(type='submit', value='Добави')
-
 block scripts
     script(src='/public/js/createDate.js')
