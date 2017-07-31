@@ -1,98 +1,43 @@
 extend ../_shared/_master
+include _orders-table
 
 block body
-        if (message && message.length > 0)
-            div.flash-message-red
-                | #{message}
-        div 
-            h1 Потребителски профил
+    if (message && message.length > 0)
+        .flash-message-green
+            | #{message}
+    if (error && error.length > 0)
+        .flash-message-red
+            | #{error}
+    h1 Профилът на: 
+        span.text-danger #{user.username}
+    .container
+        .row
+            .col-lg-4.col-md-12
+                //- div(class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad")
+                .panel.panel-info
+                    .panel-heading
+                        h3.panel-title Потребител: #{user.username}
+                    .panel-body
+                        .text-center
+                            img.img-circle.avatar(alt="profile picture" src="http://bootdey.com/img/Content/user_1.jpg")                            
+                        table.table.custom-table
+                            tbody
+                                tr
+                                    th Име:
+                                    td #{user.firstName}
+                                tr
+                                    th Фамилия:
+                                    td #{user.lastName}
+                                tr
+                                    th E-mail: 
+                                    td #{user.email}
+                                tr
+                                    th Телефон:
+                                    td #{user.phone}
 
-            div(class="container")
-                div(class="row")
-                    div(class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad")
-                        div(class="panel panel-info")
-                            div(class="panel-heading")
-                                h3( class="panel-title") Потребителско име: #{user.username}
-                            div(class="panel-body")
-                                div(class="row")
-                                    div(class="col-md-3 col-lg-3 " align="center")
-                                        img(alt="User Pic" src="https://www.microsoft.com/en-us/research/wp-content/themes/microsoft-research-theme/images/blank-avatar.png" class="img-circle img-responsive")
-                                    div(class=" col-md-9 col-lg-9")
-                                        table(class="table table-user-information")
-                                            tbody
-                                                tr
-                                                    td Име:
-                                                    td #{user.firstName}
-                                                tr
-                                                    td Фамилия:
-                                                    td #{user.lastName}
-                                                tr
-                                                    td E-mail: 
-                                                    td #{user.email}
-                                                tr
-                                                    td Телефон:
-                                                    td #{user.phone}
-
-                                                tr
-                                                    td(class="submenu") Резeрвирани стаи/услуги:
-                                                        tr 
-                                                            each val in orders
-                                                                tr  
-                                                                    td(class="submenu") Резервация #{val._id}:
-                                                                        tr
-                                                                            td Хотел: #{val.hotel}
-                                                                    td
-                                                                        tr
-                                                                            td Денонощия: #{val.nightsCount}
-                                                                    td
-                                                                        tr
-                                                                            td Стая тип: #{val.room}
-                                                                    td
-                                                                        tr
-                                                                            td Платежно средство: #{val.paymentType}
-                                                                    td
-                                                                        tr
-                                                                            td Видове услуги #{val.serviceType}
-                                                                    
-                                                                   
-
-
-
-
-
-block scripts
-    script.
-        $(document).ready(function() {
-        var panels = $('.user-infos');
-        var panelsButton = $('.dropdown-user');
-        panels.hide();
-
-        //Click dropdown
-        panelsButton.click(function() {
-            //get data-for attribute
-            var dataFor = $(this).attr('data-for');
-            var idFor = $(dataFor);
-
-            //current button
-            var currentButton = $(this);
-            idFor.slideToggle(400, function() {
-                //Completed slidetoggle
-                if(idFor.is(':visible'))
-                {
-                    currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
-                }
-                else
-                {
-                    currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
-                }
-            })
-        });
-
-
-        $('[data-toggle="tooltip"]').tooltip();
-
-        $('button').click(function(e) {
-            e.preventDefault();
-            alert("This is a demo.\n :-)");
-        });
-        });
+            .col-lg-8.col-md-12
+                .panel.panel-success
+                    .panel-heading
+                        h3.panel-title Резeрвирани стаи или услуги
+                    .panel-body
+                        +orders-table

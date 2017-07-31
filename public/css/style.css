@@ -300,9 +300,13 @@ html {
 }
 
 
-/* user profile css */
+/* user profile */
+.custom-table{
+    color: black;
+    font-size: 15px;
+}
 
-.user-row {
+/* .user-row {
     margin-bottom: 14px;
 }
 
@@ -357,7 +361,7 @@ html {
 .panel-white .panel-footer {
     background-color: #fff;
     border-color: #ddd;
-}
+} */
 
 .post .post-heading {
     height: 95px;

@@ -55,7 +55,7 @@ describe('Hotels Data tests', () => {
     });
 
     describe('Method tests', () => {
-        it('getByName() should return user from collection', (done) => {
+        it('getByName() should return hotel from collection', (done) => {
             const hotel1 = {
                 hotelname: 'hotel1',
             };
@@ -65,8 +65,8 @@ describe('Hotels Data tests', () => {
 
             items.push(hotel1, hotel2);
             hotelsData.getByName(hotel2.hotelname)
-                .then((user) => {
-                    expect(user).to.be.deep.equal(hotel2);
+                .then((hotel) => {
+                    expect(hotel).to.be.deep.equal(hotel2);
                     done();
                 })
                 .catch((error) => {

@@ -1,0 +1,52 @@
+mixin orders-table
+
+    table.table.custom-table.hidden-xs
+        thead
+            tr
+                th Хотел
+                th Нощувки
+                th Тип стая/услуга
+                th Плащане
+                th Цена
+        tbody
+            tr 
+                if orders          
+                    each order in orders
+                        tr  
+                            td #{order.hotel}
+                            if order.nightsCount
+                                td #{order.nightsCount}
+                            else
+                                td -
+                            if order.room
+                                td #{order.room}
+                            else
+                                td #{order.serviceType}
+                            td #{order.paymentType}
+                            td #{order.price}
+    table.table.custom-table.visible-xs
+        tbody
+            tr 
+                if orders          
+                    each order in orders
+                        tr.bg-info 
+                            th Хотел 
+                            th #{order.hotel}
+                        tr
+                            th Нощувки
+                            if order.nightsCount
+                                td #{order.nightsCount}
+                            else
+                                td -
+                        tr
+                            th Тип стая/услуга 
+                            if order.room
+                                td #{order.room}
+                            else
+                                td #{order.serviceType}
+                        tr
+                            th Плащане
+                            td #{order.paymentType}
+                        tr
+                            th Цена
+                            td #{order.price}
