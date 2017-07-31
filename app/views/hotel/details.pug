@@ -16,11 +16,14 @@ block body
                 each room in hotel.rooms
                     .col-lg-4.col-sm-6
                         .room-card
-                            img(src=room.imageURL)
+                            a(href="/rooms/" + room._id)
+                                img(src=room.imageURL)
                             div.text-center
                                 span.label.label-primary Цена: #{room.price}лв
                                 if room.roomStatus === 'free'
                                     span.label.label-success Свободна
+                                    a(href="/users/order")
+                                        span.label.label-info Резервирай
                                 else
                                     span.label.label-danger Заета
                             p=room.description
