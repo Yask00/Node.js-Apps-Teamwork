@@ -24,21 +24,21 @@ body {
   overflow-y: auto;
 } */
 /* Layout */
-.wrapper {
+.wrapper-admin {
   /* height: 100%; */
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
 }
-.wrapper:before,
-.wrapper:after {
+.wrapper-admin:before,
+.wrapper-admin:after {
   content: " ";
   display: table;
 }
-.wrapper:after {
+.wrapper-admin:after {
   clear: both;
 }
-.layout-boxed .wrapper {
+.layout-boxed .wrapper-admin {
   max-width: 1250px;
   margin: 0 auto;
   min-height: 100%;
@@ -117,10 +117,10 @@ body {
     padding-top: 100px;
   }
 }
-.fixed.layout-boxed .wrapper {
+.fixed.layout-boxed .wrapper-admin {
   max-width: 100%;
 }
-.fixed .wrapper {
+.fixed .wrapper-admin {
   overflow: hidden;
 }
 .hold-transition .content-wrapper,

@@ -325,7 +325,7 @@ throw new Error('AdminLTE requires jQuery')
     data   : '[data-toggle="control-sidebar"]',
     open   : '.control-sidebar-open',
     bg     : '.control-sidebar-bg',
-    wrapper: '.wrapper',
+    wrapper: '.wrapper-admin',
     content: '.content-wrapper',
     boxed  : '.layout-boxed'
   }
@@ -531,7 +531,7 @@ throw new Error('AdminLTE requires jQuery')
   }
 
   var Selector = {
-    wrapper       : '.wrapper',
+    wrapper       : '.wrapper-admin',
     contentWrapper: '.content-wrapper',
     layoutBoxed   : '.layout-boxed',
     mainFooter    : '.main-footer',
