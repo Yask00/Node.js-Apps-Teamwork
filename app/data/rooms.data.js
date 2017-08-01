@@ -10,6 +10,10 @@ class RoomsData extends BaseData {
         return this.collection.findOne({ name: name });
     }
 
+    setStatus(id, status) {
+        return this.collection.update({ _id: id }, { $set: { roomStatus: status } });
+    }
+
     update(id, body) {
         const dbModel = this.getDbModel(body);
         return this.collection.update({ _id: new ObjectID(id) }, { $set: dbModel });

@@ -12,6 +12,10 @@ class HotelData extends BaseData {
     }
 
     removeFromCollection(body, collection) {
+
+        body._id = new ObjectID(body._id);
+        console.log(body._id);
+
         const collections = {
             'rooms': { rooms: { _id: body._id } },
             'services': { services: { _id: body._id } },
@@ -26,6 +30,7 @@ class HotelData extends BaseData {
 
     updateCollection(body, collection) {
         const dbModel = this.getDbModel(body);
+        console.log(dbModel);
         return this.removeFromCollection(dbModel, collection)
             .then(() => {
                 return this.addToCollection(dbModel, collection);

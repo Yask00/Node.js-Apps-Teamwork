@@ -3,7 +3,9 @@
 (function getAction() {
     $('#update-form').submit((event) => {
         const id = $('#roomId').val();
+        console.log(id);
         const url = '/rooms/' + id;
+        console.log(url);
         const options = {};
         options.data = {
             roomType: $('#roomType').val(),

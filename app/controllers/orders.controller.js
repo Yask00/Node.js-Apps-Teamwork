@@ -38,11 +38,16 @@ class OrdersController {
 
     createBooking(req, res) {
         let dbOrder;
+        let service;
         const body = req.body;
         const hotel = JSON.parse(req.body.hotel);
         const room = hotel.rooms.find((r) => r._id === body.roomId);
         room.roomStatus = 'booked';
-        const service = hotel.services.find((s) => s._id === body.serviceId);
+        if (!body.serviceId) {
+            service = 'Не искам услуга';
+        } else {
+            service = hotel.services.find((s) => s._id === body.serviceId);
+        }
         const price = body.price.replace(/\./g, ',');
         const model = {
             hotelName: hotel.name,
@@ -59,7 +64,7 @@ class OrdersController {
                 dbOrder = order.ops[0];
                 return this.data.users.addToCollection(dbOrder, 'rooms');
             }).then(() => {
-                return this.data.rooms.update(dbOrder.room._id, room);
+                return this.data.rooms.setStatus(dbOrder.room._id, dbOrder.room.roomStatus);
             }).then(() => {
                 return this.data.hotels.updateCollection(dbOrder.room, 'rooms');
             }).then((result) => {
@@ -69,9 +74,7 @@ class OrdersController {
                     message: req.flash('Order success'),
                     user: req.user,
                 });
-            })
-            .catch((err) => {
-                console.log(err);
+            }).catch((err) => {
                 req.flash('Failed creation',
                     'Записът e неуспешен поради невалидни данни!');
                 res.render('home/index', {

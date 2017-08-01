@@ -39,7 +39,7 @@ class RoomsController {
 
     getUpdateForm(req, res) {
         if (!req.single) {
-            this.data.rooms.getAll()
+            return this.data.rooms.getAll()
                 .then((rooms) =>
                     res.render('room/update', {
                         message: req.flash('Room success'),

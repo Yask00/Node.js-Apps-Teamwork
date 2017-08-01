@@ -36,7 +36,7 @@ class BaseData {
         Object.keys(model)
             .forEach((prop) => {
                 if (model[prop] &&
-                    model[prop] !== model._id &&
+                    model[prop] !== model.id &&
                     model[prop] !== model.single) {
                     dbModel[prop] = model[prop];
                 }
