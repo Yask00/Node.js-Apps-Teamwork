@@ -7,16 +7,8 @@ block body
     if (error && error.length > 0)
         div.flash-message-red
             | #{error}
-        //- div
-        //- img(src=room.imageURL, alt='')
-        //- h2 #{room.roomType}
-        //- h3 #{room.price}
-        //- h3 #{room.description}
-        //- h3 #{room.roomStatus}
-        //-     a.btn.btn-primary.pull-right(href='#') Резервирай
     .row.text-center
         .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
-            //- .col-sm-8.col-xs-12.text-center
             .room-details
                 img(src=room.imageURL)
                 div.text-center
