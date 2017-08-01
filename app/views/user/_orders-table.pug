@@ -13,17 +13,17 @@ mixin orders-table
                 if orders          
                     each order in orders
                         tr  
-                            td #{order.hotel}
+                            td #{order.hotelName}
                             if order.nightsCount
                                 td #{order.nightsCount}
                             else
                                 td -
                             if order.room
-                                td #{order.room}
+                                td #{order.room.roomType}
                             else
                                 td #{order.serviceType}
                             td #{order.paymentType}
-                            td #{order.price}
+                            td #{order.price}лв.
     table.table.custom-table.visible-xs
         tbody
             tr 

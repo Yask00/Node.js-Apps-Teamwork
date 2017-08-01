@@ -43,15 +43,16 @@ class OrdersController {
         const room = hotel.rooms.find((r) => r._id === body.roomId);
         room.roomStatus = 'booked';
         const service = hotel.services.find((s) => s._id === body.serviceId);
+        const price = body.price.replace(/\./g, ',');
         const model = {
-            hotelId: hotel._id,
+            hotelName: hotel.name,
             nightsCount: body.nightsCount,
             room: room,
-            price: body.price.replace(/\./g, ','),
+            price: price,
             paymentType: body.paymentType,
             serviceType: service.serviceType,
             username: req.user.username,
-            userId: req.user._id,
+            userId: req.user._id.toString(),
         };
         return this.data.orders.create(model)
             .then((order) => {
@@ -60,15 +61,17 @@ class OrdersController {
             }).then(() => {
                 return this.data.rooms.update(dbOrder.room._id, room);
             }).then(() => {
-                this.data.hotels.updateCollection(dbOrder.room, 'rooms');
-            }).then(() => {
+                return this.data.hotels.updateCollection(dbOrder.room, 'rooms');
+            }).then((result) => {
                 req.flash('Order success',
-                    `Успешно резервирахте стая ${dbOrder.room.roomType} в хотел ${hotel.name}`);
+                    `Успешно резервирахте стая ${dbOrder.room.roomType} в хотел ${dbOrder.hotelName}`);
                 res.render('home/index', {
                     message: req.flash('Order success'),
                     user: req.user,
                 });
-            }).catch((err) => {
+            })
+            .catch((err) => {
+                console.log(err);
                 req.flash('Failed creation',
                     'Записът e неуспешен поради невалидни данни!');
                 res.render('home/index', {

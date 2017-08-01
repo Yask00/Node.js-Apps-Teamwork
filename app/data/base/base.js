@@ -25,7 +25,6 @@ class BaseData {
         if (!Static.isValid(model, this.validator)) {
             return Promise.reject('Model validation failed!');
         }
-        console.log(model);
         return this.collection.insert(model);
     }
 
@@ -37,7 +36,7 @@ class BaseData {
         Object.keys(model)
             .forEach((prop) => {
                 if (model[prop] &&
-                    model[prop] !== model.id &&
+                    model[prop] !== model._id &&
                     model[prop] !== model.single) {
                     dbModel[prop] = model[prop];
                 }

@@ -1,7 +1,7 @@
 class Order {
     constructor(options) {
         this._id = options._id;
-        this.hotelId = options.hotelId;
+        this.hotelName = options.hotelName;
         this.nightsCount = options.nightsCount;
         this.room = options.room;
         this.price = options.price;
