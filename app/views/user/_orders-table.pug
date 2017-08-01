@@ -5,7 +5,8 @@ mixin orders-table
             tr
                 th Хотел
                 th Нощувки
-                th Тип стая/услуга
+                th Стая
+                th Услуга
                 th Плащане
                 th Цена
         tbody
@@ -14,14 +15,9 @@ mixin orders-table
                     each order in orders
                         tr  
                             td #{order.hotelName}
-                            if order.nightsCount
-                                td #{order.nightsCount}
-                            else
-                                td -
-                            if order.room
-                                td #{order.room.roomType}
-                            else
-                                td #{order.serviceType}
+                            td #{order.nightsCount}
+                            td #{order.room.roomType}/#{order.room.price}лв
+                            td #{order.serviceType}
                             td #{order.paymentType}
                             td #{order.price}лв.
     table.table.custom-table.visible-xs
@@ -34,19 +30,16 @@ mixin orders-table
                             th #{order.hotel}
                         tr
                             th Нощувки
-                            if order.nightsCount
-                                td #{order.nightsCount}
-                            else
-                                td -
+                            td #{order.nightsCount}
                         tr
-                            th Тип стая/услуга 
-                            if order.room
-                                td #{order.room}
-                            else
-                                td #{order.serviceType}
+                            th Тип стая
+                            td #{order.room.roomType}/#{order.room.price}лв
+                        tr
+                            th Тип услуга                             
+                            td #{order.serviceType}
                         tr
                             th Плащане
                             td #{order.paymentType}
                         tr
                             th Цена
-                            td #{order.price}
+                            td #{order.price}лв

@@ -47,10 +47,11 @@
     "price" : "60",
     "roomStatus" : "free"
 }, {
+    // mihovata kushta
     "roomType" : "двойна",
-    "imageURL" : "",
-    "description" : "",
-    "price" : "",
+    "imageURL" : "http://www.bgvakancia.com/common_images/offers/3487/a9a9e6a171d4b7299085fce4233390c2.jpg",
+    "description" : "Стаята има спалня и още едно двойно легло, телевизор и санитарен възел. Изглед към барбекюто и градината.",
+    "price" : "40",
     "roomStatus" : "free"
 }, {
     "roomType" : "двойна",

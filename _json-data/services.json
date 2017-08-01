@@ -1,0 +1,14 @@
+[
+    {
+        "serviceType" : "разходка с лодка и риболов",
+        "imageURL" : "http://www.strandja.bg/custom/tinymceup/files/priroda/Rezovska.jpg",
+        "description" : "Да намерим заедно най-тихите подмоли, където се крият вкусни рибки!",
+        "price" : "50"
+    }, 
+    {
+        "serviceType" : "традиционни ястия",
+        "imageURL" : "https://letsmeetstrandja.files.wordpress.com/2011/11/scan10032.jpg",
+        "description" : "Нашата домакиня приговя ястия, които няма да ви оставят равнодушни!",
+        "price" : "15"
+        }
+]
