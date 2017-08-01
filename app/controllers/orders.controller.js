@@ -69,8 +69,9 @@ class OrdersController {
                 return this.data.hotels.updateCollection(dbOrder.room, 'rooms');
             }).then((result) => {
                 req.flash('Order success',
-                    `Успешно резервирахте стая ${dbOrder.room.roomType} в хотел ${dbOrder.hotelName}`);
-                res.render('home/index', {
+                    `Успешно резервирахте ${dbOrder.room.roomType} стая
+                     в хотел ${dbOrder.hotelName}`);
+                return res.render('home/index', {
                     message: req.flash('Order success'),
                     user: req.user,
                 });

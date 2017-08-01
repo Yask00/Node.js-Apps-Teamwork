@@ -2,14 +2,15 @@ extend ../_shared/_master
 
 block body
     if (message && message.length > 0)
-        div.flash-message-green
+        .flash-message-green
             | #{message}
     if (error && error.length > 0)
         div.flash-message-red
             | #{error}
-    div
-        img(src=region.imageURL, alt='')
-        h2 #{region.name}
-        h3 #{region.description}
-        h3 #{region.regionType}
-            a.btn.btn-primary.pull-right(href='#') Резервирай
+    .row.text-center
+        .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
+            .room-details
+                img(src=region.imageURL)
+                div.text-center                    
+                    h3 #{region.name}
+                    p=region.description
