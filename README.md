@@ -1,23 +1,14 @@
 # Node.js-Apps-Teamwork
-# Team PerfectCodeStorm - for4Wagon
+# Team PerfectCodeStorm - Dream REST
 
 ## Application Description
 
 This is a Web Application developed by Team "PerfectCodeStorm" as part of the Web Apps with Node.js course at Telerik Academy 2016/17.
 
-### Main features:
-
-- login/register user
-
-### Pages:
-
--main page
--...
-
-### Libraries, Frameworks, Database:
-
--Express
--....
+### Used Technologies
+  -Node.js
+  -MongoDb
+  -Express
 
 ### Team Members
 
@@ -27,7 +18,5 @@ This is a Web Application developed by Team "PerfectCodeStorm" as part of the We
 | [Tatiyana Rangelova](https://github.com/TanyaRan) | TanyaRan  | 
 | [Yasen Trayanov](https://github.com/Yask00) | Yask00  | 
 
-### Live demos
-
-* [YouTube Video](https://#)
-* [Live Demo](https://#)
+### Live demo
+* [Live Demo](http://ec2-34-213-116-14.us-west-2.compute.amazonaws.com)
