@@ -2,7 +2,7 @@ const { expect } = require('chai');
 // const CryptoJS = require('crypto-js');
 
 const OrdersData = require('../../../app/data/orders.data');
-const Static = require('../../../app/models/static');
+// const Static = require('../../../app/models/static');
 const validator = require('../../../app/utils/validator');
 
 describe('Orders Data tests', () => {

@@ -13,7 +13,9 @@ class ServiceData extends BaseData {
 
     update(id, body) {
         const dbModel = this.getDbModel(body);
-        return this.collection.update({ _id: new ObjectID(id) }, { $set: dbModel });
+        return this.collection.update(
+            { _id: new ObjectID(id) },
+            { $set: dbModel });
     }
 }
 

@@ -3,9 +3,9 @@ const { expect } = require('chai');
 
 const ServicesData = require('../../../app/data/services.data');
 
-const BaseData = require('../../../app/data/base/base');
+// const BaseData = require('../../../app/data/base/base');
 
-const Static = require('../../../app/models/static');
+// const Static = require('../../../app/models/static');
 const validator = require('../../../app/utils/validator');
 
 describe('Services Data tests', () => {

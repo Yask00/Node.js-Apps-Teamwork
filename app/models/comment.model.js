@@ -4,7 +4,7 @@ class Comment {
         this.username = options.username;
         this.hotelId = options.hotelId;
         this.content = options.content;
-        this.createdOn = options.createdOn; // Tue Jul 25 2017
+        this.createdOn = options.createdOn;
     }
 
     get id() {

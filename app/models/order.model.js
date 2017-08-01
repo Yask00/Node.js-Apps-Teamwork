@@ -6,7 +6,7 @@ class Order {
         this.room = options.room;
         this.price = options.price;
         this.paymentType = options.paymentType;
-        this.serviceType = options.serviceType; // can be blank
+        this.serviceType = options.serviceType;
         this.username = options.username;
         this.userId = options.userId;
     }

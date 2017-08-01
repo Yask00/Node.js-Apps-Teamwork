@@ -11,12 +11,16 @@ class RoomsData extends BaseData {
     }
 
     setStatus(id, status) {
-        return this.collection.update({ _id: id }, { $set: { roomStatus: status } });
+        return this.collection.update(
+            { _id: id },
+            { $set: { roomStatus: status } });
     }
 
     update(id, body) {
         const dbModel = this.getDbModel(body);
-        return this.collection.update({ _id: new ObjectID(id) }, { $set: dbModel });
+        return this.collection.update(
+            { _id: new ObjectID(id) },
+            { $set: dbModel });
     }
 }
 

@@ -19,7 +19,9 @@ class UserData extends BaseData {
                 'services': { serviceOrders: body },
             };
             const params = collections[collection];
-            return this.collection.update({ _id: new ObjectID(body.userId) }, { $push: params });
+            return this.collection.update(
+                { _id: new ObjectID(body.userId) },
+                { $push: params });
         }
         return Promise.reject('Добавянето е неуспешно!');
     }
@@ -31,10 +33,14 @@ class UserData extends BaseData {
         item.hotelId = user._id;
         item.roomId = user._id;
         if (req.body.nightsCount) {
-            return this.collection.update({ _id: user._id }, { $push: { roomOrders: item } });
+            return this.collection.update(
+                { _id: user._id },
+                { $push: { roomOrders: item } });
         }
 
-        return this.collection.update({ _id: user._id }, { $push: { serviceOrders: item } });
+        return this.collection.update(
+            { _id: user._id },
+            { $push: { serviceOrders: item } });
     }
 
     removeFromCollection(body, collection) {
